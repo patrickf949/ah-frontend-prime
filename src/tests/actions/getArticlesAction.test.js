@@ -27,7 +27,7 @@ describe("Action for getting Articles", () => {
         response: {
           count: 75,
           next:
-            "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/?page_size=2",
+            "https://ah-webapi.herokuapp.com/api/v1/articles/?page_size=2",
           previous: null,
           results: data.articles
         }
@@ -39,7 +39,7 @@ describe("Action for getting Articles", () => {
         payload: {
           count: 75,
           next:
-            "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/?page_size=2",
+            "https://ah-webapi.herokuapp.com/api/v1/articles/?page_size=2",
           previous: null,
           results: data.articles
         }

@@ -67,7 +67,7 @@ export class CreateArticlePage extends Component {
 
     this.props.articleCreateEditAction(
       messageObject,
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/",
+      "https://ah-webapi.herokuapp.com/api/v1/articles/",
       "post",
       this.props,
       "created"

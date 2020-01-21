@@ -13,7 +13,7 @@ export const registerUser = userData => async dispatch => {
   });
   await axios
     .post(
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/users/register/",
+      "https://ah-webapi.herokuapp.com/api/v1/users/register/",
       { user: userData }
     )
     .then(res => {

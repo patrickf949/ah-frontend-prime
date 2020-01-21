@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const deleteArticleAction = (slug, props) => dispatch => {
   return axios({
     url:
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/" + slug,
+      "https://ah-webapi.herokuapp.com/api/v1/articles/" + slug,
     method: "delete",
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`
