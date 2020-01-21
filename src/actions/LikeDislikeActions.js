@@ -15,7 +15,7 @@ export const likeArticle = slug => {
     };
     return await axios
       .post(
-        `https://ah-webapi.herokuapp.com/api/v1/articles/${slug}/like/`,
+        `http://localhost:8000/api/v1/articles/${slug}/like/`,
         body,
         { headers: headers }
       )
@@ -44,7 +44,7 @@ export const dislikeArticle = slug => {
     };
     return await axios
       .post(
-        `https://ah-webapi.herokuapp.com/api/v1/articles/${slug}/dislike/`,
+        `http://localhost:8000/api/v1/articles/${slug}/dislike/`,
         body,
         { headers: headers }
       )

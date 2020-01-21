@@ -27,7 +27,7 @@ describe("Action for getting Articles", () => {
         response: {
           count: 75,
           next:
-            "https://ah-webapi.herokuapp.com/api/v1/articles/?page_size=2",
+            "http://localhost:8000/api/v1/articles/?page_size=2",
           previous: null,
           results: data.articles
         }
@@ -39,7 +39,7 @@ describe("Action for getting Articles", () => {
         payload: {
           count: 75,
           next:
-            "https://ah-webapi.herokuapp.com/api/v1/articles/?page_size=2",
+            "http://localhost:8000/api/v1/articles/?page_size=2",
           previous: null,
           results: data.articles
         }

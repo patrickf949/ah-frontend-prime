@@ -14,7 +14,7 @@ export const sendPasswordResetLink = data => async dispatch => {
   });
   return await axios
     .post(
-      `https://ah-webapi.herokuapp.com/api/v1/users/password/reset/email/`,
+      `http://localhost:8000/api/v1/users/password/reset/email/`,
       data
     )
     .then(res => {
@@ -49,7 +49,7 @@ export const passwordReset = (data, token) => async dispatch => {
   });
   return await axios
     .put(
-      `https://ah-webapi.herokuapp.com/api/v1/users/password/${token}/reset/`,
+      `http://localhost:8000/api/v1/users/password/${token}/reset/`,
       {
         user: data
       }

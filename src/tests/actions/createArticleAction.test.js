@@ -81,7 +81,7 @@ describe("Action for creating Articles", () => {
         articleCreateEditAction(
           data.article_no_data,
           "post",
-          "https://ah-webapi.herokuapp.com/api/v1/articles/",
+          "http://localhost:8000/api/v1/articles/",
           "post",
           "created"
         )

@@ -13,7 +13,7 @@ export class UserArticles extends Component {
   }
   componentDidMount() {
     this.props.getArticlesAction(
-      "https://ah-webapi.herokuapp.com/api/v1/articles/" +
+      "http://localhost:8000/api/v1/articles/" +
         "?email=" +
         sessionStorage.getItem("email")
     );

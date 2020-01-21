@@ -18,7 +18,7 @@ export const getUsersFollowing = username => {
   return async dispatch => {
     return await axios
       .get(
-        `https://ah-webapi.herokuapp.com/api/v1/profiles/following/${username}`,
+        `http://localhost:8000/api/v1/profiles/following/${username}`,
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.token
@@ -45,7 +45,7 @@ export const getUsersFollowers = username => {
   return async dispatch => {
     return await axios
       .get(
-        `https://ah-webapi.herokuapp.com/api/v1/profiles/followers/${username}`,
+        `http://localhost:8000/api/v1/profiles/followers/${username}`,
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.token
@@ -75,7 +75,7 @@ export const getUsersProfileAction = username => {
     };
     return await axios
       .get(
-        `https://ah-webapi.herokuapp.com/api/v1/profiles/${username}`,
+        `http://localhost:8000/api/v1/profiles/${username}`,
         { headers: headers }
       )
       .then(data => {
@@ -97,7 +97,7 @@ export const editProfileAction = data => {
   return async dispatch => {
     return axios
       .put(
-        `https://ah-webapi.herokuapp.com/api/v1/profiles/${
+        `http://localhost:8000/api/v1/profiles/${
           sessionStorage.username
         }/edit`,
         data,
@@ -131,7 +131,7 @@ export const followUser = user => {
     };
     return axios
       .post(
-        `https://ah-webapi.herokuapp.com/api/v1/profiles/${user}/follow`,
+        `http://localhost:8000/api/v1/profiles/${user}/follow`,
         body,
         { headers: headers }
       )
@@ -186,7 +186,7 @@ export const unfollowUser = user => {
 
     return axios
       .delete(
-        `https://ah-webapi.herokuapp.com/api/v1/profiles/${user}/follow`,
+        `http://localhost:8000/api/v1/profiles/${user}/follow`,
         { headers: headers }
       )
       .then(data => {

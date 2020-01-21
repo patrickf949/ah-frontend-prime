@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 export const articleComments = (data, slug) => async dispatch => {
   return await axios
     .post(
-      `https://ah-webapi.herokuapp.com/api/v1/articles/${slug}/comments/0/`,
+      `http://localhost:8000/api/v1/articles/${slug}/comments/0/`,
       data,
       {
         headers: {
@@ -39,7 +39,7 @@ export const articleComments = (data, slug) => async dispatch => {
 export const fetchComments = slug => async dispatch => {
   return await axios
     .get(
-      ` https://ah-webapi.herokuapp.com/api/v1/articles/${slug}/comments/0/`,
+      ` http://localhost:8000/api/v1/articles/${slug}/comments/0/`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.token

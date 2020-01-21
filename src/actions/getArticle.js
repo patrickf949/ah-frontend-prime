@@ -5,7 +5,7 @@ import { getUsersProfileAction } from "./profileActions";
 export const getArticleAction = slug => dispatch => {
   return axios
     .get(
-      "https://ah-webapi.herokuapp.com/api/v1/articles/" + slug
+      "http://localhost:8000/api/v1/articles/" + slug
     )
     .then(response => {
       dispatch(fetchArticlesSuccess(response.data));
