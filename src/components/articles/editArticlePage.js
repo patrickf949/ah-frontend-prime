@@ -84,7 +84,7 @@ export class EditArticlePage extends Component {
       image: image
     };
     const url =
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/" +
+      "https://ah-backend-prime-dev-nspm.3.us-1.fl0.io/api/v1/articles/" +
       this.props.match.params.slug +
       "/";
 

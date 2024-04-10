@@ -11,7 +11,7 @@
     "test": "jest -u --coverage",
     "test:watch": "jest --watch",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "start": "webpack-dev-server --open --hot --mode development --https",
+    "start": "webpack-dev-server --open --hot --mode development --http",
     "build": "webpack --mode production",
     "lint": "eslint . --ignore-path .eslintignore",
     "lint:fix": "eslint . --ignore-path .gitignore --fix"

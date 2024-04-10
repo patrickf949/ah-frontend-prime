@@ -13,7 +13,7 @@ export class UserArticles extends Component {
   }
   componentDidMount() {
     this.props.getArticlesAction(
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/" +
+      "https://ah-backend-prime-dev-nspm.3.us-1.fl0.io/api/v1/articles/" +
         "?email=" +
         sessionStorage.getItem("email")
     );
