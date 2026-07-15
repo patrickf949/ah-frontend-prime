@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
+import { Button, Stack, TextField } from "@mui/material";
 import { articleComments, fetchComments } from "../actions/commentsActions";
 import { connect } from "react-redux";
 import "../styles/comments.scss";
@@ -68,21 +69,19 @@ export class Comments extends Component {
                 onSubmit={this.handleOnSubmit}
                 className="comment-forms"
               >
-                <textarea
-                  className="form-control"
-                  name="comments"
-                  value={this.state.comments}
-                  onChange={this.handleOnChange}
-                >
-                  comments here
-                </textarea>
-                <button
-                  type="submit"
-                  className="btn btn-comment"
-                  style={{ marginTop: "10px" }}
-                >
-                  comment
-                </button>
+                <Stack spacing={1.5} alignItems="flex-start">
+                  <TextField
+                    name="comments"
+                    label="Add a comment"
+                    value={this.state.comments}
+                    onChange={this.handleOnChange}
+                    multiline
+                    minRows={4}
+                  />
+                  <Button type="submit" className="btn btn-comment">
+                    Comment
+                  </Button>
+                </Stack>
               </form>
             </div>
           </div>

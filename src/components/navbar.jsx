@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { InputAdornment, TextField } from "@mui/material";
+import { withRouter } from "../utils/router";
 import "../styles/navbar.scss";
 import BellIcon from "../styles/images/icons8-bell-100.png";
 import SideDrawer from "./sideDrawer";
@@ -34,48 +36,53 @@ export class NavBarComponent extends React.Component {
     }
 
     return (
-      <div style={{ height: "100%" }}>
-        <nav className="navbar navbar-expand-sm ">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <h4>
-                  <i
-                    className="fas fa-bars"
-                    style={{ marginRight: "20px" }}
-                    onClick={this.toggleDrawer}
-                    id="nav-icon"
-                  />
-                  <a href="/" className="nav-links">
-                    Author's Haven
-                  </a>
-                </h4>
-              </a>
-            </li>
-          </ul>
+      <header className="site-header">
+        <nav className="navbar app-navbar" aria-label="Primary navigation">
+          <div className="navbar-brand-group">
+            <button
+              className="menu-toggle"
+              type="button"
+              onClick={this.toggleDrawer}
+              aria-label="Open menu"
+            >
+              <i className="fas fa-bars" id="nav-icon" />
+            </button>
+            <Link to="/" className="brand-link">
+              Author's Haven
+            </Link>
+          </div>
           {sessionUser ? (
-            <ul className="nav navbar-nav ml-auto">
+            <ul className="nav navbar-nav nav-actions authenticated-actions">
               <li className="nav-item active">
                 <div className="form-group has-search">
-                  <span
-                    className="fa fa-search form-control-feedback"
-                    id="search-icon"
-                  />
                   <form className="form-inline my-5 my-lg-0">
-                    <input
-                      className="form-control mr-sm-2 form-control-search"
+                    <TextField
+                      className="form-control-search"
                       type="search"
+                      size="small"
+                      placeholder="Search"
                       aria-label="Search"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <i className="fa fa-search" id="search-icon" />
+                          </InputAdornment>
+                        )
+                      }}
                     />
                   </form>
                 </div>
               </li>
-              <li className="nav-item">
-                <img src={BellIcon} id="notification-icon" />
+              <li className="nav-item notification-item">
+                <img src={BellIcon} id="notification-icon" alt="Notifications" />
               </li>
               <li className="nav-item">
                 <div className="dropdown">
-                  <img className="dropbtn profile-img" src={profileImage} />
+                  <img
+                    className="dropbtn profile-img"
+                    src={profileImage}
+                    alt="Profile"
+                  />
                   <div className="dropdown-content">
                     <a
                       className="navlink"
@@ -97,7 +104,7 @@ export class NavBarComponent extends React.Component {
               </li>
             </ul>
           ) : (
-            <ul className="nav navbar-nav ml-auto">
+            <ul className="nav navbar-nav nav-actions guest-actions">
               <li className="nav-item">
                 <Link className="nav-link" to="/login">
                   Sign In
@@ -112,7 +119,7 @@ export class NavBarComponent extends React.Component {
           )}
         </nav>
         {sideDrawer}
-      </div>
+      </header>
     );
   }
 }

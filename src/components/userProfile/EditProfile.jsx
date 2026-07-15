@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Button, Stack, TextField } from "@mui/material";
+import { withRouter } from "../../utils/router";
 import { editProfileAction } from "../../actions/profileActions";
 import firebase from "../../firebase/config";
 import "../../styles/profile.scss";
@@ -94,43 +95,36 @@ export class EditProfile extends Component {
             <div className="row">
               <div className="col-md-8">
                 <form role="form" method="post" onSubmit={this.handleSubmit}>
-                  <div className="form-group">
-                    <input
+                  <Stack spacing={2.25} alignItems="flex-start">
+                    <TextField
                       id="full_name"
                       type="text"
-                      placeholder="Enter your FullName"
-                      className="form-control"
+                      label="Full name"
                       defaultValue={this.state.full_name}
                       onChange={this.handleNameChange}
                     />
-                  </div>
-
-                  <div className="form-group">
-                    <input
+                    <TextField
                       id="bio"
                       type="text"
-                      placeholder="Enter a short Bio"
-                      className="form-control"
+                      label="Short bio"
                       defaultValue={this.state.bio}
                       onChange={this.handleBioChange}
+                      multiline
+                      minRows={3}
                     />
-                  </div>
-                  <div className="row">
-                    <div className="col">
-                      <input
-                        type="submit"
-                        value="Save"
-                        className="btn btn-outline-success"
-                      />
-                    </div>
-                  </div>
+                    <Button type="submit">Save</Button>
+                  </Stack>
                 </form>
               </div>
 
               <div className="col-md-4">
                 <div className="styleme">
                   <div className="profile-img">
-                    <img src={this.state.image} className="update-image" />
+                    <img
+                      src={this.state.image}
+                      className="update-image"
+                      alt="Profile"
+                    />
                     <input
                       type="file"
                       onChange={event => this.uploadImage(event.target.files)}

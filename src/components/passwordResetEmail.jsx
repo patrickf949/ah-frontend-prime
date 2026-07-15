@@ -1,6 +1,7 @@
 import React from "react";
+import { Button, Stack, TextField } from "@mui/material";
 import "../styles/passwordreset.scss";
-import Loader from "react-loader";
+import { ThreeDots } from "react-loader-spinner";
 
 const PasswordResetEmailComponent = props => {
   const { email, handleOnChange, errors, handleOnSubmit, isLoading } = props;
@@ -16,27 +17,29 @@ const PasswordResetEmailComponent = props => {
             password.
           </p>
           <form method="POST" onSubmit={handleOnSubmit}>
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
+            <Stack spacing={2.25}>
+              <TextField
+                type="email"
                 name="email"
                 id="email"
                 required
-                placeholder="email"
+                label="Email"
                 value={email}
                 onChange={handleOnChange}
+                error={errors.email.length > 0}
+                helperText={errors.email.length > 0 ? errors.email : " "}
               />
-              {errors.email.length > 0 ? (
-                <span className="form-errors">{errors.email}</span>
-              ) : (
-                ""
-              )}
-            </div>
-            <button type="submit" className="btn btn-primary">
-              send link
-              <span> {isLoading ? <Loader color="#003153" /> : ""}</span>
-            </button>
+            <Button type="submit">
+              Send link
+              <ThreeDots
+                height="24"
+                width="48"
+                color="#003153"
+                visible={isLoading}
+                ariaLabel="password-reset-email-loading"
+              />
+            </Button>
+            </Stack>
           </form>
         </div>
         <div className="col col-lg-3" />

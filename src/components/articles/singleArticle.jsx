@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { withRouter } from "../../utils/router";
 import FollowsButton from "../FollowsButton";
 import { followUser, unfollowUser } from "../../actions/profileActions";
 import { likeArticle, dislikeArticle } from "../../actions/LikeDislikeActions";
+import { reactArticle } from "../../actions/reactionActions";
+import { applyArticleSeo } from "../../utils/seo";
 import like from "../../styles/images/like.png";
 import dislike from "../../styles/images/dislike.png";
 
@@ -21,12 +24,21 @@ export class SingleArticleComponent extends Component {
     this.props.getArticleAction(this.props.match.params.slug);
   }
   componentWillReceiveProps(newProps) {
-    const { likes, dislikes } = newProps;
+    const { likes, dislikes, article } = newProps;
     this.setState({
       likes: likes,
       dislikes: dislikes
     });
+    if (article && article.article && article.article.seo) {
+      applyArticleSeo(article.article.seo);
+    }
   }
+
+  handleReact = reaction => {
+    const { reactArticle } = this.props;
+    const slug = this.props.match.params.slug;
+    reactArticle(slug, reaction);
+  };
 
   handlefollowUser = () => {
     const { followUser } = this.props;
@@ -56,9 +68,32 @@ export class SingleArticleComponent extends Component {
     username === sessionStorage.getItem("username") ? true : false;
 
   render() {
-    const { isfollowing, article } = this.props;
+    const { isfollowing, article, reactions } = this.props;
     const { likes, dislikes } = this.state;
     const oneArticle = article ? article.article : null;
+    const reactionBreakdown =
+      (reactions && reactions.breakdown) ||
+      (oneArticle && oneArticle.reactions && oneArticle.reactions.breakdown) ||
+      [];
+    const emojiBar = reactionBreakdown
+      .filter(item => !["like", "dislike"].includes(item.reaction))
+      .map(item => (
+        <button
+          key={item.reaction}
+          type="button"
+          title={item.reaction}
+          onClick={() => this.handleReact(item.reaction)}
+          style={{
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            fontSize: "20px",
+            marginRight: "8px"
+          }}
+        >
+          {item.emoji} {item.count}
+        </button>
+      ));
     const singleArticle = oneArticle ? (
       <div className="container">
         <div className="single-article-div">
@@ -146,6 +181,7 @@ export class SingleArticleComponent extends Component {
             />
             {dislikes}
           </div>
+            <div className="reaction-bar">{emojiBar}</div>
             <Comments articleSlug={oneArticle.slug} />
           </div>
         </div>
@@ -161,12 +197,20 @@ export const mapStateToProps = state => ({
   article: state.getArticleReducer.article,
   isfollowing: state.profileReducer.isfollowing,
   likes: state.getArticleReducer.likes,
-  dislikes: state.getArticleReducer.dislikes
+  dislikes: state.getArticleReducer.dislikes,
+  reactions: state.getArticleReducer.reactions
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { getArticleAction, followUser, unfollowUser, likeArticle, dislikeArticle }
+    {
+      getArticleAction,
+      followUser,
+      unfollowUser,
+      likeArticle,
+      dislikeArticle,
+      reactArticle
+    }
   )(SingleArticleComponent)
 );

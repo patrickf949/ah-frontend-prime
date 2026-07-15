@@ -1,10 +1,7 @@
 import React from "react";
+import { Button, Stack, TextField } from "@mui/material";
 import "../../styles/createArticles.scss";
 import "../../styles/singleArticle.scss";
-import ReactQuill from "react-quill";
-import { modules, formats } from "./quillModules";
-import "react-quill/dist/quill.snow.css";
-import "react-quill/dist/quill.bubble.css";
 
 const CreateArticleComponent = props => {
   const { onChange, onSubmit, onUpload, onBodyChange, image, article, body } = props;
@@ -16,44 +13,34 @@ const CreateArticleComponent = props => {
         <div className="col col-lg-6">
           <h1>Tell A story</h1>
           <form>
-            <div className="form-group">
-              <input
+            <Stack spacing={2.25}>
+              <TextField
                 onChange={onChange}
-                className="form-control"
-                placeholder="title"
+                label="Title"
                 name="title"
                 id="title"
                 defaultValue={article ? article.title : ""}
               />
-            </div>
-            <div className="form-group">
-              <input
+              <TextField
                 onChange={onChange}
-                className="form-control"
-                placeholder="description"
+                label="Description"
                 name="description"
                 id="description"
                 defaultValue={article ? article.description : ""}
               />
-            </div>
-            <div className="form-group">
-              <ReactQuill
+              <TextField
                 onChange={onBodyChange}
-                className="text-area"
-                placeholder="Body"
-                name="body"
+                label="Body"
                 value={body}
-                formats={formats}
-                modules={modules}
+                multiline
+                minRows={8}
               />
-            </div>
-            <div className="form-group">
-              <input
+              <TextField
                 onChange={onChange}
-                className="form-control"
-                placeholder="tags"
+                label="Tags"
                 name="tags"
                 id="tags"
+                helperText="Separate your tags with a comma"
                 defaultValue={
                   article
                     ? article.tagList
@@ -62,15 +49,12 @@ const CreateArticleComponent = props => {
                     : ""
                 }
               />
-              <div>
-                <i>Separate your tags with a comma</i>
-              </div>
-            </div>
             <div className="image-div">
               <div className="actual-image">
                 <img
                   src={image ? image : article ? article.image : " "}
                   className="image-fluid"
+                  alt=""
                 />
               </div>
               <input
@@ -81,11 +65,10 @@ const CreateArticleComponent = props => {
               />
             </div>
 
-            <div className="form-group">
-              <button onClick={onSubmit} className="btn btn-primary">
+              <Button onClick={onSubmit}>
                 Publish Story
-              </button>
-            </div>
+              </Button>
+            </Stack>
           </form>
         </div>
         <div className="col col-lg-3" />

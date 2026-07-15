@@ -1,95 +1,68 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { Button, Stack, TextField } from "@mui/material";
+import { ThreeDots } from "react-loader-spinner";
 import "../../styles/register.scss";
 import SocialAuthContainer from "../../containers/SocialAuthContainer";
 
-const styles = themes => ({
-  floatingLabelFocusStyle: {
-    color: "black",
-    fontFamily: "Quantico",
-    fontSize: "15px",
-    fontWeight: "bold"
-  }
-});
 const LoginComponent = props => {
-  const {
-    classes,
-    password,
-    email,
-    handleChange,
-    handleSubmit,
-    isProcessing
-  } = props;
-
-  let Loader = require("react-loader");
+  const { password, email, handleChange, handleSubmit, isProcessing } = props;
 
   return (
-    <div>
-      <Grid container spacing={24}>
-        <Grid item lg={2} md={2} />
-        <Grid item lg={8} md={8}>
-          <Paper className="Paper">
+    <div className="auth-page container-fluid px-3">
+      <div className="row">
+        <div className="col-lg-2 col-md-2" />
+        <div className="col-lg-8 col-md-8">
+          <section className="Paper">
             <h3>Welcome back!</h3>
             <p>
               SignIn to like, dislike, favorite and unfavorite various articles,
               <br />
               follow authors and comment on articles.
             </p>
-            <Grid container spacing={24}>
-              <Grid item lg={6} md={6}>
+            <div className="row">
+              <div className="col-lg-6 col-md-6">
                 <div className="button-collective">
                   <SocialAuthContainer />
                 </div>
-              </Grid>
-              <Grid
-                item
-                lg={6}
-                md={6}
-                className="grid-register"
-                id="login-form"
-              >
+              </div>
+              <div className="col-lg-6 col-md-6 grid-register" id="login-form">
                 <form method="post" onSubmit={handleSubmit}>
+                  <Stack spacing={2.25}>
                   <TextField
-                    InputLabelProps={{
-                      className: classes.floatingLabelFocusStyle
-                    }}
                     id="email"
-                    label="email"
+                    label="Email"
                     name="email"
-                    type="text"
+                    type="email"
                     required
-                    className="textField"
                     value={email}
                     onChange={handleChange}
                   />
-
                   <TextField
-                    InputLabelProps={{
-                      className: classes.floatingLabelFocusStyle
-                    }}
                     id="password"
-                    label="password"
+                    label="Password"
                     name="password"
                     required
                     minLength={6}
                     maxLength={16}
                     type="password"
-                    className="textField"
                     value={password}
                     onChange={handleChange}
                   />
-                  <Loader loaded={!isProcessing} />
+                  <ThreeDots
+                    height="24"
+                    width="48"
+                    color="#003153"
+                    visible={isProcessing}
+                    ariaLabel="login-loading"
+                  />
                   <Button type="submit" className="button-success">
                     Login
                   </Button>
+                  </Stack>
                 </form>
-              </Grid>
-            </Grid>
+              </div>
+            </div>
             <p>
               Don't have an account yet?{" "}
               <Link to="/register" id="link">
@@ -102,11 +75,11 @@ const LoginComponent = props => {
                 reset now
               </Link>
             </p>
-          </Paper>
-        </Grid>
-        <Grid item lg={2} md={2} />
-      </Grid>
+          </section>
+        </div>
+        <div className="col-lg-2 col-md-2" />
+      </div>
     </div>
   );
 };
-export default withStyles(styles)(LoginComponent);
+export default LoginComponent;

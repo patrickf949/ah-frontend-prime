@@ -1,8 +1,9 @@
+import { API_BASE_URL } from "../../config/api";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "../../styles/app.scss";
 import moment from "moment";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../utils/router";
 import { getArticlesAction } from "../../actions/getArticles";
 import { deleteArticleAction } from "../../actions/deleteArticleAction";
 import { Link } from "react-router-dom";
@@ -13,7 +14,7 @@ export class UserArticles extends Component {
   }
   componentDidMount() {
     this.props.getArticlesAction(
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/" +
+      API_BASE_URL + "/articles/" +
         "?email=" +
         sessionStorage.getItem("email")
     );

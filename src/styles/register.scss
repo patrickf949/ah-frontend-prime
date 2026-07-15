@@ -1,225 +1,117 @@
 .Paper {
-  padding: 30px 0 30px 0;
-  margin-top: 15%;
+  width: 100%;
+  max-width: 980px;
+  margin: 48px auto 0;
+  padding: 36px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
 
   p,
   h3 {
     text-align: center;
   }
 
-  .button-collective {
-    margin-top: 30px;
-    border-right: 2px solid black;
-    height: 90%;
-    width: 100%;
-
-    .face-book,
-    .google {
-      margin: 10px 0 5px 10%;
-      color: black;
-      width: 80%;
-      border: 1px solid black;
-      border-radius: 5px;
-      font-weight: 500;
-      font-size: smaller;
-      text-align: start;
-      display: inline-block;
-
-      .metro {
-        padding: 20px 10px 10px 60px !important;
-        border-color: #0000;
-        color: #000000 !important;
-        font-weight: 500;
-        font-size: 14px;
-        border-radius: 5px;
-        font-family: Quantico;
-        text-align: left;
-        height: 50px;
-        background: #ffff;
-      }
-
-      button {
-        font-weight: 500;
-        width: 100%;
-        box-shadow: none !important;
-        border-radius: 5px !important;
-        padding-left: 60px !important;
-        font-family: Quantico !important;
-        color: #000000 !important;
-      }
-    }
-
-    img {
-      padding-right: 10px;
-      float: left;
-      margin-top: -10px;
-    }
+  h3 {
+    margin-bottom: 12px;
+    color: #111827;
+    font-size: 28px;
+    font-weight: 700;
   }
 
-  follow-button {
-    font-weight: 500;
-    width: 50%;
-    border-radius: 5px;
-    font-family: Quantico;
-    color: #000000;
+  p {
+    color: #4b5563;
+  }
+
+  .button-collective {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    height: 100%;
+    min-height: 220px;
+    padding-right: 32px;
+    border-right: 1px solid #e5e7eb;
+  }
+
+  .face-book,
+  .google {
+    width: 100%;
+  }
+
+  .face-book button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 14px;
+    color: #111827;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .face-book button:hover,
+  .face-book button:focus {
+    border-color: #003153;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 49, 83, 0.12);
+  }
+
+  .face-book img {
+    width: 28px;
+    height: 28px;
   }
 
   form {
-    padding-top: 30px;
     width: 100%;
+    padding-top: 24px;
+  }
 
-    .textField {
-      width: 85%;
-      margin-left: 5%;
-    }
+  .button-success {
+    width: 100%;
+  }
 
-    .button-success {
-      margin: 20px 5% 20px 5%;
-      color: white;
-      background: #003153;
-      width: 85%;
-      border-radius: 0;
-      font-family: "Quantico", sans-serif;
-      font-weight: bold;
-      padding: 10px 0 10px 0;
-    }
-
-    .button-success:hover {
-      background-color: #003153;
-    }
-
-    .form-errors {
-      float: left;
-      color: #ce8c64;
-      text-align: left;
-      font-size: 13px;
-      padding-left: 27px;
-      margin-top: -10px;
-    }
+  .form-errors {
+    color: #b45309;
+    font-size: 13px;
   }
 
   #link {
+    color: #003153;
+    font-weight: 700;
     text-decoration: none;
   }
 
-  @media (max-width: 1199px) {
+  #link:hover,
+  #link:focus {
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 991px) {
+  .Paper {
+    margin-top: 28px;
+    padding: 28px 20px;
+
     .button-collective {
+      min-height: auto;
+      padding-right: 0;
+      padding-bottom: 24px;
       border-right: 0;
-      margin: 10px 0 5px -10px;
+      border-bottom: 1px solid #e5e7eb;
     }
 
-    form .textField {
-      width: 70%;
-      margin: 0;
-    }
-
-    #login-form form {
-      padding: 0 40px;
-    }
-
-    #email,
-    #password {
-      width: 100% !important;
-      padding: 15px 10px;
-    }
-
-    form .button-success {
-      width: 70%;
-      margin: 15px 0 !important;
-    }
-  }
-
-  @media (max-width: 959px) {
-    .button-collective {
-      border-right: 1px;
-      margin: 10px 0 5px 80px;
-    }
-    .google,
-    .face-book {
-      width: 100%;
-      margin: 0;
-    }
-    form .textField {
-      width: 100%;
-      margin: 0;
-    }
-    #login-form {
-      width: 81%;
-    }
-    #login-form form {
-      padding: 0 40px;
-    }
-    #email,
-    #password {
-      width: 100% !important;
-      padding: 15px 10px;
-    }
-    form .button-success {
-      width: 100%;
-      margin: 15px 0 !important;
-    }
-  }
-
-  @media (max-width: 768px) {
+    #login-form,
     #registerForm {
-      width: 85% !important;
-      margin-left: 70px !important;
+      width: 100%;
+      margin: 0;
     }
-    form {
-      .textField {
-        width: 93% !important;
-      }
-    }
-    .button-success {
-      width: 93% !important;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  #registerForm {
-    width: 85% !important;
-    margin-left: 70px !important;
-  }
-  form {
-    .textField {
-      width: 93% !important;
-    }
-  }
-}
-
-@media (max-width: 360px) {
-  #registerForm {
-    width: 100% !important;
-    margin-left: 30px !important;
-  }
-  form {
-    .textField {
-      width: 150% !important;
-    }
-  }
-  .button-success {
-    width: 150% !important;
-  }
-}
-
-@media (max-width: 414px) {
-  #registerForm {
-    width: 100% !important;
-    margin-left: 30px !important;
-  }
-  form {
-    .textField {
-      width: 150% !important;
-    }
-  }
-  .button-success {
-    width: 150% !important;
-  }
-}
-@media (max-width: 378px) {
-  .button-collective {
-    border-right: 0px;
-    margin-right: -100px;
   }
 }

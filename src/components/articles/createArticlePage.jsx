@@ -1,13 +1,12 @@
+import { API_BASE_URL } from "../../config/api";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "../../styles/app.scss";
 import { articleCreateEditAction } from "../../actions/articleCreateEditAction";
-import { getArticleAction } from "../../actions/getArticle";
 import CreateArticleComponent from "./createArticleComponent";
 import firebase from "../../firebase/config";
-import { TextArea } from "semantic-ui-react";
 
-export class EditArticlePage extends Component {
+export class CreateArticlePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,22 +21,6 @@ export class EditArticlePage extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onUpload = this.onUpload.bind(this);
     this.onBodyChange = this.onBodyChange.bind(this);
-  }
-  componentWillMount() {
-    this.props.getArticleAction(this.props.match.params.slug);
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps) {
-      this.setState({
-        title: newProps.article.article.title,
-        description: newProps.article.article.description,
-        body: newProps.article.article.body,
-        image: newProps.article.article.image,
-        tags: newProps.article.tagList,
-        article: newProps.article.article
-      });
-    }
   }
 
   /* istanbul ignore next */
@@ -70,9 +53,8 @@ export class EditArticlePage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   onBodyChange(e) {
-    this.setState({ body: e });
+    this.setState({ body: e.target.value });
   }
-
   onSubmit(e) {
     e.preventDefault();
     const { title, body, description, tags, image } = this.state;
@@ -80,26 +62,21 @@ export class EditArticlePage extends Component {
       title: title,
       body: body,
       description: description,
-      tags: tags ? tags.split(",") : "",
+      tags: tags.split(","),
       image: image
     };
-    const url =
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/" +
-      this.props.match.params.slug +
-      "/";
 
     this.props.articleCreateEditAction(
       messageObject,
-      url,
-      "put",
+      API_BASE_URL + "/articles/",
+      "post",
       this.props,
-      "updated"
+      "created"
     );
   }
 
   render() {
-    const { image, article } = this.state;
-
+    const { image } = this.state;
     return (
       <div>
         <CreateArticleComponent
@@ -109,18 +86,13 @@ export class EditArticlePage extends Component {
           onSubmit={this.onSubmit}
           onBodyChange={this.onBodyChange}
           image={image}
-          article={article ? article : null}
         />
       </div>
     );
   }
 }
 
-export const mapStateToProps = state => ({
-  article: state.getArticleReducer.article
-});
-
 export default connect(
-  mapStateToProps,
-  { getArticleAction, articleCreateEditAction }
-)(EditArticlePage);
+  null,
+  { articleCreateEditAction }
+)(CreateArticlePage);

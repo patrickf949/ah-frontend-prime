@@ -4,7 +4,7 @@ import { facebooklogin, googlelogin } from "../actions/SocialAuthActions";
 import { SocialAuth } from "../components/SocialAuth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../utils/router";
 
 export class SocialAuthContainer extends Component {
   constructor(props) {
@@ -26,8 +26,8 @@ export class SocialAuthContainer extends Component {
   };
   handlegooglesuccess = response => {
     const { googlelogin } = this.props;
-    if (response.tokenId) {
-      googlelogin(response.tokenId);
+    if (response.credential) {
+      googlelogin(response.credential);
     }
   };
   handlegooglefailure = response => {

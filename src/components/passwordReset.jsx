@@ -1,6 +1,7 @@
 import React from "react";
+import { Button, Stack, TextField } from "@mui/material";
 import "../styles/passwordreset.scss";
-import Loader from "react-loader";
+import { ThreeDots } from "react-loader-spinner";
 
 export const PasswordResetComponent = props => {
   const {
@@ -24,47 +25,44 @@ export const PasswordResetComponent = props => {
                 sign in into Author's haven
               </p>
               <form method="post" onSubmit={handleOnSubmit}>
-                <div className="form-group">
-                  <input
+                <Stack spacing={2.25}>
+                  <TextField
                     type="password"
                     id="password"
                     name="password"
                     required
-                    className="form-control"
-                    placeholder="Password"
+                    label="Password"
                     value={password}
                     onChange={handleOnChange}
+                    error={errors.password.length > 0}
+                    helperText={errors.password.length > 0 ? errors.password : " "}
                   />
-                  {errors.password.length > 0 ? (
-                    <span className="form-errors-email">{errors.password}</span>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
+                  <TextField
                     type="password"
                     id="passwordConfirm"
                     name="passwordConfirm"
-                    className="form-control"
                     required
-                    placeholder="confirm Password"
+                    label="Confirm password"
                     value={passwordConfirm}
                     onChange={handleOnChange}
+                    error={errors.passwordConfirm.length > 0}
+                    helperText={
+                      errors.passwordConfirm.length > 0
+                        ? errors.passwordConfirm
+                        : " "
+                    }
                   />
-                  {errors.passwordConfirm.length > 0 ? (
-                    <span className="form-errors-email">
-                      {errors.passwordConfirm}
-                    </span>
-                  ) : (
-                    ""
-                  )}
-                  <br />
-                </div>
-                <button type="submit" className="btn btn-primary">
+                <Button type="submit">
                   Reset
-                  <span>{isLoading ? <Loader /> : ""}</span>
-                </button>
+                  <ThreeDots
+                    height="24"
+                    width="48"
+                    color="#003153"
+                    visible={isLoading}
+                    ariaLabel="password-reset-loading"
+                  />
+                </Button>
+                </Stack>
               </form>
             </div>
           </div>
