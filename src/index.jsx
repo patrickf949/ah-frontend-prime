@@ -1,8 +1,7 @@
 import React from "react";
-import ReactDom from "react-dom";
+import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./containers/app";
 import "react-toastify/dist/ReactToastify.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-ReactDom.render(<App />, document.getElementById("App"));
+createRoot(document.getElementById("App")).render(<App />);

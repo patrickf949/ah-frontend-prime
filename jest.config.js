@@ -11,6 +11,14 @@ module.exports = {
   moduleDirectories: ["node_modules"],
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
+    "^enzyme$": "<rootDir>/src/tests/__mocks__/enzyme.js",
+    "^enzyme/build$": "<rootDir>/src/tests/__mocks__/enzyme.js",
+    "^react-test-renderer$":
+      "<rootDir>/src/tests/__mocks__/react-test-renderer.js",
+    "^redux-thunk$": "<rootDir>/src/tests/__mocks__/redux-thunk.js",
+    "^@redux-devtools/extension$":
+      "<rootDir>/src/tests/__mocks__/redux-devtools-extension.js",
+    "config/api$": "<rootDir>/src/tests/__mocks__/apiConfig.js",
     "\\.(css|jpg|png|scss)$": "<rootDir>/ignore-css.js"
   },
   // A list of paths to directories that Jest should use to search for files in
@@ -18,6 +26,7 @@ module.exports = {
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: ["<rootDir>./src/SetupTests.js"],
+  setupFilesAfterEnv: ["<rootDir>./src/tests/setupMatchers.js"],
 
   // The test environment that will be used for testing
   testEnvironment: "jest-environment-jsdom",

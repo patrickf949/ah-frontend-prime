@@ -1,8 +1,8 @@
+import { API_BASE_URL } from "./config/api";
+
 const endpoints = {
-  googleLogin:
-    "https://ah-backend-prime-staging.herokuapp.com/api/v1/social/auth/google/",
-  facebookLogin:
-    "https://ah-backend-prime-staging.herokuapp.com/api/v1/social/auth/facebook/"
+  googleLogin: `${API_BASE_URL}/social/auth/google/`,
+  facebookLogin: `${API_BASE_URL}/social/auth/facebook/`
 };
 
 export default endpoints;
