@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import axios from "axios";
 import {
   LIKE_ARTICLE_FAILURE,
@@ -15,7 +16,7 @@ export const likeArticle = slug => {
     };
     return await axios
       .post(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/${slug}/like/`,
+        `${API_BASE_URL}/articles/${slug}/like/`,
         body,
         { headers: headers }
       )
@@ -44,7 +45,7 @@ export const dislikeArticle = slug => {
     };
     return await axios
       .post(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/${slug}/dislike/`,
+        `${API_BASE_URL}/articles/${slug}/dislike/`,
         body,
         { headers: headers }
       )

@@ -33,7 +33,7 @@ export const facebooklogin = token => dispatch => {
           toast.success(
             `Welcome ${data.data["auth_token"].username}. Login Successful`,
             {
-              position: toast.POSITION.TOP_RIGHT,
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false
             }
@@ -46,7 +46,7 @@ export const facebooklogin = token => dispatch => {
           });
         } else {
           toast.success(`${data.data["auth_token"]}`, {
-            position: toast.POSITION.TOP_RIGHT,
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false
           });
@@ -79,7 +79,7 @@ export const googlelogin = token => dispatch => {
           toast.success(
             `Welcome ${data.data["auth_token"].username}. Login Successful`,
             {
-              position: toast.POSITION.TOP_RIGHT,
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false
             }
@@ -92,7 +92,7 @@ export const googlelogin = token => dispatch => {
           });
         } else {
           toast.success(`${data.data["auth_token"]}`, {
-            position: toast.POSITION.TOP_RIGHT,
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false
           });

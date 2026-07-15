@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import authReducer from "./authReducer";
 import loginReducer from "./loginReducer";
 import getArticlesReducer from "./getArticlesReducer";
+import homeArticlesReducer from "./homeArticlesReducer";
 import { socialAuthReducer } from "./socialAuthReducer";
 import passwordResetReducer from "./passwordResetReducer";
 import passwordChangeReducer from "./passwordChangeReducer";
@@ -15,6 +16,7 @@ import getCommentsReducer from "./getCommentsReducer";
 export default combineReducers({
   auth_login: loginReducer,
   getArticlesReducer,
+  homeArticlesReducer,
   getArticleReducer,
   createArticleReducer,
   auth: authReducer,

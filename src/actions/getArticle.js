@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import axios from "axios";
 import { FETCH_ARTICLE_SUCCESS } from "./types";
 import { getUsersProfileAction } from "./profileActions";
@@ -5,7 +6,7 @@ import { getUsersProfileAction } from "./profileActions";
 export const getArticleAction = slug => dispatch => {
   return axios
     .get(
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/" + slug
+      API_BASE_URL + "/articles/" + slug
     )
     .then(response => {
       dispatch(fetchArticlesSuccess(response.data));

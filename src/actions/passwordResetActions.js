@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
@@ -14,7 +15,7 @@ export const sendPasswordResetLink = data => async dispatch => {
   });
   return await axios
     .post(
-      `https://ah-backend-prime-staging.herokuapp.com/api/v1/users/password/reset/email/`,
+      `${API_BASE_URL}/users/password/reset/email/`,
       data
     )
     .then(res => {
@@ -24,7 +25,7 @@ export const sendPasswordResetLink = data => async dispatch => {
       });
       toast.dismiss();
       toast.success(`${res.data.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
         autoClose: 3000,
         hideProgressBar: false
       });
@@ -36,7 +37,7 @@ export const sendPasswordResetLink = data => async dispatch => {
       });
       toast.dismiss();
       toast.error(`${error.response.data.error}`, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
         autoClose: false,
         hideProgressBar: false
       });
@@ -49,7 +50,7 @@ export const passwordReset = (data, token) => async dispatch => {
   });
   return await axios
     .put(
-      `https://ah-backend-prime-staging.herokuapp.com/api/v1/users/password/${token}/reset/`,
+      `${API_BASE_URL}/users/password/${token}/reset/`,
       {
         user: data
       }
@@ -61,7 +62,7 @@ export const passwordReset = (data, token) => async dispatch => {
       });
       toast.dismiss();
       toast.success(`${res.data.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
         autoClose: 3000,
         hideProgressBar: false
       });
@@ -73,7 +74,7 @@ export const passwordReset = (data, token) => async dispatch => {
       });
       toast.dismiss();
       toast.error("there was error during the password reset", {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
         autoClose: false,
         hideProgressBar: false
       });

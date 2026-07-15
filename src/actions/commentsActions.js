@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import {
   CREATE_COMMENTS,
   CREATE_COMMENTS_ERRORS,
@@ -10,7 +11,7 @@ import { toast } from "react-toastify";
 export const articleComments = (data, slug) => async dispatch => {
   return await axios
     .post(
-      `https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/${slug}/comments/0/`,
+      `${API_BASE_URL}/articles/${slug}/comments/0/`,
       data,
       {
         headers: {
@@ -39,7 +40,7 @@ export const articleComments = (data, slug) => async dispatch => {
 export const fetchComments = slug => async dispatch => {
   return await axios
     .get(
-      ` https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/${slug}/comments/0/`,
+      `${API_BASE_URL}/articles/${slug}/comments/0/`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.token
