@@ -1,3 +1,27 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`registerContainer should  render without fail  1`] = `ShallowWrapper {}`;
+exports[`registerContainer should  render without fail  1`] = `
+<div>
+  <RegisterComponent
+    email=""
+    error_message={
+      {
+        "email": "",
+        "password": "",
+        "username": "",
+      }
+    }
+    errors={
+      {
+        "email": "",
+        "password": "",
+        "username": "",
+      }
+    }
+    handleOnChange={[Function]}
+    handleOnSubmit={[Function]}
+    password=""
+    username=""
+  />
+</div>
+`;

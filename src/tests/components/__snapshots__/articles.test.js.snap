@@ -1,15 +1,536 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Article Components renders the create article page 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the create article page 1`] = `
+<div>
+  <CreateArticleComponent
+    body=""
+    description=""
+    image=""
+    isUploaded={false}
+    onBodyChange={[Function]}
+    onChange={[Function]}
+    onSubmit={[Function]}
+    onUpload={[Function]}
+    tags=""
+    title=""
+  />
+</div>
+`;
 
-exports[`Article Components renders the edit article page 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the edit article page 1`] = `
+<div>
+  <CreateArticleComponent
+    article={null}
+    body="This is the body"
+    description=""
+    image=""
+    isUploaded={false}
+    onBodyChange={[Function]}
+    onChange={[Function]}
+    onSubmit={[Function]}
+    onUpload={[Function]}
+    tags=""
+    title=""
+  />
+</div>
+`;
 
-exports[`Article Components renders the single article page 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the single article page 1`] = `
+<div>
+  <div>
+    The article you have requested does not exist
+  </div>
+</div>
+`;
 
-exports[`Article Components renders the single article page without an article 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the single article page without an article 1`] = `
+<div>
+  <div>
+    The article you have requested does not exist
+  </div>
+</div>
+`;
 
-exports[`Article Components renders the single article page without an article image 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the single article page without an article image 1`] = `
+<div>
+  <div>
+    The article you have requested does not exist
+  </div>
+</div>
+`;
 
-exports[`Article Components should not regress 1`] = `ShallowWrapper {}`;
+exports[`Article Components should not regress 1`] = `
+<div
+  className="container-fluid mt-5"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col col-lg-3"
+    />
+    <div
+      className="col col-lg-6"
+    >
+      <h1>
+        Tell A story
+      </h1>
+      <form>
+        <ForwardRef(Grid)
+          spacing={2.25}
+        >
+          <ForwardRef(TextField)
+            defaultValue=""
+            id="title"
+            label="Title"
+            name="title"
+            onChange={[MockFunction]}
+          />
+          <ForwardRef(TextField)
+            defaultValue=""
+            id="description"
+            label="Description"
+            name="description"
+            onChange={[MockFunction]}
+          />
+          <ForwardRef(TextField)
+            label="Body"
+            minRows={8}
+            multiline={true}
+          />
+          <ForwardRef(TextField)
+            defaultValue=""
+            helperText="Separate your tags with a comma"
+            id="tags"
+            label="Tags"
+            name="tags"
+            onChange={[MockFunction]}
+          />
+          <div
+            className="image-div"
+          >
+            <div
+              className="actual-image"
+            >
+              <img
+                alt=""
+                className="image-fluid"
+                src=" "
+              />
+            </div>
+            <input
+              id="fitz"
+              name="imageUpload"
+              onChange={[Function]}
+              type="file"
+            />
+          </div>
+          <ForwardRef(Button)
+            onClick={[MockFunction]}
+          >
+            Publish Story
+          </ForwardRef(Button)>
+        </ForwardRef(Grid)>
+      </form>
+    </div>
+    <div
+      className="col col-lg-3"
+    />
+  </div>
+</div>
+`;
 
-exports[`Article Components should render the home page 1`] = `ShallowWrapper {}`;
+exports[`Article Components should render the home page 1`] = `
+<div
+  className="big-container"
+>
+  <div
+    className="articles-top"
+  >
+    <div
+      className="top-articles"
+    />
+  </div>
+  <div
+    className="articles"
+  >
+    <div
+      className="heading"
+    >
+      <h3>
+        Trending Articles
+      </h3>
+    </div>
+    <hr />
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/dkaole-ld",
+            }
+          }
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              sunt aut facere repellat provi
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              7:38:14 am on May 17th 2019.
+            </span>
+            <br />
+            <p>
+              <b />
+            </p>
+          </div>
+          <div>
+            <img
+              className="img-tile"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+      </div>
+    </div>
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/kdaf-alpha",
+            }
+          }
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              qui est esse
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              7:38:14 am on May 17th 2019.
+            </span>
+            <br />
+            <p>
+              <b />
+            </p>
+          </div>
+          <div>
+            <img
+              className="img-tile"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+      </div>
+    </div>
+  </div>
+  <div
+    className="articles1"
+  >
+    <div
+      className="heading"
+    >
+      <h3>
+        Popular Articles
+      </h3>
+    </div>
+    <hr />
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/dkaole-ld",
+            }
+          }
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              sunt aut facere repellat provi
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              7:38:14 am on May 17th 2019.
+            </span>
+            <br />
+            <p>
+              <b />
+            </p>
+          </div>
+          <div>
+            <img
+              className="img-tile"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+      </div>
+    </div>
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/kdaf-alpha",
+            }
+          }
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              qui est esse
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              7:38:14 am on May 17th 2019.
+            </span>
+            <br />
+            <p>
+              <b />
+            </p>
+          </div>
+          <div>
+            <img
+              className="img-tile"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+      </div>
+    </div>
+  </div>
+  <div
+    className="articles"
+  >
+    <div
+      className="heading"
+    >
+      <h3>
+        All Articles
+      </h3>
+    </div>
+    <hr />
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/dkaole-ld",
+            }
+          }
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              sunt aut facere repellat provi
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              7:38:14 am on May 17th 2019.
+            </span>
+            <br />
+            <p>
+              <b />
+            </p>
+          </div>
+          <div>
+            <img
+              className="img-tile"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+      </div>
+    </div>
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/kdaf-alpha",
+            }
+          }
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              qui est esse
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              7:38:14 am on May 17th 2019.
+            </span>
+            <br />
+            <p>
+              <b />
+            </p>
+          </div>
+          <div>
+            <img
+              className="img-tile"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button
+      className="btn btn-outline-success btn eian"
+      onClick={[Function]}
+    >
+      Previous
+    </button>
+     
+    <button
+      className="btn btn-outline-success btn aken"
+      onClick={[Function]}
+    >
+      Next
+    </button>
+  </div>
+</div>
+`;

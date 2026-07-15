@@ -1,5 +1,31 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`profile container should receive props 1`] = `ShallowWrapper {}`;
+exports[`profile container should receive props 1`] = `
+<ProfileComponent
+  bio="the fudge"
+  followUser={[Function]}
+  full_name="fudge supreme"
+  image="image"
+  isOwner={false}
+  isfollowing={false}
+  unfollowUser={[Function]}
+  username="imatiti"
+/>
+`;
 
-exports[`profile container should render without crushing 1`] = `ShallowWrapper {}`;
+exports[`profile container should render without crushing 1`] = `
+<ProfileComponent
+  bio=""
+  followUser={[Function]}
+  followers={[]}
+  followers_no={0}
+  following={[]}
+  following_no={0}
+  full_name=""
+  image=""
+  isOwner={false}
+  isfollowing={false}
+  unfollowUser={[Function]}
+  username=""
+/>
+`;

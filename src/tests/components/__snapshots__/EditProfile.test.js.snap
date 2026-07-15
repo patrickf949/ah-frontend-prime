@@ -1,3 +1,81 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`editprofile component success tests should render without crushing 1`] = `ShallowWrapper {}`;
+exports[`editprofile component success tests should render without crushing 1`] = `
+<div>
+  <div
+    className="container"
+  >
+    <div
+      className="container-profile"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-8"
+        >
+          <form
+            method="post"
+            onSubmit={[Function]}
+            role="form"
+          >
+            <ForwardRef(Grid)
+              alignItems="flex-start"
+              spacing={2.25}
+            >
+              <ForwardRef(TextField)
+                defaultValue=""
+                id="full_name"
+                label="Full name"
+                onChange={[Function]}
+                type="text"
+              />
+              <ForwardRef(TextField)
+                defaultValue=""
+                id="bio"
+                label="Short bio"
+                minRows={3}
+                multiline={true}
+                onChange={[Function]}
+                type="text"
+              />
+              <ForwardRef(Button)
+                type="submit"
+              >
+                Save
+              </ForwardRef(Button)>
+            </ForwardRef(Grid)>
+          </form>
+        </div>
+        <div
+          className="col-md-4"
+        >
+          <div
+            className="styleme"
+          >
+            <div
+              className="profile-img"
+            >
+              <img
+                alt="Profile"
+                className="update-image"
+                src=""
+              />
+              <input
+                className="upload-button btn-outline-success"
+                id="banyati"
+                onChange={[Function]}
+                type="file"
+              />
+            </div>
+          </div>
+          <progress
+            max="100"
+            value={0}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

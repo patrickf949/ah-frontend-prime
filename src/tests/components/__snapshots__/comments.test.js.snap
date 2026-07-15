@@ -1,5 +1,147 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`test for comments should  1`] = `ShallowWrapper {}`;
+exports[`test for comments should  1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col col-lg-1"
+  />
+  <div
+    className="col col-lg-10"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col col-lg-1"
+      />
+      <div
+        className="col col-lg-11"
+      >
+        <form
+          className="comment-forms"
+          method="POST"
+          onSubmit={[Function]}
+        >
+          <ForwardRef(Grid)
+            alignItems="flex-start"
+            spacing={1.5}
+          >
+            <ForwardRef(TextField)
+              label="Add a comment"
+              minRows={4}
+              multiline={true}
+              name="comments"
+              onChange={[Function]}
+              value=""
+            />
+            <ForwardRef(Button)
+              className="btn btn-comment"
+              type="submit"
+            >
+              Comment
+            </ForwardRef(Button)>
+          </ForwardRef(Grid)>
+        </form>
+      </div>
+    </div>
+    <section
+      className="comments"
+    >
+      <article
+        className="comment"
+      >
+        <a
+          className="comment-img"
+          href="#non"
+        >
+          <img
+            alt=""
+            height="50"
+            src=""
+            width="50"
+          />
+        </a>
+        <div
+          className="comment-body"
+        >
+          <div
+            className="text"
+          >
+            <p>
+              this is it
+            </p>
+          </div>
+          <p
+            className="attribution"
+          >
+            by 
+            <a
+              href="/profile/undefined"
+            />
+             at 
+            7:38:14 am on May 17th 2019.
+          </p>
+        </div>
+      </article>
+    </section>
+  </div>
+  <div
+    className="col col-lg-1"
+  />
+</div>
+`;
 
-exports[`test for comments should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`test for comments should render without crashing 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col col-lg-1"
+  />
+  <div
+    className="col col-lg-10"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col col-lg-1"
+      />
+      <div
+        className="col col-lg-11"
+      >
+        <form
+          className="comment-forms"
+          method="POST"
+          onSubmit={[Function]}
+        >
+          <ForwardRef(Grid)
+            alignItems="flex-start"
+            spacing={1.5}
+          >
+            <ForwardRef(TextField)
+              label="Add a comment"
+              minRows={4}
+              multiline={true}
+              name="comments"
+              onChange={[Function]}
+              value=""
+            />
+            <ForwardRef(Button)
+              className="btn btn-comment"
+              type="submit"
+            >
+              Comment
+            </ForwardRef(Button)>
+          </ForwardRef(Grid)>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    className="col col-lg-1"
+  />
+</div>
+`;

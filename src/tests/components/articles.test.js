@@ -18,6 +18,31 @@ const props = {
   fetchPrevious: jest.fn()
 };
 
+const homeArticle = (slug, title, count) => ({
+  slug,
+  title,
+  description: `Description of ${title} that is long enough to be cut`,
+  createdAt: "2019-05-17T04:38:14.045441Z",
+  image: "",
+  reading_time: "1 minute read",
+  author: { username: "alice" },
+  reactions: {
+    total: count,
+    breakdown: [{ reaction: "fire", emoji: "🔥", count }]
+  }
+});
+
+const homeProps = {
+  ...props,
+  getHomeArticlesAction: jest.fn(),
+  latest: [
+    homeArticle("hero-article", "The Hero Article Title", 0),
+    homeArticle("second-latest", "Second Latest Article", 1)
+  ],
+  trending: [homeArticle("trending-article", "A Trending Article", 5)],
+  popular: [homeArticle("popular-article", "A Popular Article", 9)]
+};
+
 const props1 = {
   getArticleAction: jest.fn(),
   match: {
@@ -34,6 +59,39 @@ describe("Article Components", () => {
   });
   it("should render the home page", () => {
     expect(homeWrapper).toMatchSnapshot();
+  });
+
+  it("should fetch home articles on mount", () => {
+    const wrapper = shallow(<Home {...homeProps} />);
+    wrapper.instance().componentDidMount();
+    expect(homeProps.getHomeArticlesAction).toHaveBeenCalled();
+  });
+
+  it("should render the latest article as the hero", () => {
+    const wrapper = shallow(<Home {...homeProps} />);
+    const hero = wrapper.find(".best-article");
+    expect(hero.length).toEqual(1);
+    expect(hero.text()).toContain("The Hero Article Title");
+  });
+
+  it("should render trending and popular sections from props", () => {
+    const wrapper = shallow(<Home {...homeProps} />);
+    const text = wrapper.find(".big-container").text();
+    expect(text).toContain("Trending Articles");
+    expect(text).toContain("Popular Articles");
+    expect(text).toContain("A Trending Article".substring(0, 30));
+    expect(text).toContain("A Popular Article".substring(0, 30));
+  });
+
+  it("should show emoji reaction counts on article cards", () => {
+    const wrapper = shallow(<Home {...homeProps} />);
+    expect(wrapper.find(".card-reactions").length).toBeGreaterThan(0);
+    expect(wrapper.find(".big-container").text()).toContain("🔥 5");
+  });
+
+  it("should render without a hero when there are no latest articles", () => {
+    const wrapper = shallow(<Home {...homeProps} latest={[]} />);
+    expect(wrapper.find(".best-article").length).toEqual(0);
   });
 
   it("renders the single article page", () => {

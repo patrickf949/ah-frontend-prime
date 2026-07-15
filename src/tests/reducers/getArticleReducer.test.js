@@ -2,7 +2,8 @@ import getArticleReducer from "../../reducers/getArticleReducer";
 import {
   FETCH_ARTICLE_SUCCESS,
   DISLIKE_ARTICLE_SUCCESS,
-  LIKE_ARTICLE_SUCCESS
+  LIKE_ARTICLE_SUCCESS,
+  REACT_ARTICLE_SUCCESS
 } from "../../actions/types";
 
 describe("App", () => {
@@ -29,6 +30,32 @@ describe("App", () => {
       },
       likes: undefined,
       dislikes: undefined
+    };
+
+    expect(getArticleReducer(initialState, dispatchedAction)).toEqual(newState);
+  });
+
+  it("should update counts after an emoji reaction", () => {
+    const reactions = {
+      total: 3,
+      breakdown: [
+        { reaction: "like", emoji: "👍", count: 1 },
+        { reaction: "fire", emoji: "🔥", count: 2 }
+      ]
+    };
+    const dispatchedAction = {
+      type: REACT_ARTICLE_SUCCESS,
+      payload: {
+        likes: 1,
+        dislikes: 0,
+        reactions
+      }
+    };
+    const newState = {
+      article: {},
+      likes: 1,
+      dislikes: 0,
+      reactions
     };
 
     expect(getArticleReducer(initialState, dispatchedAction)).toEqual(newState);

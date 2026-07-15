@@ -82,4 +82,62 @@ describe("Component for getting single Articles", () => {
     wrapper.instance().componentWillReceiveProps(newProps);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it("should call reactArticle when an emoji is clicked", () => {
+    const props = {
+      match: {
+        params: {
+          slug: "truth"
+        }
+      },
+      getArticleAction: jest.fn(),
+      likes: 1,
+      dislikes: 0,
+      isfollowing: true,
+      article: { article: data.article },
+      reactions: {
+        total: 2,
+        breakdown: [
+          { reaction: "like", emoji: "👍", count: 1 },
+          { reaction: "fire", emoji: "🔥", count: 1 }
+        ]
+      },
+      likeArticle: jest.fn(),
+      dislikeArticle: jest.fn(),
+      reactArticle: jest.fn()
+    };
+    const wrapper = shallow(<DumpProfileContainer {...props} />);
+    wrapper.instance().handleReact("fire");
+    expect(props.reactArticle).toHaveBeenCalledWith("truth", "fire");
+  });
+
+  it("should render the emoji reaction bar without like/dislike", () => {
+    const props = {
+      match: {
+        params: {
+          slug: "truth"
+        }
+      },
+      getArticleAction: jest.fn(),
+      likes: 1,
+      dislikes: 0,
+      isfollowing: true,
+      article: { article: data.article },
+      reactions: {
+        total: 3,
+        breakdown: [
+          { reaction: "like", emoji: "👍", count: 1 },
+          { reaction: "fire", emoji: "🔥", count: 2 }
+        ]
+      },
+      likeArticle: jest.fn(),
+      dislikeArticle: jest.fn(),
+      reactArticle: jest.fn()
+    };
+    const wrapper = shallow(<DumpProfileContainer {...props} />);
+    const bar = wrapper.find(".reaction-bar");
+    expect(bar.length).toEqual(1);
+    expect(bar.text()).toContain("🔥 2");
+    expect(bar.text()).not.toContain("👍");
+  });
 });

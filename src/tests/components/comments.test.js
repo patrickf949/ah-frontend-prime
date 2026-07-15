@@ -45,6 +45,7 @@ describe("test for comments", () => {
         {
           id: 2,
           body: "this is it",
+          createdAt: "2019-05-17T04:38:14.045441Z",
           author: {
             image: ""
           }
