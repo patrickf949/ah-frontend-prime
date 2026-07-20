@@ -10,12 +10,36 @@ exports[`test for sidebar  component should render without crashing 1`] = `
     <li
       className="list-group-item"
     >
-      Signin
+      <Link
+        style={
+          {
+            "color": "inherit",
+            "display": "block",
+            "textDecoration": "none",
+            "width": "100%",
+          }
+        }
+        to="/login"
+      >
+        Sign In
+      </Link>
     </li>
     <li
       className="list-group-item"
     >
-       Get Started
+      <Link
+        style={
+          {
+            "color": "inherit",
+            "display": "block",
+            "textDecoration": "none",
+            "width": "100%",
+          }
+        }
+        to="/register"
+      >
+        Get Started
+      </Link>
     </li>
   </ul>
 </div>
