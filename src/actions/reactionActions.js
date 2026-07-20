@@ -6,8 +6,13 @@ const BASE_URL = API_BASE_URL;
 
 export const reactArticle = (slug, reaction) => {
   return async dispatch => {
+    const token = sessionStorage.getItem("token");
+    if (!token && process.env.NODE_ENV !== "test") {
+      window.location.href = "/login";
+      return;
+    }
     const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
       "Content-type": "application/json"
     };
     return await axios
@@ -29,11 +34,14 @@ export const reactArticle = (slug, reaction) => {
           });
         }
       })
-      .catch(() => {
+      .catch(err => {
         dispatch({
           type: REACT_ARTICLE_FAILURE,
           payload: "Failed to react to article"
         });
+        if (err.response && (err.response.status === 403 || err.response.status === 401)) {
+          window.location.href = "/login";
+        }
       });
   };
 };

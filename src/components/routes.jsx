@@ -13,6 +13,7 @@ import UserArticles from "./articles/userArticles";
 import CreateArticlePage from "./articles/createArticlePage";
 import UsersProfileContainer from "../containers/profile/UsersProfileContainer";
 import EditArticlePage from "./articles/editArticlePage";
+import FavoritesPage from "./articles/favoritesPage";
 import { RouteElement } from "../utils/router";
 
 class Routes extends Component {
@@ -68,6 +69,10 @@ class Routes extends Component {
             <Route
               path="/profile/:username"
               element={<RouteElement component={UsersProfileContainer} />}
+            />
+            <Route
+              path="/favorites"
+              element={<RouteElement component={FavoritesPage} />}
             />
           </RouterRoutes>
         </BrowserRouter>

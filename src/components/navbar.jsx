@@ -13,7 +13,8 @@ export class NavBarComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      navBarDrawer: false
+      navBarDrawer: false,
+      search: ""
     };
     this.logout = this.logout.bind(this);
   }
@@ -28,8 +29,19 @@ export class NavBarComponent extends React.Component {
     });
   };
 
+  handleSearchChange = event => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleSearchSubmit = event => {
+    event.preventDefault();
+    const { search } = this.state;
+    this.props.history.push("/?search=" + encodeURIComponent(search));
+  };
+
   render() {
     const sessionUser = sessionStorage.getItem("username");
+    const { search } = this.state;
     let sideDrawer;
     if (this.state.navBarDrawer) {
       sideDrawer = <SideDrawer />;
@@ -51,28 +63,30 @@ export class NavBarComponent extends React.Component {
               Author's Haven
             </Link>
           </div>
+
+          <div className="form-group has-search">
+            <form className="form-inline" onSubmit={this.handleSearchSubmit}>
+              <TextField
+                className="form-control-search"
+                type="search"
+                size="small"
+                placeholder="Search stories..."
+                aria-label="Search"
+                value={search}
+                onChange={this.handleSearchChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i className="fa fa-search" id="search-icon" />
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </form>
+          </div>
+
           {sessionUser ? (
             <ul className="nav navbar-nav nav-actions authenticated-actions">
-              <li className="nav-item active">
-                <div className="form-group has-search">
-                  <form className="form-inline my-5 my-lg-0">
-                    <TextField
-                      className="form-control-search"
-                      type="search"
-                      size="small"
-                      placeholder="Search"
-                      aria-label="Search"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i className="fa fa-search" id="search-icon" />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                  </form>
-                </div>
-              </li>
               <li className="nav-item notification-item">
                 <img src={BellIcon} id="notification-icon" alt="Notifications" />
               </li>
@@ -95,6 +109,9 @@ export class NavBarComponent extends React.Component {
                     </Link>
                     <Link className="navlink" to="/user-articles/">
                       Your Stories
+                    </Link>
+                    <Link className="navlink" to="/favorites">
+                      Your favorites
                     </Link>
                     <a href="/" className="navlink" onClick={this.logout}>
                       Log out

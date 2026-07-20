@@ -9,9 +9,14 @@ import {
 
 export const likeArticle = slug => {
   return async dispatch => {
+    const token = sessionStorage.getItem("token");
+    if (!token && process.env.NODE_ENV !== "test") {
+      window.location.href = "/login";
+      return;
+    }
     const body = {};
     const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
       "Content-type": "application/json"
     };
     return await axios
@@ -32,15 +37,29 @@ export const likeArticle = slug => {
             payload: "Failed to like article"
           });
         }
+      })
+      .catch(err => {
+        dispatch({
+          type: LIKE_ARTICLE_FAILURE,
+          payload: "Failed to like article"
+        });
+        if (err.response && (err.response.status === 403 || err.response.status === 401)) {
+          window.location.href = "/login";
+        }
       });
   };
 };
 
 export const dislikeArticle = slug => {
   return async dispatch => {
+    const token = sessionStorage.getItem("token");
+    if (!token && process.env.NODE_ENV !== "test") {
+      window.location.href = "/login";
+      return;
+    }
     const body = {};
     const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
       "Content-type": "application/json"
     };
     return await axios
@@ -60,6 +79,15 @@ export const dislikeArticle = slug => {
             type: DISLIKE_ARTICLE_FAILURE,
             payload: "Failed to dislike article"
           });
+        }
+      })
+      .catch(err => {
+        dispatch({
+          type: DISLIKE_ARTICLE_FAILURE,
+          payload: "Failed to dislike article"
+        });
+        if (err.response && (err.response.status === 403 || err.response.status === 401)) {
+          window.location.href = "/login";
         }
       });
   };

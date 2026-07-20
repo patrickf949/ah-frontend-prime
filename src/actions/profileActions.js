@@ -71,9 +71,8 @@ export const getUsersFollowers = username => {
 
 export const getUsersProfileAction = username => {
   return async dispatch => {
-    const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`
-    };
+    const token = sessionStorage.getItem("token");
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
     return await axios
       .get(
         `${API_BASE_URL}/profiles/${username}`,
