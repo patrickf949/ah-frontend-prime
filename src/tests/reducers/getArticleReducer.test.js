@@ -10,7 +10,8 @@ describe("App", () => {
   const initialState = {
     article: {},
     likes: 0,
-    dislikes: 0
+    dislikes: 0,
+    loading: false
   };
   it("Should handle reducers initial state", () => {
     const newState = getArticleReducer(undefined, {});
@@ -29,7 +30,9 @@ describe("App", () => {
         article: {}
       },
       likes: undefined,
-      dislikes: undefined
+      dislikes: undefined,
+      loading: false,
+      reactions: undefined
     };
 
     expect(getArticleReducer(initialState, dispatchedAction)).toEqual(newState);
@@ -55,7 +58,8 @@ describe("App", () => {
       article: {},
       likes: 1,
       dislikes: 0,
-      reactions
+      reactions,
+      loading: false
     };
 
     expect(getArticleReducer(initialState, dispatchedAction)).toEqual(newState);
@@ -73,7 +77,8 @@ describe("App", () => {
     const newState = {
       article: {},
       likes: 1,
-      dislikes: 0
+      dislikes: 0,
+      loading: false
     };
 
     expect(getArticleReducer(initialState, dispatchedAction)).toEqual(newState);
@@ -91,7 +96,8 @@ describe("App", () => {
     const newState = {
       article: {},
       likes: 0,
-      dislikes: 1
+      dislikes: 1,
+      loading: false
     };
 
     expect(getArticleReducer(initialState, dispatchedAction)).toEqual(newState);

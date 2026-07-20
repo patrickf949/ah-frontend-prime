@@ -29,6 +29,36 @@ exports[` navbar component should load other nav elements when a user is not aut
         Author's Haven
       </Link>
     </div>
+    <div
+      className="form-group has-search"
+    >
+      <form
+        className="form-inline"
+        onSubmit={[Function]}
+      >
+        <ForwardRef(TextField)
+          InputProps={
+            {
+              "startAdornment": <ForwardRef(InputAdornment)
+                position="start"
+              >
+                <i
+                  className="fa fa-search"
+                  id="search-icon"
+                />
+              </ForwardRef(InputAdornment)>,
+            }
+          }
+          aria-label="Search"
+          className="form-control-search"
+          onChange={[Function]}
+          placeholder="Search stories..."
+          size="small"
+          type="search"
+          value=""
+        />
+      </form>
+    </div>
     <ul
       className="nav navbar-nav nav-actions guest-actions"
     >
@@ -85,6 +115,36 @@ exports[` navbar component should render without crashing 1`] = `
       >
         Author's Haven
       </Link>
+    </div>
+    <div
+      className="form-group has-search"
+    >
+      <form
+        className="form-inline"
+        onSubmit={[Function]}
+      >
+        <ForwardRef(TextField)
+          InputProps={
+            {
+              "startAdornment": <ForwardRef(InputAdornment)
+                position="start"
+              >
+                <i
+                  className="fa fa-search"
+                  id="search-icon"
+                />
+              </ForwardRef(InputAdornment)>,
+            }
+          }
+          aria-label="Search"
+          className="form-control-search"
+          onChange={[Function]}
+          placeholder="Search stories..."
+          size="small"
+          type="search"
+          value=""
+        />
+      </form>
     </div>
     <ul
       className="nav navbar-nav nav-actions guest-actions"

@@ -20,8 +20,12 @@ exports[`editprofile component success tests should render without crushing 1`] 
             role="form"
           >
             <ForwardRef(Grid)
-              alignItems="flex-start"
               spacing={2.25}
+              sx={
+                {
+                  "alignItems": "flex-start",
+                }
+              }
             >
               <ForwardRef(TextField)
                 defaultValue=""

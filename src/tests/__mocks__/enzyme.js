@@ -3,6 +3,11 @@ const React = require("react");
 const isClassComponent = type =>
   Boolean(type && type.prototype && type.prototype.render);
 
+const isHookBoundary = type => {
+  const name = (type && (type.displayName || type.name)) || "";
+  return ["Provider", "BrowserRouter", "HashRouter", "MemoryRouter"].includes(name);
+};
+
 const getChildren = node => {
   if (!node || !node.props) return [];
   return React.Children.toArray(node.props.children);
@@ -77,6 +82,11 @@ class Wrapper {
     }
 
     if (typeof type === "function") {
+      if (isHookBoundary(type)) {
+        this.output = this.element;
+        return;
+      }
+
       try {
         this.output = type(props);
       } catch (error) {

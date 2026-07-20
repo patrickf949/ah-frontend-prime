@@ -2,7 +2,9 @@
 
 exports[`Component for getting single Articles should receive props 1`] = `
 <div>
-  <div>
+  <div
+    className="not-found"
+  >
     The article you have requested does not exist
   </div>
 </div>

@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`FavoritesPage component should render tabs sorted by count with dislike last 1`] = `
+<div
+  className="big-container"
+  style={
+    {
+      "padding": "40px 24px",
+    }
+  }
+>
+  <header
+    style={
+      {
+        "marginBottom": "32px",
+        "textAlign": "center",
+      }
+    }
+  >
+    <h2
+      style={
+        {
+          "color": "var(--text-primary)",
+          "fontSize": "36px",
+          "fontWeight": "800",
+        }
+      }
+    >
+      Your Favorites & Preferences
+    </h2>
+    <p
+      style={
+        {
+          "color": "var(--text-secondary)",
+          "fontSize": "16px",
+          "marginTop": "8px",
+        }
+      }
+    >
+      Explore the stories you have reacted to, grouped by your interaction preferences.
+    </p>
+  </header>
+  <div
+    style={
+      {
+        "borderBottom": "1px solid var(--border-color)",
+        "display": "flex",
+        "gap": "12px",
+        "marginBottom": "32px",
+        "overflowX": "auto",
+        "paddingBottom": "16px",
+      }
+    }
+  >
+    <button
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "var(--accent-color)",
+          "border": "none",
+          "borderRadius": "30px",
+          "color": "white",
+          "cursor": "pointer",
+          "display": "flex",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "gap": "8px",
+          "outline": "none",
+          "padding": "10px 20px",
+          "transition": "var(--transition-base)",
+          "whiteSpace": "nowrap",
+        }
+      }
+    >
+      <span>
+        🔥
+      </span>
+      <span>
+        Clap
+        s
+      </span>
+      <span
+        style={
+          {
+            "backgroundColor": "rgba(255,255,255,0.25)",
+            "borderRadius": "10px",
+            "fontSize": "12px",
+            "padding": "2px 8px",
+          }
+        }
+      >
+        1
+      </span>
+    </button>
+    <button
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#f1f5f9",
+          "border": "none",
+          "borderRadius": "30px",
+          "color": "var(--text-secondary)",
+          "cursor": "pointer",
+          "display": "flex",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "gap": "8px",
+          "outline": "none",
+          "padding": "10px 20px",
+          "transition": "var(--transition-base)",
+          "whiteSpace": "nowrap",
+        }
+      }
+    >
+      <span>
+        🔥
+      </span>
+      <span>
+        Like
+        s
+      </span>
+      <span
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.06)",
+            "borderRadius": "10px",
+            "fontSize": "12px",
+            "padding": "2px 8px",
+          }
+        }
+      >
+        1
+      </span>
+    </button>
+    <button
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#f1f5f9",
+          "border": "none",
+          "borderRadius": "30px",
+          "color": "var(--text-secondary)",
+          "cursor": "pointer",
+          "display": "flex",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "gap": "8px",
+          "outline": "none",
+          "padding": "10px 20px",
+          "transition": "var(--transition-base)",
+          "whiteSpace": "nowrap",
+        }
+      }
+    >
+      <span>
+        🔥
+      </span>
+      <span>
+        Dislike
+        s
+      </span>
+      <span
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.06)",
+            "borderRadius": "10px",
+            "fontSize": "12px",
+            "padding": "2px 8px",
+          }
+        }
+      >
+        1
+      </span>
+    </button>
+  </div>
+  <div
+    className="all-articles-section"
+  >
+    <div
+      className="heading"
+      style={
+        {
+          "marginBottom": "24px",
+        }
+      }
+    >
+      <h3>
+        Reacted with 
+        🔥
+         
+        Clap
+        s
+      </h3>
+    </div>
+    <div
+      className="all-stories-grid"
+      style={
+        {
+          "display": "grid",
+          "gap": "24px",
+          "gridTemplateColumns": "repeat(auto-fill, minmax(320px, 1fr))",
+        }
+      }
+    >
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/clap-slug",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              Clapped Article
+            </h3>
+            <p
+              className="desc"
+            >
+              Mock description
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                bob
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              >
+                1 min read
+              </span>
+              <React.Fragment>
+                <span
+                  className="divider"
+                />
+                <span
+                  className="card-reactions reactions"
+                >
+                  🔥 1
+                </span>
+              </React.Fragment>
+            </div>
+          </div>
+          <img
+            alt="article thumbnail"
+            className="img-tile"
+            src="https://previews.123rf.com/images/twindesigner/twindesigner1708/twindesigner170800135/84202763-ah-brush-letter-logo-design-with-black-circle-creative-brushed-letters-icon-logo-.jpg"
+          />
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
+`;

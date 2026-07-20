@@ -67,11 +67,11 @@ describe("Article Components", () => {
     expect(homeProps.getHomeArticlesAction).toHaveBeenCalled();
   });
 
-  it("should render the latest article as the hero", () => {
+  it("should render the top trending article as the hero", () => {
     const wrapper = shallow(<Home {...homeProps} />);
     const hero = wrapper.find(".best-article");
     expect(hero.length).toEqual(1);
-    expect(hero.text()).toContain("The Hero Article Title");
+    expect(hero.text()).toContain("A Trending Article");
   });
 
   it("should render trending and popular sections from props", () => {

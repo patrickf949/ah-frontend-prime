@@ -6,7 +6,8 @@ describe("get comments reducer", () => {
   let initialState;
   beforeEach(() => {
     initialState = {
-      comments: []
+      comments: [],
+      loading: false
     };
   });
   it("should initial state of the reducer", () => {
