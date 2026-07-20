@@ -221,13 +221,7 @@
   }
 
   .guest-actions {
-    gap: 8px;
-  }
-
-  .guest-actions .nav-link {
-    min-height: 36px;
-    padding: 7px 10px;
-    font-size: 13px;
+    display: none;
   }
 
   .authenticated-actions .has-search,
@@ -248,12 +242,5 @@
     text-overflow: ellipsis;
   }
 
-  .guest-actions {
-    gap: 6px;
-  }
 
-  .guest-actions .nav-link {
-    padding: 7px 8px;
-    font-size: 12px;
-  }
 }

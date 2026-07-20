@@ -16,7 +16,7 @@ class App extends Component {
           <CssBaseline />
           <div>
             <Routes />
-            <ToastContainer />
+            <ToastContainer position="top-right" newestOnTop />
           </div>
         </ThemeProvider>
       </Provider>

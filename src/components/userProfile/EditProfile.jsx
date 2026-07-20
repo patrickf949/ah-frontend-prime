@@ -95,7 +95,7 @@ export class EditProfile extends Component {
             <div className="row">
               <div className="col-md-8">
                 <form role="form" method="post" onSubmit={this.handleSubmit}>
-                  <Stack spacing={2.25} alignItems="flex-start">
+                  <Stack spacing={2.25} sx={{ alignItems: "flex-start" }}>
                     <TextField
                       id="full_name"
                       type="text"

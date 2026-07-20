@@ -8,12 +8,18 @@ import { followUser, unfollowUser } from "../../actions/profileActions";
 import { likeArticle, dislikeArticle } from "../../actions/LikeDislikeActions";
 import { reactArticle } from "../../actions/reactionActions";
 import { applyArticleSeo } from "../../utils/seo";
+import { ThreeDots } from "react-loader-spinner";
 import like from "../../styles/images/like.png";
 import dislike from "../../styles/images/dislike.png";
 
 import "../../styles/singleArticle.scss";
 import { getArticleAction } from "../../actions/getArticle";
 import Comments from "../comments";
+
+const FALLBACK_IMAGE =
+  "https://previews.123rf.com/images/twindesigner/twindesigner1708/twin" +
+  "designer170800135/84202763-ah-brush-letter-logo-design-with-black-" +
+  "circle-creative-brushed-letters-icon-logo-.jpg";
 
 export class SingleArticleComponent extends Component {
   state = {
@@ -22,6 +28,11 @@ export class SingleArticleComponent extends Component {
   };
   componentDidMount() {
     this.props.getArticleAction(this.props.match.params.slug);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.slug !== prevProps.match.params.slug) {
+      this.props.getArticleAction(this.props.match.params.slug);
+    }
   }
   componentWillReceiveProps(newProps) {
     const { likes, dislikes, article } = newProps;
@@ -68,7 +79,14 @@ export class SingleArticleComponent extends Component {
     username === sessionStorage.getItem("username") ? true : false;
 
   render() {
-    const { isfollowing, article, reactions } = this.props;
+    const { isfollowing, article, reactions, loading } = this.props;
+    if (loading) {
+      return (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
+          <ThreeDots color="#03a9f4" height={80} width={80} />
+        </div>
+      );
+    }
     const { likes, dislikes } = this.state;
     const oneArticle = article ? article.article : null;
     const reactionBreakdown =
@@ -81,113 +99,82 @@ export class SingleArticleComponent extends Component {
         <button
           key={item.reaction}
           type="button"
+          className="emoji-btn"
           title={item.reaction}
           onClick={() => this.handleReact(item.reaction)}
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontSize: "20px",
-            marginRight: "8px"
-          }}
         >
-          {item.emoji} {item.count}
+          <span className="emoji-icon">{item.emoji}</span>{" "}
+          <span className="emoji-count">{item.count}</span>
         </button>
       ));
     const singleArticle = oneArticle ? (
-      <div className="container">
-        <div className="single-article-div">
-          <div className="inner">
-            <h2 className="article-title">{oneArticle.title}</h2>
-            <div>
-              <div>
-                <div className="">
-                  <div className="article-profile">
-                    <img
-                      src={
-                        oneArticle.author.image
-                          ? oneArticle.author.image
-                          : "https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="
-                      }
-                      alt="profile pic"
-                    />
-                  </div>
-                  <div className="article-author">
-                    {oneArticle.author.username}
-                    <div>
-                      {this.isOwner(oneArticle.author.username) ? (
-                        <button>Edit</button>
-                      ) : (
-                        <FollowsButton
-                          followUser={this.handlefollowUser}
-                          unfollowUser={this.handleunfollowUser}
-                          isfollowing={isfollowing === "True" ? true : false}
-                        />
-                      )}
-                    </div>
-                    <div className="article-time-stamps">
-                      <div>
-                        Created at{" "}
-                        {moment(oneArticle.createdAt).format(
-                          "h:mm:ss a [on] MMMM Do YYYY."
-                        )}
-                      </div>
-                      <div>
-                        modified at{" "}
-                        {moment(oneArticle.updatedAt).format(
-                          "h:mm:ss a [on] MMMM Do YYYY."
-                        )}
-                        .
-                      </div>
-                      <div>{oneArticle.reading_time}</div>
-                    </div>
-                  </div>
-                </div>
+      <div className="container article-page-container">
+        <header className="article-header">
+          <h1 className="article-title">{oneArticle.title}</h1>
+          <div className="article-meta-bar">
+            <div className="author-card">
+              <img
+                className="author-avatar"
+                src={
+                  oneArticle.author.image ||
+                  "https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="
+                }
+                alt={oneArticle.author.username}
+              />
+              <div className="author-details">
+                <span className="author-name">{oneArticle.author.username}</span>
+                <span className="article-date">
+                  Published {moment(oneArticle.createdAt).format("MMM D, YYYY")} · {oneArticle.reading_time}
+                </span>
               </div>
             </div>
+            <div className="author-action">
+              {this.isOwner(oneArticle.author.username) ? (
+                <button className="btn btn-outline-secondary edit-btn">Edit Story</button>
+              ) : (
+                <FollowsButton
+                  followUser={this.handlefollowUser}
+                  unfollowUser={this.handleunfollowUser}
+                  isfollowing={isfollowing === "True" ? true : false}
+                />
+              )}
+            </div>
           </div>
+        </header>
+
+        <div className="article-banner">
+          <img
+            src={oneArticle.image ? oneArticle.image : FALLBACK_IMAGE}
+            className="article-image"
+            alt="article cover"
+          />
         </div>
-        <div className="article-single">
-          <div className="article-description-body">
-            <p>{oneArticle.description}</p>
-          </div>
-          <div className="image-div">
-            <img
-              src={
-                oneArticle.image
-                  ? oneArticle.image
-                  : "https://previews.123rf.com/images/twindesigner/twindesigner1708/twin" +
-                    "designer170800135/84202763-ah-brush-letter-logo-design-with-black-" +
-                    "circle-creative-brushed-letters-icon-logo-.jpg"
-              }
-              className="article-image"
-            />
+
+        <article className="article-content">
+          <p className="article-description">{oneArticle.description}</p>
+          <div className="article-body">
+            <p>{oneArticle.body}</p>
           </div>
 
-          <div className="article-description-body">
-            <p style={{ fontWeight: "light" }}>{oneArticle.body}</p>
-            <div>
-            <img
-              onClick={this.handlelike}
-              src={like}
-              style={{ width: "30px", height: "30px" }}
-            />
-            {likes}
-            <div className="divider" />
-            <img
-              onClick={this.handledislike}
-              src={dislike}
-              style={{ width: "30px", height: "30px" }}
-            />
-            {dislikes}
+          <div className="article-reactions-row">
+            <button type="button" className="like-dislike-btn" onClick={this.handlelike} title="Like">
+              <img src={like} alt="like" />
+              <span>{likes}</span>
+            </button>
+            <button type="button" className="like-dislike-btn" onClick={this.handledislike} title="Dislike">
+              <img src={dislike} alt="dislike" />
+              <span>{dislikes}</span>
+            </button>
+            <span className="row-divider" />
+            <div className="emoji-reaction-list reaction-bar">{emojiBar}</div>
           </div>
-            <div className="reaction-bar">{emojiBar}</div>
-            <Comments articleSlug={oneArticle.slug} />
-          </div>
-        </div>
+
+          <hr className="section-divider" />
+          <Comments articleSlug={oneArticle.slug} />
+        </article>
       </div>
     ) : (
-      <div>The article you have requested does not exist</div>
+      <div className="not-found">The article you have requested does not exist</div>
     );
     return <div>{singleArticle}</div>;
   }
@@ -198,8 +185,11 @@ export const mapStateToProps = state => ({
   isfollowing: state.profileReducer.isfollowing,
   likes: state.getArticleReducer.likes,
   dislikes: state.getArticleReducer.dislikes,
-  reactions: state.getArticleReducer.reactions
+  reactions: state.getArticleReducer.reactions,
+  loading: state.getArticleReducer.loading
 });
+
+
 
 export default withRouter(
   connect(
