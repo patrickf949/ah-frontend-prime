@@ -6,12 +6,13 @@ import {
   DISLIKE_ARTICLE_FAILURE,
   DISLIKE_ARTICLE_SUCCESS
 } from "./types";
+import { redirectTo } from "../utils/redirect";
 
 export const likeArticle = slug => {
   return async dispatch => {
     const token = sessionStorage.getItem("token");
     if (!token && process.env.NODE_ENV !== "test") {
-      window.location.href = "/login";
+      redirectTo("/login");
       return;
     }
     const body = {};
@@ -44,7 +45,7 @@ export const likeArticle = slug => {
           payload: "Failed to like article"
         });
         if (err.response && (err.response.status === 403 || err.response.status === 401)) {
-          window.location.href = "/login";
+          redirectTo("/login");
         }
       });
   };
@@ -54,7 +55,7 @@ export const dislikeArticle = slug => {
   return async dispatch => {
     const token = sessionStorage.getItem("token");
     if (!token && process.env.NODE_ENV !== "test") {
-      window.location.href = "/login";
+      redirectTo("/login");
       return;
     }
     const body = {};
@@ -87,7 +88,7 @@ export const dislikeArticle = slug => {
           payload: "Failed to dislike article"
         });
         if (err.response && (err.response.status === 403 || err.response.status === 401)) {
-          window.location.href = "/login";
+          redirectTo("/login");
         }
       });
   };
