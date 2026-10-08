@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { Button, Stack, TextField } from "@mui/material";
 import { withRouter } from "../../utils/router";
 import { editProfileAction } from "../../actions/profileActions";
-import firebase from "../../firebase/config";
+import { API_BASE_URL } from "../../config/api";
+import axios from "axios";
+import { toast } from "react-toastify";
 import "../../styles/profile.scss";
 
 export class EditProfile extends Component {
@@ -15,7 +17,9 @@ export class EditProfile extends Component {
       image: "",
       isProcessing: false,
       uploadDone: false,
-      progress: 0
+      progress: 0,
+      imageFile: null,
+      previewUrl: ""
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleBioChange = this.handleBioChange.bind(this);
@@ -43,49 +47,56 @@ export class EditProfile extends Component {
     this.setState({ bio: value });
   }
   handleImageUpload(event) {
-    const { files } = event.target;
-    this.setState({ image: files });
+    const file = event.target.files[0];
+    if (file) {
+      if (file.size > 500 * 1024) {
+        toast.error("Image size exceeds the 500KB limit.");
+        return;
+      }
+      this.setState({ 
+        imageFile: file, 
+        previewUrl: URL.createObjectURL(file) 
+      });
+    }
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    const { bio, full_name, image } = this.state;
+    const { bio, full_name, image, imageFile } = this.state;
+    
+    let uploadedImageUrl = image;
+
+    if (imageFile) {
+      this.setState({ isProcessing: true });
+      try {
+        const token = sessionStorage.getItem("token");
+        const res = await axios.post(
+          `${API_BASE_URL}/articles/upload-image-url/`,
+          { filename: imageFile.name, contentType: imageFile.type, size: imageFile.size },
+          { headers: { Authorization: "Bearer " + token } }
+        );
+
+        const { uploadUrl, url } = res.data;
+
+        await axios.put(uploadUrl, imageFile, {
+          headers: { "Content-Type": imageFile.type }
+        });
+        uploadedImageUrl = url;
+        this.setState({ uploadDone: true });
+      } catch (error) {
+        this.setState({ isProcessing: false });
+        toast.error(error.response?.data?.error || "Image upload failed");
+        return;
+      }
+    }
+
     const data = {
       bio: bio,
       full_name: full_name,
-      image: image
+      image: uploadedImageUrl
     };
     this.props.editProfileAction(data, this.props);
   }
-  /* istanbul ignore next */
-  uploadImage(files) {
-    const task = firebase
-      .storage()
-      .ref(`images/${files[0].name}`)
-      .put(files[0]);
-
-    task.then(res => {
-      firebase
-        .storage()
-        .ref(`images/${files[0].name}`)
-        .getDownloadURL()
-        .then(url => {
-          this.setState({ uploadDone: true });
-          const image = {
-            image: url
-          };
-          this.props.editProfileAction(image);
-        });
-    });
-
-    task.on("state_changed", snapshot => {
-      const uploadDone = true;
-      this.setState({ uploadDone });
-      const progress = Math.round(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      );
-      this.setState({ progress });
-    });
-  }
+  /* Removed Firebase uploadImage function */
 
   render() {
     return (
@@ -112,7 +123,9 @@ export class EditProfile extends Component {
                       multiline
                       minRows={3}
                     />
-                    <Button type="submit">Save</Button>
+                    <Button type="submit" disabled={this.state.isProcessing}>
+                      {this.state.isProcessing ? "Saving..." : "Save"}
+                    </Button>
                   </Stack>
                 </form>
               </div>
@@ -121,13 +134,14 @@ export class EditProfile extends Component {
                 <div className="styleme">
                   <div className="profile-img">
                     <img
-                      src={this.state.image}
+                      src={this.state.previewUrl || this.state.image}
                       className="update-image"
                       alt="Profile"
                     />
                     <input
                       type="file"
-                      onChange={event => this.uploadImage(event.target.files)}
+                      accept="image/*"
+                      onChange={this.handleImageUpload}
                       id="banyati"
                       className="upload-button btn-outline-success"
                     />
