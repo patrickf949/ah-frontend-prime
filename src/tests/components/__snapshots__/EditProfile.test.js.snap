@@ -44,6 +44,7 @@ exports[`editprofile component success tests should render without crushing 1`] 
                 type="text"
               />
               <ForwardRef(Button)
+                disabled={false}
                 type="submit"
               >
                 Save
@@ -66,6 +67,7 @@ exports[`editprofile component success tests should render without crushing 1`] 
                 src=""
               />
               <input
+                accept="image/*"
                 className="upload-button btn-outline-success"
                 id="banyati"
                 onChange={[Function]}
