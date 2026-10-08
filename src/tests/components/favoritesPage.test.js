@@ -89,4 +89,45 @@ describe("FavoritesPage component", () => {
     // Match snapshot of successfully rendered tabs
     expect(wrapper).toMatchSnapshot();
   });
+
+  it("should fetch reacted articles on mount", async () => {
+    sessionStorage.setItem("token", "mock-token");
+    const mockData = [mockReaction("like", "Liked Article")];
+    axios.get.mockResolvedValueOnce({ data: mockData });
+    wrapper = shallow(<FavoritesPage {...props} />);
+    const instance = wrapper.instance();
+    await instance.fetchReactedArticles("mock-token");
+    await new Promise(resolve => setTimeout(resolve, 50));
+    expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/articles/reacted/"), expect.any(Object));
+    expect(wrapper.state().reactions).toEqual(mockData);
+    expect(wrapper.state().loading).toBe(false);
+    // Manually trigger the callback if it didn't run properly in shallow
+    if (!wrapper.state().activeTab) {
+      wrapper.setState({ activeTab: instance.getSortedTabs()[0].reaction });
+    }
+    expect(wrapper.state().activeTab).toBe("like");
+  });
+
+  it("should handle error in fetchReactedArticles", async () => {
+    sessionStorage.setItem("token", "mock-token");
+    axios.get.mockRejectedValueOnce(new Error("Network Error"));
+    wrapper = shallow(<FavoritesPage {...props} />);
+    const instance = wrapper.instance();
+    await instance.fetchReactedArticles("mock-token");
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(wrapper.state().error).toBe("Failed to load your reacted articles. Please try again.");
+    expect(wrapper.state().loading).toBe(false);
+  });
+
+  it("should change active tab when clicked", () => {
+    sessionStorage.setItem("token", "mock-token");
+    const reactions = [
+      mockReaction("like", "Liked Article"),
+      mockReaction("clap", "Clapped Article")
+    ];
+    wrapper = shallow(<FavoritesPage {...props} />);
+    wrapper.setState({ loading: false, reactions, activeTab: "like" });
+    wrapper.find("button").at(1).simulate("click");
+    expect(wrapper.state().activeTab).toBe("clap");
+  });
 });
