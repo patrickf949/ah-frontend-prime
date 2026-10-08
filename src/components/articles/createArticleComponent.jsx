@@ -2,9 +2,10 @@ import React from "react";
 import { Button, Stack, TextField } from "@mui/material";
 import "../../styles/createArticles.scss";
 import "../../styles/singleArticle.scss";
+import DynamicBlockEditor from "./DynamicBlockEditor";
 
 const CreateArticleComponent = props => {
-  const { onChange, onSubmit, onUpload, onBodyChange, image, article, body } = props;
+  const { onChange, onSubmit, onUpload, onBodyChange, image, article, body, title, description, tags } = props;
 
   return (
     <div className="container-fluid mt-5">
@@ -19,21 +20,20 @@ const CreateArticleComponent = props => {
                 label="Title"
                 name="title"
                 id="title"
-                defaultValue={article ? article.title : ""}
+                value={title || ""}
               />
               <TextField
                 onChange={onChange}
                 label="Description"
                 name="description"
                 id="description"
-                defaultValue={article ? article.description : ""}
+                value={description || ""}
               />
-              <TextField
-                onChange={onBodyChange}
-                label="Body"
-                value={body}
-                multiline
-                minRows={8}
+              <DynamicBlockEditor
+                initialBlocks={body}
+                onChange={(blocksString) => onBodyChange({ target: { value: blocksString } })}
+                onCoverImageSelect={onUpload}
+                coverImageUrl={image}
               />
               <TextField
                 onChange={onChange}
@@ -41,29 +41,8 @@ const CreateArticleComponent = props => {
                 name="tags"
                 id="tags"
                 helperText="Separate your tags with a comma"
-                defaultValue={
-                  article
-                    ? article.tagList
-                      ? article.tagList.join(",")
-                      : ""
-                    : ""
-                }
+                value={tags || ""}
               />
-            <div className="image-div">
-              <div className="actual-image">
-                <img
-                  src={image ? image : article ? article.image : " "}
-                  className="image-fluid"
-                  alt=""
-                />
-              </div>
-              <input
-                type="file"
-                name="imageUpload"
-                onChange={event => onUpload(event.target.files)}
-                id="fitz"
-              />
-            </div>
 
               <Button onClick={onSubmit}>
                 Publish Story
