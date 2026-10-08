@@ -1,0 +1,352 @@
+
+> ah-frontend-prime@1.0.0 test
+> jest -u --coverage --coverage --testPathIgnorePatterns=SocialAuthActions.spec.js
+
+  console.error
+    Error: Upload failed
+        at /Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/src/tests/components/DynamicBlockEditor.test.js:108:38
+        at /Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/@babel/runtime/helpers/regeneratorRuntime.js:52:18
+        at Generator.<anonymous> (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/@babel/runtime/helpers/regenerator.js:52:51)
+        at Generator.next (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/@babel/runtime/helpers/regeneratorDefine.js:11:21)
+        at asyncGeneratorStep (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+        at _next (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+        at /Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+        at new Promise (<anonymous>)
+        at Object.<anonymous> (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+        at Promise.finally.completed (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:1561:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:1501:10)
+        at _callCircusTest (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:1011:40)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:567:9)
+        at processTimers (node:internal/timers:541:7)
+        at _runTest (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:951:3)
+        at /Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:853:7
+        at _runTestsForDescribeBlock (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:866:11)
+        at _runTestsForDescribeBlock (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:861:11)
+        at run (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:765:3)
+        at runAndTransformResultsToJestFormat (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/jestAdapterInit.js:1993:21)
+        at jestAdapter (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-circus/build/runner.js:111:19)
+        at runTestInternal (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-runner/build/testWorker.js:276:16)
+        at runTest (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-runner/build/testWorker.js:344:7)
+        at Object.worker (/Users/fitzpatrick/Desktop/macdesktop/freelance/personal/Blog/ah-frontend-prime/node_modules/jest-runner/build/testWorker.js:498:12)
+
+       99 |       notifyChange([...blocks, { id: Date.now().toString(), type: "image", url: url }]);
+      100 |     } catch (err) {
+    > 101 |       console.error(err);
+          |               ^
+      102 |       setError("Failed to upload image. Please try again.");
+      103 |     }
+      104 |     
+
+      at error (src/components/articles/DynamicBlockEditor.jsx:101:15)
+      at node_modules/@babel/runtime/helpers/regeneratorRuntime.js:52:18
+      at Generator.<anonymous> (node_modules/@babel/runtime/helpers/regenerator.js:52:51)
+      at Generator.throw (node_modules/@babel/runtime/helpers/regeneratorDefine.js:11:21)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _throw (node_modules/@babel/runtime/helpers/asyncToGenerator.js:20:9)
+
+  console.error
+    An update to MemoryRouter inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+       9 |   return {
+      10 |     history: {
+    > 11 |       push: to => navigate(to),
+         |                   ^
+      12 |       replace: to => navigate(to, { replace: true }),
+      13 |       go: delta => navigate(delta),
+      14 |       back: () => navigate(-1),
+
+      at node_modules/react-dom/cjs/react-dom-client.development.js:18758:19
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-dom/cjs/react-dom-client.development.js:18757:9)
+      at scheduleUpdateOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:16409:11)
+      at dispatchSetStateInternal (node_modules/react-dom/cjs/react-dom-client.development.js:9170:13)
+      at dispatchSetState (node_modules/react-dom/cjs/react-dom-client.development.js:9127:7)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:38
+      at Object.process.env.NODE_ENV.exports.startTransition (node_modules/react/cjs/react.development.js:1158:27)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:16
+      at push (node_modules/react-router/dist/development/chunk-KFNXW4AL.js:99:9)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:7159:63
+      at Object.navigate [as push] (src/utils/router.jsx:11:19)
+      at push (src/tests/utils/router.test.jsx:10:44)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at Object.click (src/tests/utils/router.test.jsx:32:25)
+
+  console.error
+    An update to MemoryRouter inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      10 |     history: {
+      11 |       push: to => navigate(to),
+    > 12 |       replace: to => navigate(to, { replace: true }),
+         |                      ^
+      13 |       go: delta => navigate(delta),
+      14 |       back: () => navigate(-1),
+      15 |       forward: () => navigate(1)
+
+      at node_modules/react-dom/cjs/react-dom-client.development.js:18758:19
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-dom/cjs/react-dom-client.development.js:18757:9)
+      at scheduleUpdateOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:16409:11)
+      at dispatchSetStateInternal (node_modules/react-dom/cjs/react-dom-client.development.js:9170:13)
+      at dispatchSetState (node_modules/react-dom/cjs/react-dom-client.development.js:9127:7)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:38
+      at Object.process.env.NODE_ENV.exports.startTransition (node_modules/react/cjs/react.development.js:1158:27)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:16
+      at replace (node_modules/react-router/dist/development/chunk-KFNXW4AL.js:107:9)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:7159:63
+      at Object.navigate [as replace] (src/utils/router.jsx:12:22)
+      at replace (src/tests/utils/router.test.jsx:11:44)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at Object.click (src/tests/utils/router.test.jsx:33:28)
+
+  console.error
+    An update to MemoryRouter inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      11 |       push: to => navigate(to),
+      12 |       replace: to => navigate(to, { replace: true }),
+    > 13 |       go: delta => navigate(delta),
+         |                    ^
+      14 |       back: () => navigate(-1),
+      15 |       forward: () => navigate(1)
+      16 |     },
+
+      at node_modules/react-dom/cjs/react-dom-client.development.js:18758:19
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-dom/cjs/react-dom-client.development.js:18757:9)
+      at scheduleUpdateOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:16409:11)
+      at dispatchSetStateInternal (node_modules/react-dom/cjs/react-dom-client.development.js:9170:13)
+      at dispatchSetState (node_modules/react-dom/cjs/react-dom-client.development.js:9127:7)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:38
+      at Object.process.env.NODE_ENV.exports.startTransition (node_modules/react/cjs/react.development.js:1158:27)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:16
+      at Object.go (node_modules/react-router/dist/development/chunk-KFNXW4AL.js:116:9)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:7147:19
+      at Object.navigate [as go] (src/utils/router.jsx:13:20)
+      at go (src/tests/utils/router.test.jsx:12:44)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at Object.click (src/tests/utils/router.test.jsx:34:23)
+
+  console.error
+    An update to MemoryRouter inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      12 |       replace: to => navigate(to, { replace: true }),
+      13 |       go: delta => navigate(delta),
+    > 14 |       back: () => navigate(-1),
+         |                   ^
+      15 |       forward: () => navigate(1)
+      16 |     },
+      17 |     location,
+
+      at node_modules/react-dom/cjs/react-dom-client.development.js:18758:19
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-dom/cjs/react-dom-client.development.js:18757:9)
+      at scheduleUpdateOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:16409:11)
+      at dispatchSetStateInternal (node_modules/react-dom/cjs/react-dom-client.development.js:9170:13)
+      at dispatchSetState (node_modules/react-dom/cjs/react-dom-client.development.js:9127:7)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:38
+      at Object.process.env.NODE_ENV.exports.startTransition (node_modules/react/cjs/react.development.js:1158:27)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:16
+      at Object.go (node_modules/react-router/dist/development/chunk-KFNXW4AL.js:116:9)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:7147:19
+      at Object.navigate [as back] (src/utils/router.jsx:14:19)
+      at back (src/tests/utils/router.test.jsx:13:44)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at Object.click (src/tests/utils/router.test.jsx:35:25)
+
+  console.error
+    An update to MemoryRouter inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      13 |       go: delta => navigate(delta),
+      14 |       back: () => navigate(-1),
+    > 15 |       forward: () => navigate(1)
+         |                      ^
+      16 |     },
+      17 |     location,
+      18 |     match: { params }
+
+      at node_modules/react-dom/cjs/react-dom-client.development.js:18758:19
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-dom/cjs/react-dom-client.development.js:18757:9)
+      at scheduleUpdateOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:16409:11)
+      at dispatchSetStateInternal (node_modules/react-dom/cjs/react-dom-client.development.js:9170:13)
+      at dispatchSetState (node_modules/react-dom/cjs/react-dom-client.development.js:9127:7)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:38
+      at Object.process.env.NODE_ENV.exports.startTransition (node_modules/react/cjs/react.development.js:1158:27)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:9761:16
+      at Object.go (node_modules/react-router/dist/development/chunk-KFNXW4AL.js:116:9)
+      at node_modules/react-router/dist/development/chunk-KFNXW4AL.js:7147:19
+      at Object.navigate [as forward] (src/utils/router.jsx:15:22)
+      at forward (src/tests/utils/router.test.jsx:14:44)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at Object.click (src/tests/utils/router.test.jsx:36:28)
+
+-----------------------------|---------|----------|---------|---------|-------------------------------------
+File                         | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                   
+-----------------------------|---------|----------|---------|---------|-------------------------------------
+All files                    |      87 |    73.91 |   87.26 |   88.33 |                                     
+ src                         |     100 |      100 |     100 |     100 |                                     
+  store.js                   |     100 |      100 |     100 |     100 |                                     
+  theme.js                   |     100 |      100 |     100 |     100 |                                     
+  urls.js                    |     100 |      100 |     100 |     100 |                                     
+ src/actions                 |   91.44 |    85.13 |   93.02 |   91.83 |                                     
+  LikeDislikeActions.js      |     100 |    95.45 |     100 |     100 | 90                                  
+  LoginAction.js             |     100 |      100 |     100 |     100 |                                     
+  SocialAuthActions.js       |    7.14 |        0 |       0 |    7.69 | 13-48,59-94                         
+  articleCreateEditAction.js |     100 |      100 |     100 |     100 |                                     
+  commentsActions.js         |     100 |    88.23 |     100 |     100 | 51-55                               
+  deleteArticleAction.js     |     100 |      100 |     100 |     100 |                                     
+  getArticle.js              |     100 |      100 |     100 |     100 |                                     
+  getArticles.js             |     100 |      100 |     100 |     100 |                                     
+  homeArticlesActions.js     |     100 |      100 |     100 |     100 |                                     
+  passwordResetActions.js    |     100 |      100 |     100 |     100 |                                     
+  profileActions.js          |     100 |      100 |     100 |     100 |                                     
+  reactionActions.js         |     100 |      100 |     100 |     100 |                                     
+  registerActions.js         |     100 |      100 |     100 |     100 |                                     
+  types.js                   |     100 |      100 |     100 |     100 |                                     
+ src/components              |   58.93 |    55.48 |   65.75 |      61 |                                     
+  FollowersList.jsx          |   85.71 |       75 |     100 |   85.71 | 30                                  
+  FollowingList.jsx          |   85.71 |       75 |     100 |   85.71 | 30                                  
+  FollowsButton.jsx          |     100 |      100 |     100 |     100 |                                     
+  FollowsStats.jsx           |     100 |      100 |     100 |     100 |                                     
+  SocialAuth.jsx             |     100 |      100 |     100 |     100 |                                     
+  comments.jsx               |    1.21 |        0 |       0 |    1.29 | 12-227                              
+  home.jsx                   |    98.5 |    81.81 |   96.29 |     100 | 35,51-57,93,131-138,171-179,192,202 
+  navbar.jsx                 |   95.65 |       75 |    87.5 |     100 | 88                                  
+  passwordReset.jsx          |     100 |      100 |     100 |     100 |                                     
+  passwordResetEmail.jsx     |     100 |      100 |     100 |     100 |                                     
+  registerComponent.jsx      |     100 |      100 |     100 |     100 |                                     
+  routes.jsx                 |     100 |      100 |     100 |     100 |                                     
+  sideDrawer.jsx             |     100 |      100 |     100 |     100 |                                     
+ src/components/articles     |   87.92 |    68.02 |    88.6 |   91.46 |                                     
+  DynamicBlockEditor.jsx     |   94.11 |       76 |     100 |   98.38 | 21                                  
+  createArticleComponent.jsx |      75 |     37.5 |      50 |      75 | 34                                  
+  createArticlePage.jsx      |   65.71 |       45 |   66.66 |   71.87 | 46-63                               
+  editArticlePage.jsx        |   81.25 |    58.33 |   72.72 |   89.65 | 37-42                               
+  favoritesPage.jsx          |   91.22 |    79.48 |   93.75 |   92.45 | 31,46-48                            
+  singleArticle.jsx          |   93.22 |    72.97 |   93.75 |   94.73 | 96,102,128                          
+  userArticles.jsx           |     100 |    66.66 |     100 |     100 | 28-54                               
+ src/components/login        |     100 |      100 |     100 |     100 |                                     
+  LoginModal.jsx             |     100 |      100 |     100 |     100 |                                     
+ src/components/userProfile  |     100 |    66.66 |     100 |     100 |                                     
+  EditProfile.jsx            |     100 |      100 |     100 |     100 |                                     
+  ProfileComponent.jsx       |     100 |       50 |     100 |     100 | 32-60                               
+  ProfilePage.jsx            |     100 |      100 |     100 |     100 |                                     
+ src/containers              |   99.05 |    96.96 |     100 |   99.01 |                                     
+  SocialAuthContainer.jsx    |   94.73 |    83.33 |     100 |   94.44 | 30                                  
+  app.jsx                    |     100 |      100 |     100 |     100 |                                     
+  passwordReset.jsx          |     100 |      100 |     100 |     100 |                                     
+  passwordResetEmail.jsx     |     100 |      100 |     100 |     100 |                                     
+  registerContainer.jsx      |     100 |      100 |     100 |     100 |                                     
+ src/containers/Login        |     100 |      100 |     100 |     100 |                                     
+  LoginContainer.jsx         |     100 |      100 |     100 |     100 |                                     
+ src/containers/profile      |     100 |       50 |     100 |     100 |                                     
+  EditProfileContainer.jsx   |     100 |      100 |     100 |     100 |                                     
+  UsersProfileContainer.jsx  |     100 |       50 |     100 |     100 | 38-53                               
+ src/firebase                |     100 |      100 |     100 |     100 |                                     
+  config.js                  |     100 |      100 |     100 |     100 |                                     
+ src/reducers                |     100 |      100 |     100 |     100 |                                     
+  authReducer.js             |     100 |      100 |     100 |     100 |                                     
+  commentsReducer.js         |     100 |      100 |     100 |     100 |                                     
+  createArticleReducer.js    |     100 |      100 |     100 |     100 |                                     
+  deleteArticleReducer.js    |     100 |      100 |     100 |     100 |                                     
+  followsUnfollowsReducer.js |     100 |      100 |     100 |     100 |                                     
+  getArticleReducer.js       |     100 |      100 |     100 |     100 |                                     
+  getArticlesReducer.js      |     100 |      100 |     100 |     100 |                                     
+  getCommentsReducer.js      |     100 |      100 |     100 |     100 |                                     
+  homeArticlesReducer.js     |     100 |      100 |     100 |     100 |                                     
+  loginReducer.js            |     100 |      100 |     100 |     100 |                                     
+  passwordChangeReducer.js   |     100 |      100 |     100 |     100 |                                     
+  passwordResetReducer.js    |     100 |      100 |     100 |     100 |                                     
+  profileReducer.js          |     100 |      100 |     100 |     100 |                                     
+  rootReducer.js             |       0 |        0 |       0 |       0 |                                     
+  socialAuthReducer.js       |     100 |      100 |     100 |     100 |                                     
+ src/tests/mock_data         |     100 |      100 |     100 |     100 |                                     
+  moxios_mock.js             |     100 |      100 |     100 |     100 |                                     
+ src/utils                   |   98.33 |    96.29 |   94.11 |    98.3 |                                     
+  redirect.js                |      50 |      100 |       0 |      50 | 2                                   
+  regex.js                   |     100 |      100 |     100 |     100 |                                     
+  router.jsx                 |     100 |    66.66 |     100 |     100 | 29                                  
+  seo.js                     |     100 |      100 |     100 |     100 |                                     
+  validateforms.js           |     100 |      100 |     100 |     100 |                                     
+-----------------------------|---------|----------|---------|---------|-------------------------------------
