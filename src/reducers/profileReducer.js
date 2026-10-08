@@ -11,6 +11,7 @@ import {
 
 const initialState = {
   profile: null,
+  loggedInProfile: null,
   isLoading: false,
   message: null,
   isUpdating: false,
@@ -23,9 +24,11 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case PROFILE_FETCHED:
+      const sessionUsername = sessionStorage.getItem("username");
       return {
         ...state,
         profile: action.payload,
+        loggedInProfile: action.payload.username === sessionUsername ? action.payload : state.loggedInProfile,
         isLoading: false,
         isUpdating: false,
         message: true,
@@ -41,6 +44,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.payload,
+        loggedInProfile: action.payload,
         isLoading: false,
         isUpdating: true,
         upDateSuccess: true
