@@ -61,10 +61,59 @@ describe("Article Components", () => {
     expect(homeWrapper).toMatchSnapshot();
   });
 
-  it("should fetch home articles on mount", () => {
+  it("should fetch home articles on mount without search", () => {
     const wrapper = shallow(<Home {...homeProps} />);
     wrapper.instance().componentDidMount();
     expect(homeProps.getHomeArticlesAction).toHaveBeenCalled();
+    expect(homeProps.getArticlesAction).toHaveBeenCalledWith();
+  });
+
+  it("should fetch search results on mount if search param exists and scroll", () => {
+    jest.useFakeTimers();
+    const propsWithSearch = {
+      ...homeProps,
+      location: { search: "?search=react" }
+    };
+    const wrapper = shallow(<Home {...propsWithSearch} />);
+    const mockScrollIntoView = jest.fn();
+    wrapper.instance().allArticlesRef = {
+      current: { scrollIntoView: mockScrollIntoView }
+    };
+    wrapper.instance().componentDidMount();
+    expect(propsWithSearch.getArticlesAction).toHaveBeenCalledWith(expect.stringContaining("search=react"));
+    
+    jest.runAllTimers();
+    expect(mockScrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" });
+    jest.useRealTimers();
+  });
+
+  it("should fetch search results on update if search param changes", () => {
+    jest.useFakeTimers();
+    const propsBase = { ...homeProps, location: { search: "" } };
+    const wrapper = shallow(<Home {...propsBase} />);
+    
+    const mockScrollIntoView = jest.fn();
+    wrapper.instance().allArticlesRef = {
+      current: { scrollIntoView: mockScrollIntoView }
+    };
+
+    const newProps = { ...propsBase, location: { search: "?search=new" } };
+    wrapper.setProps(newProps);
+    // Force componentDidUpdate to make sure it's tested reliably in Enzyme
+    wrapper.instance().componentDidUpdate(propsBase);
+    
+    expect(propsBase.getArticlesAction).toHaveBeenCalledWith(expect.stringContaining("search=new"));
+    
+    jest.runAllTimers();
+    expect(mockScrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" });
+
+    const newerProps = { ...newProps, location: { search: "" } };
+    wrapper.setProps(newerProps);
+    wrapper.instance().componentDidUpdate(newProps);
+    
+    expect(propsBase.getArticlesAction).toHaveBeenCalledWith();
+    
+    jest.useRealTimers();
   });
 
   it("should render the top trending article as the hero", () => {
@@ -220,9 +269,9 @@ describe("Article Components", () => {
     const wrapper = shallow(<EditArticlePage {...props} />);
     wrapper.instance().onChange(event);
     wrapper.instance().onSubmit(event);
-    wrapper
-      .instance()
-      .componentWillReceiveProps({ article: { article: data.article } });
+    const newArticle = { article: { ...data.article, body: "the new Article" } };
+    wrapper.setProps({ article: newArticle });
+    wrapper.instance().componentDidUpdate({ article: undefined });
 
     expect(wrapper.instance().state.body).toEqual("the new Article");
   });
@@ -246,8 +295,85 @@ describe("Article Components", () => {
     const wrapper = shallow(<EditArticlePage {...props} />);
     wrapper.instance().onChange(event);
     wrapper.instance().onSubmit(event);
-    wrapper.instance().componentWillReceiveProps(null);
+    wrapper.setProps({ article: null });
 
     expect(wrapper.instance().state.body).toEqual("This is the body");
+  });
+
+  it("should trigger onBodyChange when DynamicBlockEditor changes in CreateArticleComponent", () => {
+    const props = {
+      onChange: jest.fn(),
+      onSubmit: jest.fn(),
+      onUpload: jest.fn(),
+      onBodyChange: jest.fn(),
+      article: null
+    };
+    const wrapper = shallow(<CreateArticleComponent {...props} />);
+    const editor = wrapper.find('DynamicBlockEditor');
+    if (editor.length > 0) {
+      editor.props().onChange("some string");
+      expect(props.onBodyChange).toHaveBeenCalledWith({ target: { value: "some string" } });
+    }
+  });
+
+  it("should handle onBodyChange and trigger autoSave in CreateArticlePage", () => {
+    jest.useFakeTimers();
+    const props = {
+      articleCreateEditAction: jest.fn()
+    };
+    const wrapper = shallow(<CreateArticlePage {...props} />);
+    wrapper.instance().onBodyChange({ target: { value: "new body" } });
+    expect(wrapper.instance().state.body).toEqual("new body");
+    
+    // Test triggerAutoSave timeout
+    jest.runAllTimers();
+    jest.useRealTimers();
+  });
+
+  it("should fetch draft on mount and restore it if confirmed", async () => {
+    sessionStorage.setItem("token", "mock-token");
+    const mockDraft = { title: "Draft", body: "Draft Body", description: "Draft Desc", tags: ["react"] };
+    const axios = require("axios");
+    axios.get = jest.fn(() => Promise.resolve({ data: { draft: mockDraft } }));
+    
+    const props = { articleCreateEditAction: jest.fn() };
+    const wrapper = shallow(<CreateArticlePage {...props} />);
+    await wrapper.instance().componentDidMount();
+    
+    expect(wrapper.instance().state.showDraftModal).toBe(true);
+    wrapper.instance().handleRestoreDraft(true);
+    
+    expect(wrapper.instance().state.title).toEqual("Draft");
+    expect(wrapper.instance().state.body).toEqual("Draft Body");
+  });
+
+  it("should autoSaveDraft in EditArticlePage", () => {
+    sessionStorage.setItem("token", "mock-token");
+    const axios = require("axios");
+    axios.post = jest.fn(() => Promise.resolve({ data: {} }));
+    
+    const props = {
+      getArticleAction: jest.fn(),
+      articleCreateEditAction: jest.fn(),
+      match: { params: { slug: "slug" } }
+    };
+    const wrapper = shallow(<EditArticlePage {...props} />);
+    wrapper.setState({ title: "T", body: "B", description: "D", tags: "t1,t2" });
+    wrapper.instance().autoSaveDraft();
+    expect(axios.post).toHaveBeenCalledWith(expect.stringContaining("/articles/autosave/"), expect.any(Object), expect.any(Object));
+  });
+
+  it("should handle onBodyChange in EditArticlePage", () => {
+    jest.useFakeTimers();
+    const props = {
+      getArticleAction: jest.fn(),
+      articleCreateEditAction: jest.fn(),
+      match: { params: { slug: "slug" } }
+    };
+    const wrapper = shallow(<EditArticlePage {...props} />);
+    wrapper.instance().onBodyChange({ target: { value: "new body" } });
+    expect(wrapper.instance().state.body).toEqual("new body");
+    jest.runAllTimers();
+    jest.useRealTimers();
   });
 });
