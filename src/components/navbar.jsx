@@ -8,16 +8,58 @@ import "../styles/navbar.scss";
 import BellIcon from "../styles/images/icons8-bell-100.png";
 import SideDrawer from "./sideDrawer";
 import profileImage from "../styles/images/profile.png";
+import { getUsersProfileAction } from "../actions/profileActions";
 
 export class NavBarComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       navBarDrawer: false,
-      search: ""
+      search: "",
+      isDropdownOpen: false
     };
+    this.closeTimer = null;
+    this.dropdownRef = React.createRef();
     this.logout = this.logout.bind(this);
   }
+  
+  componentDidMount() {
+    const sessionUser = sessionStorage.getItem("username");
+    if (sessionUser && !this.props.profile) {
+      this.props.getUsersProfileAction(sessionUser);
+    }
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+    if (this.closeTimer) clearTimeout(this.closeTimer);
+  }
+
+  handleClickOutside = (event) => {
+    if (this.dropdownRef.current && !this.dropdownRef.current.contains(event.target)) {
+      this.setState({ isDropdownOpen: false });
+    }
+  };
+
+  handleDropdownMouseEnter = () => {
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+      this.closeTimer = null;
+    }
+    this.setState({ isDropdownOpen: true });
+  };
+
+  handleDropdownMouseLeave = () => {
+    this.closeTimer = setTimeout(() => {
+      this.setState({ isDropdownOpen: false });
+    }, 2000);
+  };
+
+  toggleDropdown = () => {
+    this.setState(prevState => ({ isDropdownOpen: !prevState.isDropdownOpen }));
+  };
+
   logout() {
     sessionStorage.clear();
     window.location.href = "/";
@@ -46,6 +88,8 @@ export class NavBarComponent extends React.Component {
     if (this.state.navBarDrawer) {
       sideDrawer = <SideDrawer />;
     }
+    
+    const userImage = (this.props.profile && this.props.profile.image) || profileImage;
 
     return (
       <header className="site-header">
@@ -74,12 +118,14 @@ export class NavBarComponent extends React.Component {
                 aria-label="Search"
                 value={search}
                 onChange={this.handleSearchChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <i className="fa fa-search" id="search-icon" />
-                    </InputAdornment>
-                  )
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i className="fa fa-search" id="search-icon" />
+                      </InputAdornment>
+                    )
+                  }
                 }}
               />
             </form>
@@ -91,13 +137,22 @@ export class NavBarComponent extends React.Component {
                 <img src={BellIcon} id="notification-icon" alt="Notifications" />
               </li>
               <li className="nav-item">
-                <div className="dropdown">
+                <div 
+                  className="dropdown"
+                  ref={this.dropdownRef}
+                  onMouseEnter={this.handleDropdownMouseEnter}
+                  onMouseLeave={this.handleDropdownMouseLeave}
+                >
                   <img
                     className="dropbtn profile-img"
-                    src={profileImage}
+                    src={userImage}
                     alt="Profile"
+                    onClick={this.toggleDropdown}
                   />
-                  <div className="dropdown-content">
+                  <div 
+                    className={`dropdown-content ${this.state.isDropdownOpen ? 'show' : ''}`}
+                    onClick={() => this.setState({ isDropdownOpen: false })}
+                  >
                     <a
                       className="navlink"
                       href={`/profile/${sessionStorage.getItem("username")}`}
@@ -146,6 +201,7 @@ NavBarComponent.proptypes = {
 };
 const mapStateToProps = state => ({
   isAuthenticated: state.auth_login.loginSuccess,
-  isAuthenticatedSocial: state.socialAuthReducer.isAuthenticated
+  isAuthenticatedSocial: state.socialAuthReducer.isAuthenticated,
+  profile: state.profileReducer.loggedInProfile
 });
-export default withRouter(connect(mapStateToProps)(NavBarComponent));
+export default withRouter(connect(mapStateToProps, { getUsersProfileAction })(NavBarComponent));
