@@ -24,4 +24,25 @@ describe("get comments reducer", () => {
       comments: fetchAllComments
     });
   });
+
+  it("should handle FETCH_COMMENTS_REQUEST", () => {
+    const expectedState = getCommentsReducer(initialState, {
+      type: "FETCH_COMMENTS_REQUEST"
+    });
+    expect(expectedState).toEqual({
+      ...initialState,
+      comments: [],
+      loading: true
+    });
+  });
+
+  it("should handle FETCH_COMMENTS_ERRORS", () => {
+    const expectedState = getCommentsReducer(initialState, {
+      type: "FETCH_COMMENTS_ERRORS"
+    });
+    expect(expectedState).toEqual({
+      ...initialState,
+      loading: false
+    });
+  });
 });
