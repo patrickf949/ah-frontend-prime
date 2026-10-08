@@ -5,7 +5,7 @@ import "../../styles/app.scss";
 import { articleCreateEditAction } from "../../actions/articleCreateEditAction";
 import { getArticleAction } from "../../actions/getArticle";
 import CreateArticleComponent from "./createArticleComponent";
-import firebase from "../../firebase/config";
+import axios from "axios";
 
 export class EditArticlePage extends Component {
   constructor(props) {
@@ -22,55 +22,55 @@ export class EditArticlePage extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onUpload = this.onUpload.bind(this);
     this.onBodyChange = this.onBodyChange.bind(this);
+    this.autoSaveDraft = this.autoSaveDraft.bind(this);
+    this.saveTimeout = null;
   }
-  componentWillMount() {
+
+  autoSaveDraft() {
+    const token = sessionStorage.getItem("token");
+    if (!token) return;
+    const { title, body, description, tags } = this.state;
+    const draft = { title, body, description, tags: tags ? tags.split(",") : "" };
+    
+    axios.post(API_BASE_URL + "/articles/autosave/", draft, {
+      headers: { Authorization: "Bearer " + token }
+    }).catch(err => console.error("Autosave failed", err));
+  }
+
+  triggerAutoSave() {
+    if (this.saveTimeout) clearTimeout(this.saveTimeout);
+    this.saveTimeout = setTimeout(this.autoSaveDraft, 3000);
+  }
+  componentDidMount() {
     this.props.getArticleAction(this.props.match.params.slug);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps) {
+  componentDidUpdate(prevProps) {
+    const currentArticle = this.props.article?.article;
+    const prevArticle = prevProps.article?.article;
+
+    if (currentArticle && currentArticle !== prevArticle) {
       this.setState({
-        title: newProps.article.article.title,
-        description: newProps.article.article.description,
-        body: newProps.article.article.body,
-        image: newProps.article.article.image,
-        tags: newProps.article.tagList,
-        article: newProps.article.article
+        title: currentArticle.title || "",
+        description: currentArticle.description || "",
+        body: currentArticle.body || "",
+        image: currentArticle.image || "",
+        tags: this.props.article?.tagList ? this.props.article.tagList.join(",") : "",
+        article: currentArticle
       });
     }
   }
 
   /* istanbul ignore next */
-  onUpload(files) {
-    const image1 = URL.createObjectURL(event.target.files[0]);
-    this.setState({ image1 });
-
-    const task = firebase
-      .storage()
-      .ref(`images/${files[0].name}`)
-      .put(files[0]);
-
-    task.then(res => {
-      firebase
-        .storage()
-        .ref(`images/${files[0].name}`)
-        .getDownloadURL()
-        .then(url => {
-          this.setState({ isUploaded: true, image: url });
-        });
-    });
-
-    task.on("state_changed", snapshot => {
-      const isUploaded = true;
-      this.setState({ isUploaded: isUploaded });
-    });
+  onUpload(url) {
+    this.setState({ isUploaded: !!url, image: url }, this.triggerAutoSave);
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value }, this.triggerAutoSave);
   }
   onBodyChange(e) {
-    this.setState({ body: e.target.value });
+    this.setState({ body: e.target.value }, this.triggerAutoSave);
   }
 
   onSubmit(e) {
