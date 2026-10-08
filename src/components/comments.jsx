@@ -13,7 +13,9 @@ export class Comments extends Component {
     const isLoggedIn = Boolean(sessionStorage.token);
     this.state = {
       comments: "",
-      visibleCount: isLoggedIn ? 20 : 5
+      visibleCount: isLoggedIn ? 20 : 5,
+      replyingTo: null,
+      replyComment: ""
     };
   }
 
@@ -34,7 +36,9 @@ export class Comments extends Component {
       const isLoggedIn = Boolean(sessionStorage.token);
       this.setState({
         visibleCount: isLoggedIn ? 20 : 5,
-        comments: ""
+        comments: "",
+        replyingTo: null,
+        replyComment: ""
       });
     }
   }
@@ -85,6 +89,84 @@ export class Comments extends Component {
     }
   };
 
+  handleReplySubmit = (event, parentId) => {
+    event.preventDefault();
+    const { articleSlug, articleComments, fetchComments } = this.props;
+    const { replyComment } = this.state;
+    const data = {
+      body: replyComment
+    };
+    const result = articleComments(data, articleSlug, parentId);
+    if (result && typeof result.then === "function") {
+      result.then(() => {
+        fetchComments(articleSlug, false);
+        this.setState({ replyComment: "", replyingTo: null });
+      });
+    } else {
+      fetchComments(articleSlug, false);
+      this.setState({ replyComment: "", replyingTo: null });
+    }
+  };
+
+  renderCommentItem = (message, isReply = false) => {
+    const { replyingTo, replyComment } = this.state;
+    const isLoggedIn = Boolean(sessionStorage.token);
+
+    return (
+      <article className="comment" style={{ marginLeft: isReply ? "50px" : "0", borderLeft: isReply ? "2px solid #eee" : "none", paddingLeft: isReply ? "15px" : "0", marginTop: isReply ? "15px" : "0" }}>
+        <a className="comment-img" href={`/profile/${message.author.username}`}>
+          <img
+            src={message.author.image || "https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="}
+            alt=""
+            width="50"
+            height="50"
+          />
+        </a>
+        <div className="comment-body">
+          <div className="text">
+            <p>{message.body}</p>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <p className="attribution">
+              by <a href={`/profile/${message.author.username}`}>{message.author.username}</a> at {moment(message.createdAt).format(
+                "h:mm:ss a [on] MMMM Do YYYY."
+              )}
+            </p>
+            {!isReply && isLoggedIn && (
+              <Button 
+                size="small" 
+                onClick={() => this.setState({ replyingTo: replyingTo === message.id ? null : message.id })}
+                sx={{ textTransform: "none", color: "#fff", minWidth: "auto", padding: "2px 8px" }}
+              >
+                {replyingTo === message.id ? "Cancel" : "Reply"}
+              </Button>
+            )}
+          </div>
+          
+          {replyingTo === message.id && (
+             <form onSubmit={(e) => this.handleReplySubmit(e, message.id)} style={{ marginTop: "10px" }}>
+                <Stack spacing={1} direction="row" alignItems="flex-start">
+                  <TextField
+                    name="replyComment"
+                    placeholder="Write a reply..."
+                    size="small"
+                    value={replyComment}
+                    onChange={this.handleOnChange}
+                    multiline
+                    minRows={2}
+                    fullWidth
+                    autoFocus
+                  />
+                  <Button type="submit" variant="contained" size="small" sx={{ backgroundColor: "#03a9f4", color: "#fff", textTransform: "none", height: "32px", padding: "4px 16px", alignSelf: "flex-start" }}>
+                    Post
+                  </Button>
+                </Stack>
+             </form>
+          )}
+        </div>
+      </article>
+    );
+  };
 
   render() {
     const { commentsMessage, commentsLoading } = this.props;
@@ -99,33 +181,23 @@ export class Comments extends Component {
         </div>
       );
     } else if (commentsMessage && commentsMessage.length > 0) {
-      const slicedComments = commentsMessage.slice(0, visibleCount);
+      const topLevelComments = commentsMessage.filter(c => c.parentId === 0);
+      const childComments = commentsMessage.filter(c => c.parentId !== 0);
+      
+      const slicedComments = topLevelComments.slice(0, visibleCount);
+      
       const commentItems = slicedComments.map(message => (
         <section className="comments" key={message.id}>
-          <article className="comment">
-            <a className="comment-img" href={`/profile/${message.author.username}`}>
-              <img
-                src={message.author.image || "https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="}
-                alt=""
-                width="50"
-                height="50"
-              />
-            </a>
-            <div className="comment-body">
-              <div className="text">
-                <p>{message.body}</p>
-              </div>
-              <p className="attribution">
-                by <a href={`/profile/${message.author.username}`}>{message.author.username}</a> at {moment(message.createdAt).format(
-                  "h:mm:ss a [on] MMMM Do YYYY."
-                )}
-              </p>
+          {this.renderCommentItem(message, false)}
+          {childComments.filter(c => c.parentId === message.id).map(reply => (
+            <div key={reply.id}>
+              {this.renderCommentItem(reply, true)}
             </div>
-          </article>
+          ))}
         </section>
       ));
 
-      const hasMore = commentsMessage.length > visibleCount;
+      const hasMore = topLevelComments.length > visibleCount;
 
       commentsContent = (
         <div>
