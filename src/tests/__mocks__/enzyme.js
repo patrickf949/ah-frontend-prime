@@ -17,9 +17,11 @@ const classNames = value => String(value || "").split(/\s+/).filter(Boolean);
 
 const matchesSelector = (node, selector) => {
   if (!node || typeof node !== "object") return false;
-  if (selector.startsWith("#")) return node.props && node.props.id === selector.slice(1);
-  if (selector.startsWith(".")) {
-    return node.props && classNames(node.props.className).includes(selector.slice(1));
+  if (typeof selector === "string") {
+    if (selector.startsWith("#")) return node.props && node.props.id === selector.slice(1);
+    if (selector.startsWith(".")) {
+      return node.props && classNames(node.props.className).includes(selector.slice(1));
+    }
   }
   return node.type === selector;
 };
