@@ -50,14 +50,50 @@ describe("Action for creating Articles", () => {
           "https://www.makesite.com/",
           "post",
           {
-            props: {
-              history: { push: jest.fn() }
-            }
+            history: { push: jest.fn() }
           }
         )
       )
       .then(() => {
         expect(store.getActions()).toEqual(expectedAction);
+      });
+  });
+
+  it("should handle response containing article object with slug", () => {
+    const store = mockStore({});
+    const pushMock = jest.fn();
+
+    moxios.wait(() => {
+      const requestM = moxios.requests.mostRecent();
+      requestM.respondWith({
+        status: 200,
+        response: {
+          article: { slug: "test-article-slug" }
+        }
+      });
+    });
+
+    const expectedAction = [
+      {
+        type: ARTICLE_SUCCESS,
+        payload: {
+          article: { slug: "test-article-slug" }
+        }
+      }
+    ];
+    return store
+      .dispatch(
+        articleCreateEditAction(
+          data.article,
+          "https://www.makesite.com/edit",
+          "put",
+          { history: { push: pushMock } },
+          "updated"
+        )
+      )
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedAction);
+        expect(pushMock).toHaveBeenCalledWith("/article/test-article-slug");
       });
   });
   it("should not create articles if no data is passed", () => {
@@ -89,5 +125,17 @@ describe("Action for creating Articles", () => {
       .then(() => {
         expect(store.getActions()).toEqual(expectedAction);
       });
+  });
+
+  it("should handle network error without response", () => {
+    const store = mockStore({});
+    moxios.wait(() => {
+      moxios.requests.mostRecent().reject(new Error("Network Error"));
+    });
+    return store.dispatch(
+      articleCreateEditAction(data.article_no_data, "url", "post", { history: {} })
+    ).then(() => {
+      expect(store.getActions()).toEqual([]);
+    });
   });
 });
