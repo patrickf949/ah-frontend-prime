@@ -34,6 +34,11 @@ module.exports = {
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: ["/node_modules/"],
 
+  // An array of regexp pattern strings that are matched against all source file paths before transformation
+  transformIgnorePatterns: [
+    "/node_modules/(?!(react-quill-new|lodash-es|quill|quill-delta|parchment)/)"
+  ],
+
   // Indicates whether each individual test should be reported during the run
   verbose: true
 };
