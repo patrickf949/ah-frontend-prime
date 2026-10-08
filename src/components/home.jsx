@@ -7,11 +7,7 @@ import { getArticlesAction } from "../actions/getArticles";
 import { getHomeArticlesAction } from "../actions/homeArticlesActions";
 import { API_BASE_URL } from "../config/api";
 
-const FALLBACK_IMAGE =
-  "https://previews.123rf.com/images/twindesigner/twindesigner1708/twin" +
-  "designer170800135/84202763-ah-brush-letter-logo-design-with-black-" +
-  "circle-creative-brushed-letters-icon-logo-.jpg";
-
+import { FALLBACK_IMAGE } from "../utils/constants";
 const reactionSummary = article => {
   const breakdown =
     (article.reactions && article.reactions.breakdown) || [];
@@ -106,9 +102,10 @@ export class Home extends Component {
           </div>
           <img
             src={article.image ? article.image : FALLBACK_IMAGE}
+            onError={(e) => { e.target.onerror = null; e.target.src = FALLBACK_IMAGE; }}
             className="img-tile"
-            alt="article thumbnail"
-          />
+            alt="authors haven"
+          /> 
         </Link>
       </div>
     );
