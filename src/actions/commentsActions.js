@@ -8,16 +8,17 @@ import {
 } from "./types";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { redirectTo } from "../utils/redirect";
 
-export const articleComments = (data, slug) => async dispatch => {
+export const articleComments = (data, slug, parentId = 0) => async dispatch => {
   const token = sessionStorage.getItem("token");
   if (!token && process.env.NODE_ENV !== "test") {
-    window.location.href = "/login";
+    redirectTo("/login");
     return;
   }
   return await axios
     .post(
-      `${API_BASE_URL}/articles/${slug}/comments/0/`,
+      `${API_BASE_URL}/articles/${slug}/comments/${parentId}/`,
       data,
       {
         headers: {
@@ -42,7 +43,7 @@ export const articleComments = (data, slug) => async dispatch => {
         payload: errors.response ? errors.response.data : "Failed to post comment"
       });
       if (errors.response && (errors.response.status === 403 || errors.response.status === 401)) {
-        window.location.href = "/login";
+        redirectTo("/login");
       }
     });
 };
