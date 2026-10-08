@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`test for comments should  1`] = `
+exports[`test for comments should render comments 1`] = `
 <div
   className="row"
 >
@@ -73,10 +73,18 @@ exports[`test for comments should  1`] = `
       >
         <article
           className="comment"
+          style={
+            {
+              "borderLeft": "none",
+              "marginLeft": "0",
+              "marginTop": "0",
+              "paddingLeft": "0",
+            }
+          }
         >
           <a
             className="comment-img"
-            href="/profile/undefined"
+            href="/profile/user1"
           >
             <img
               alt=""
@@ -95,16 +103,28 @@ exports[`test for comments should  1`] = `
                 this is it
               </p>
             </div>
-            <p
-              className="attribution"
+            <div
+              style={
+                {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "justifyContent": "space-between",
+                }
+              }
             >
-              by 
-              <a
-                href="/profile/undefined"
-              />
-               at 
-              7:38:14 am on May 17th 2019.
-            </p>
+              <p
+                className="attribution"
+              >
+                by 
+                <a
+                  href="/profile/user1"
+                >
+                  user1
+                </a>
+                 at 
+                7:38:14 am on May 17th 2019.
+              </p>
+            </div>
           </div>
         </article>
       </section>
