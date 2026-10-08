@@ -18,6 +18,7 @@ import followsUnfollowsReducer from "../../reducers/followsUnfollowsReducer";
 describe("profile Reducer Tests", () => {
   const initialState = {
     profile: null,
+    loggedInProfile: null,
     isLoading: false,
     message: null,
     isUpdating: false,
@@ -41,6 +42,7 @@ describe("profile Reducer Tests", () => {
 
   const profileSuccess = {
     profile: { profile: {} },
+    loggedInProfile: null,
     isLoading: false,
     message: true,
     isUpdating: false,
@@ -62,6 +64,7 @@ describe("profile Reducer Tests", () => {
     };
     const failedfetch = {
       profile: null,
+      loggedInProfile: null,
       isLoading: false,
       message: "invalid token",
       isUpdating: false,
@@ -80,6 +83,7 @@ describe("profile Reducer Tests", () => {
     };
     const editedProfileState = {
       profile: { profile: {} },
+      loggedInProfile: { profile: {} },
       isLoading: false,
       message: null,
       isUpdating: true,
@@ -114,9 +118,10 @@ describe("profile Reducer Tests", () => {
       following_no: 0,
       isfollowing: false
     };
-    expect(profileReducer(initialState, fetchingAction)).toEqual(
-      profilefetchingsuccess
-    );
+    expect(profileReducer(initialState, fetchingAction)).toEqual({
+      ...profilefetchingsuccess,
+      loggedInProfile: null
+    });
   });
 
   it("return all the users followers", () => {
@@ -193,7 +198,7 @@ describe("profile Reducer Tests", () => {
       following_no: 0,
       isfollowing: "True"
     };
-    expect(profileReducer(initialState, followAction)).toEqual(followsuccess);
+    expect(profileReducer(initialState, followAction)).toEqual({...followsuccess, loggedInProfile: null});
   });
 
   it("unfollow a user", () => {
@@ -211,9 +216,10 @@ describe("profile Reducer Tests", () => {
       following_no: 0,
       isfollowing: "False"
     };
-    expect(profileReducer(initialState, unfollowAction)).toEqual(
-      unfollowsuccess
-    );
+    expect(profileReducer(initialState, unfollowAction)).toEqual({
+      ...unfollowsuccess,
+      loggedInProfile: null
+    });
   });
 
   it("fails to follow a user", () => {
@@ -231,9 +237,10 @@ describe("profile Reducer Tests", () => {
       following_no: 0,
       isfollowing: "False"
     };
-    expect(profileReducer(initialState, failedfollowAction)).toEqual(
-      followsfailure
-    );
+    expect(profileReducer(initialState, failedfollowAction)).toEqual({
+      ...followsfailure,
+      loggedInProfile: null
+    });
   });
 
   it("fails to unfollow a user", () => {
@@ -251,8 +258,9 @@ describe("profile Reducer Tests", () => {
       following_no: 0,
       isfollowing: "True"
     };
-    expect(profileReducer(initialState, failedunfollowAction)).toEqual(
-      unfollowfailure
-    );
+    expect(profileReducer(initialState, failedunfollowAction)).toEqual({
+      ...unfollowfailure,
+      loggedInProfile: null
+    });
   });
 });
