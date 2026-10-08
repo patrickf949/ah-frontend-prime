@@ -37,23 +37,25 @@ exports[` navbar component should load other nav elements when a user is not aut
         onSubmit={[Function]}
       >
         <ForwardRef(TextField)
-          InputProps={
-            {
-              "startAdornment": <ForwardRef(InputAdornment)
-                position="start"
-              >
-                <i
-                  className="fa fa-search"
-                  id="search-icon"
-                />
-              </ForwardRef(InputAdornment)>,
-            }
-          }
           aria-label="Search"
           className="form-control-search"
           onChange={[Function]}
           placeholder="Search stories..."
           size="small"
+          slotProps={
+            {
+              "input": {
+                "startAdornment": <ForwardRef(InputAdornment)
+                  position="start"
+                >
+                  <i
+                    className="fa fa-search"
+                    id="search-icon"
+                  />
+                </ForwardRef(InputAdornment)>,
+              },
+            }
+          }
           type="search"
           value=""
         />
@@ -124,23 +126,25 @@ exports[` navbar component should render without crashing 1`] = `
         onSubmit={[Function]}
       >
         <ForwardRef(TextField)
-          InputProps={
-            {
-              "startAdornment": <ForwardRef(InputAdornment)
-                position="start"
-              >
-                <i
-                  className="fa fa-search"
-                  id="search-icon"
-                />
-              </ForwardRef(InputAdornment)>,
-            }
-          }
           aria-label="Search"
           className="form-control-search"
           onChange={[Function]}
           placeholder="Search stories..."
           size="small"
+          slotProps={
+            {
+              "input": {
+                "startAdornment": <ForwardRef(InputAdornment)
+                  position="start"
+                >
+                  <i
+                    className="fa fa-search"
+                    id="search-icon"
+                  />
+                </ForwardRef(InputAdornment)>,
+              },
+            }
+          }
           type="search"
           value=""
         />
