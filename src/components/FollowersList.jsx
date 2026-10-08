@@ -24,7 +24,11 @@ const FollowersList = props => {
                   id="follower"
                   key={item.username}
                   onClick={() => {
-                    document.location.href = `/profile/${item.username}`;
+                    if (props.onClick) {
+                      props.onClick(item.username);
+                    } else {
+                      window.location.assign(`/profile/${item.username}`);
+                    }
                   }}
                   key={item.username}
                 >
