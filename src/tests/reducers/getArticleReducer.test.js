@@ -1,6 +1,7 @@
 import getArticleReducer from "../../reducers/getArticleReducer";
 import {
   FETCH_ARTICLE_SUCCESS,
+  FETCH_ARTICLE_REQUEST,
   DISLIKE_ARTICLE_SUCCESS,
   LIKE_ARTICLE_SUCCESS,
   REACT_ARTICLE_SUCCESS
@@ -16,6 +17,18 @@ describe("App", () => {
   it("Should handle reducers initial state", () => {
     const newState = getArticleReducer(undefined, {});
     expect(newState).toEqual(initialState);
+  });
+
+  it("should handle FETCH_ARTICLE_REQUEST", () => {
+    const dispatchedAction = {
+      type: FETCH_ARTICLE_REQUEST
+    };
+    const newState = {
+      ...initialState,
+      loading: true,
+      reactions: null
+    };
+    expect(getArticleReducer(initialState, dispatchedAction)).toEqual(newState);
   });
 
   it("should successfully fetch article", () => {
