@@ -2,15 +2,46 @@
 
 exports[`Article Components renders the create article page 1`] = `
 <div>
+  <ForwardRef(Dialog)
+    onClose={[Function]}
+    open={false}
+  >
+    <ForwardRef(DialogTitle)>
+      Unsaved Draft Found
+    </ForwardRef(DialogTitle)>
+    <ForwardRef(DialogContent)>
+      <ForwardRef(DialogContentText)>
+        An unsaved draft was found from your previous session. Would you like to restore it?
+      </ForwardRef(DialogContentText)>
+    </ForwardRef(DialogContent)>
+    <ForwardRef(DialogActions)>
+      <ForwardRef(Button)
+        color="secondary"
+        onClick={[Function]}
+      >
+        Discard
+      </ForwardRef(Button)>
+      <ForwardRef(Button)
+        autoFocus={true}
+        color="primary"
+        onClick={[Function]}
+        variant="contained"
+      >
+        Restore Draft
+      </ForwardRef(Button)>
+    </ForwardRef(DialogActions)>
+  </ForwardRef(Dialog)>
   <CreateArticleComponent
     body=""
     description=""
+    draftData={null}
     image=""
     isUploaded={false}
     onBodyChange={[Function]}
     onChange={[Function]}
     onSubmit={[Function]}
     onUpload={[Function]}
+    showDraftModal={false}
     tags=""
     title=""
   />
@@ -86,51 +117,31 @@ exports[`Article Components should not regress 1`] = `
           spacing={2.25}
         >
           <ForwardRef(TextField)
-            defaultValue=""
             id="title"
             label="Title"
             name="title"
             onChange={[MockFunction]}
+            value=""
           />
           <ForwardRef(TextField)
-            defaultValue=""
             id="description"
             label="Description"
             name="description"
             onChange={[MockFunction]}
+            value=""
+          />
+          <DynamicBlockEditor
+            onChange={[Function]}
+            onCoverImageSelect={[MockFunction]}
           />
           <ForwardRef(TextField)
-            label="Body"
-            minRows={8}
-            multiline={true}
-          />
-          <ForwardRef(TextField)
-            defaultValue=""
             helperText="Separate your tags with a comma"
             id="tags"
             label="Tags"
             name="tags"
             onChange={[MockFunction]}
+            value=""
           />
-          <div
-            className="image-div"
-          >
-            <div
-              className="actual-image"
-            >
-              <img
-                alt=""
-                className="image-fluid"
-                src=" "
-              />
-            </div>
-            <input
-              id="fitz"
-              name="imageUpload"
-              onChange={[Function]}
-              type="file"
-            />
-          </div>
           <ForwardRef(Button)
             onClick={[MockFunction]}
           >
@@ -232,8 +243,9 @@ exports[`Article Components should render the home page 1`] = `
             </div>
           </div>
           <img
-            alt="article thumbnail"
+            alt="authors haven"
             className="img-tile"
+            onError={[Function]}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
           />
         </Link>
@@ -278,8 +290,9 @@ exports[`Article Components should render the home page 1`] = `
             </div>
           </div>
           <img
-            alt="article thumbnail"
+            alt="authors haven"
             className="img-tile"
+            onError={[Function]}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
           />
         </Link>
@@ -335,8 +348,9 @@ exports[`Article Components should render the home page 1`] = `
             </div>
           </div>
           <img
-            alt="article thumbnail"
+            alt="authors haven"
             className="img-tile"
+            onError={[Function]}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
           />
         </Link>
@@ -381,8 +395,9 @@ exports[`Article Components should render the home page 1`] = `
             </div>
           </div>
           <img
-            alt="article thumbnail"
+            alt="authors haven"
             className="img-tile"
+            onError={[Function]}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
           />
         </Link>
@@ -447,8 +462,9 @@ exports[`Article Components should render the home page 1`] = `
             </div>
           </div>
           <img
-            alt="article thumbnail"
+            alt="authors haven"
             className="img-tile"
+            onError={[Function]}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
           />
         </Link>
@@ -493,8 +509,9 @@ exports[`Article Components should render the home page 1`] = `
             </div>
           </div>
           <img
-            alt="article thumbnail"
+            alt="authors haven"
             className="img-tile"
+            onError={[Function]}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
           />
         </Link>
