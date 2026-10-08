@@ -75,4 +75,19 @@ describe("applyArticleSeo", () => {
     applyArticleSeo(null);
     expect(document.title).toEqual("");
   });
+
+  it("handles missing content and url gracefully", () => {
+    applyArticleSeo({
+      meta_title: "Title",
+      meta_description: "",
+      canonical_url: null,
+      og: {
+        "og:title": undefined
+      }
+    });
+    expect(document.title).toEqual("Title — Authors' Haven");
+    expect(document.head.querySelector('meta[name="description"]')).toBeNull();
+    expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
+    expect(document.head.querySelector('meta[property="og:title"]')).toBeNull();
+  });
 });
