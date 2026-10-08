@@ -37,4 +37,17 @@ describe("login component", () => {
     const onSubmit = wrapper.dive();
     onSubmit.find(".button-success").simulate("submit");
   });
+
+  it("should render error messages when present", () => {
+    const errorProps = {
+      ...props,
+      errors: {
+        username: "Username is required",
+        email: "Invalid email format",
+        password: "Password too short"
+      }
+    };
+    const errorWrapper = shallow(<RegisterComponent {...errorProps} />);
+    expect(errorWrapper).toMatchSnapshot();
+  });
 });
