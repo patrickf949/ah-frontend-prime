@@ -15,17 +15,10 @@ import dislike from "../../styles/images/dislike.png";
 import "../../styles/singleArticle.scss";
 import { getArticleAction } from "../../actions/getArticle";
 import Comments from "../comments";
-
-const FALLBACK_IMAGE =
-  "https://previews.123rf.com/images/twindesigner/twindesigner1708/twin" +
-  "designer170800135/84202763-ah-brush-letter-logo-design-with-black-" +
-  "circle-creative-brushed-letters-icon-logo-.jpg";
+import { FALLBACK_IMAGE } from "../../utils/constants";
 
 export class SingleArticleComponent extends Component {
-  state = {
-    likes: 0,
-    dislikes: 0
-  };
+  state = {};
   componentDidMount() {
     this.props.getArticleAction(this.props.match.params.slug);
   }
@@ -33,15 +26,12 @@ export class SingleArticleComponent extends Component {
     if (this.props.match.params.slug !== prevProps.match.params.slug) {
       this.props.getArticleAction(this.props.match.params.slug);
     }
-  }
-  componentWillReceiveProps(newProps) {
-    const { likes, dislikes, article } = newProps;
-    this.setState({
-      likes: likes,
-      dislikes: dislikes
-    });
-    if (article && article.article && article.article.seo) {
-      applyArticleSeo(article.article.seo);
+    
+    // Apply SEO if article data changed
+    const currentArticle = this.props.article?.article;
+    const prevArticle = prevProps.article?.article;
+    if (currentArticle?.seo && currentArticle !== prevArticle) {
+      applyArticleSeo(currentArticle.seo);
     }
   }
 
@@ -78,8 +68,32 @@ export class SingleArticleComponent extends Component {
   isOwner = username =>
     username === sessionStorage.getItem("username") ? true : false;
 
+  renderBody = (bodyString) => {
+    if (!bodyString) return null;
+    try {
+      const blocks = JSON.parse(bodyString);
+      if (Array.isArray(blocks)) {
+        return blocks.map((block, index) => {
+          if (block.type === "text") {
+            return <div key={index} dangerouslySetInnerHTML={{ __html: block.content }} className="article-text-block" />;
+          } else if (block.type === "image") {
+            return (
+              <div key={index} style={{ textAlign: "center", margin: "20px 0" }}>
+                <img src={block.url} alt="Article visual" onError={(e) => { e.target.onerror = null; e.target.src = FALLBACK_IMAGE; }} style={{ maxWidth: "100%", maxHeight: "500px", borderRadius: "8px" }} />
+              </div>
+            );
+          }
+          return null;
+        });
+      }
+    } catch (e) {
+      return <p>{bodyString}</p>;
+    }
+    return <p>{bodyString}</p>;
+  };
+
   render() {
-    const { isfollowing, article, reactions, loading } = this.props;
+    const { isfollowing, article, reactions, loading, likes, dislikes } = this.props;
     if (loading) {
       return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
@@ -87,7 +101,6 @@ export class SingleArticleComponent extends Component {
         </div>
       );
     }
-    const { likes, dislikes } = this.state;
     const oneArticle = article ? article.article : null;
     const reactionBreakdown =
       (reactions && reactions.breakdown) ||
@@ -130,7 +143,9 @@ export class SingleArticleComponent extends Component {
             </div>
             <div className="author-action">
               {this.isOwner(oneArticle.author.username) ? (
-                <button className="btn btn-outline-secondary edit-btn">Edit Story</button>
+                <Link to={`/edit-article/${oneArticle.slug}`} className="btn btn-outline-secondary edit-btn">
+                  Edit Story
+                </Link>
               ) : (
                 <FollowsButton
                   followUser={this.handlefollowUser}
@@ -142,18 +157,21 @@ export class SingleArticleComponent extends Component {
           </div>
         </header>
 
-        <div className="article-banner">
-          <img
-            src={oneArticle.image ? oneArticle.image : FALLBACK_IMAGE}
-            className="article-image"
-            alt="article cover"
-          />
-        </div>
+        {oneArticle.image && (
+          <div className="article-banner">
+            <img
+              src={oneArticle.image}
+              onError={(e) => { e.target.onerror = null; e.target.src = FALLBACK_IMAGE; }}
+              className="article-image"
+              alt="article cover"
+            />
+          </div>
+        )}
 
         <article className="article-content">
           <p className="article-description">{oneArticle.description}</p>
           <div className="article-body">
-            <p>{oneArticle.body}</p>
+            {this.renderBody(oneArticle.body)}
           </div>
 
           <div className="article-reactions-row">
