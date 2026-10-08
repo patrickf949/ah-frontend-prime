@@ -62,6 +62,7 @@ suscipit recusandae consequuntur expedita e
           >
             <img
               className="img-tile"
+              onError={[Function]}
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
             />
           </div>
@@ -134,6 +135,7 @@ suscipit recusandae consequuntur expedita e
           >
             <img
               className="img-tile"
+              onError={[Function]}
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
             />
           </div>
