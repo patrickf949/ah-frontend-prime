@@ -7,6 +7,7 @@ import { withRouter } from "../../utils/router";
 import { getArticlesAction } from "../../actions/getArticles";
 import { deleteArticleAction } from "../../actions/deleteArticleAction";
 import { Link } from "react-router-dom";
+import { FALLBACK_IMAGE } from "../../utils/constants";
 
 export class UserArticles extends Component {
   constructor(props) {
@@ -50,13 +51,8 @@ export class UserArticles extends Component {
                   </div>
                   <div className="img-div">
                     <img
-                      src={
-                        article.image
-                          ? article.image
-                          : "https://previews.123rf.com/images/twindesigner/twindesigner1708/twin" +
-                            "designer170800135/84202763-ah-brush-letter-logo-design-with-black-" +
-                            "circle-creative-brushed-letters-icon-logo-.jpg"
-                      }
+                      src={article.image ? article.image : FALLBACK_IMAGE}
+                      onError={(e) => { e.target.onerror = null; e.target.src = FALLBACK_IMAGE; }}
                       className="img-tile"
                     />
                   </div>
