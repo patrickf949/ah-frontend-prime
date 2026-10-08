@@ -186,7 +186,7 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
 }
 
-.dropdown:hover .dropdown-content,
+.dropdown-content.show,
 .dropdown:focus-within .dropdown-content {
   display: block;
 }
