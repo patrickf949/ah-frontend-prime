@@ -42,4 +42,22 @@ describe(" navbar component", () => {
     instance.logout();
     expect(props.logout).toBeCalledTimes(0);
   });
+
+  it("should handle search change", () => {
+    const event = { target: { value: "my query" } };
+    instance.handleSearchChange(event);
+    expect(instance.state.search).toEqual("my query");
+  });
+
+  it("should handle search submit", () => {
+    const event = { preventDefault: jest.fn() };
+    const history = { push: jest.fn() };
+    wrapper.setProps({ history });
+    instance.setState({ search: "my query" });
+    
+    instance.handleSearchSubmit(event);
+    
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(history.push).toHaveBeenCalledWith("/?search=my%20query");
+  });
 });
