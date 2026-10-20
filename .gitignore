@@ -6,3 +6,8 @@ dist/*
 */__snapshots__/*
 .DS_Store
 src/.DS_Store/*
+
+# local tooling / test output
+commit_frontend.py
+coverage.txt
+coverage_output.txt
