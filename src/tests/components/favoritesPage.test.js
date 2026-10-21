@@ -90,6 +90,47 @@ describe("FavoritesPage component", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it("should sort tabs with dislike compared in both positions", () => {
+    sessionStorage.setItem("token", "mock-token");
+    const reactions = [
+      mockReaction("dislike", "Disliked"),
+      mockReaction("like", "Liked"),
+      mockReaction("clap", "Clapped")
+    ];
+    wrapper = shallow(<FavoritesPage {...props} />);
+    wrapper.setState({ loading: false, reactions });
+    const sorted = wrapper.instance().getSortedTabs();
+    expect(sorted[sorted.length - 1].reaction).toBe("dislike");
+
+    // Order with like first and dislike second to trigger a.reaction === dislike
+    const reactionsReversed = [
+      mockReaction("like", "Liked"),
+      mockReaction("dislike", "Disliked")
+    ];
+    wrapper.setState({ reactions: reactionsReversed });
+    const sortedReversed = wrapper.instance().getSortedTabs();
+    expect(sortedReversed[1].reaction).toBe("dislike");
+  });
+
+  it("calls fetchReactedArticles on componentDidMount if token exists", () => {
+    sessionStorage.setItem("token", "mock-token");
+    wrapper = shallow(<FavoritesPage {...props} />);
+    const spy = jest.spyOn(wrapper.instance(), "fetchReactedArticles");
+    wrapper.instance().componentDidMount();
+    expect(spy).toHaveBeenCalledWith("mock-token");
+  });
+
+  it("handles image tile onError fallback", () => {
+    sessionStorage.setItem("token", "mock-token");
+    const reactions = [mockReaction("like", "Liked Article")];
+    wrapper = shallow(<FavoritesPage {...props} />);
+    wrapper.setState({ loading: false, reactions, activeTab: "like" });
+    const img = wrapper.find(".img-tile");
+    const mockTarget = { src: "", onerror: jest.fn() };
+    img.simulate("error", { target: mockTarget });
+    expect(mockTarget.src).toBeTruthy();
+  });
+
   it("should fetch reacted articles on mount", async () => {
     sessionStorage.setItem("token", "mock-token");
     const mockData = [mockReaction("like", "Liked Article")];
