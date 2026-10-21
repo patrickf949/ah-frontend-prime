@@ -112,6 +112,34 @@ describe("editprofile component success tests", () => {
     wrapper.setProps({ ...nextProps });
     expect(props.history.push).toBeCalledWith("/profile/null");
   });
+  it("should reject image files larger than 500KB", () => {
+    wrapper.instance().setState({ imageFile: null });
+    const file = new File(["dummy content"], "large.png", { type: "image/png" });
+    Object.defineProperty(file, "size", { value: 600 * 1024 });
+    const event = {
+      target: {
+        files: [file]
+      }
+    };
+    wrapper.instance().handleImageUpload(event);
+    expect(wrapper.instance().state.imageFile).toBeNull();
+  });
+  it("should handle image upload failure in handleSubmit", async () => {
+    const instance = wrapper.instance();
+    const event = { preventDefault: jest.fn() };
+    const axios = require("axios");
+    const spyPost = jest.spyOn(axios, "post").mockRejectedValueOnce({
+      response: { data: { error: "Upload error" } }
+    });
+
+    instance.setState({
+      full_name: "emma",
+      imageFile: new File(["dummy"], "sample.png", { type: "image/png" })
+    });
+    await instance.handleSubmit(event);
+    expect(instance.state.isProcessing).toBe(false);
+    spyPost.mockRestore();
+  });
   it("should map state to props", () => {
     const state = {
       profileReducer: {
