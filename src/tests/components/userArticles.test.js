@@ -68,4 +68,12 @@ describe("user article tests", () => {
     wrapper.instance().componentDidMount();
     expect(localProps.getArticlesAction).toHaveBeenCalledWith(expect.stringContaining("?email=test@test.com"));
   });
+
+  it("should handle article image onError fallback", () => {
+    const wrapper = shallow(<UserArticles {...props} />);
+    const img = wrapper.find(".img-tile").at(0);
+    const mockTarget = { src: "", onerror: jest.fn() };
+    img.simulate("error", { target: mockTarget });
+    expect(mockTarget.src).toBeTruthy();
+  });
 });
