@@ -22,6 +22,8 @@ const matchesSelector = (node, selector) => {
     if (selector.startsWith(".")) {
       return node.props && classNames(node.props.className).includes(selector.slice(1));
     }
+    const typeName = (node.type && (node.type.displayName || node.type.name)) || "";
+    if (typeName === selector || typeName === `Mui${selector}` || typeName.endsWith(selector)) return true;
   }
   return node.type === selector;
 };
@@ -64,7 +66,7 @@ class Wrapper {
       if (!this._instance) {
         this._instance = new type(props);
         this._instance.props = props;
-        this._instance.setState = nextState => {
+        this._instance.setState = (nextState, callback) => {
           const patch =
             typeof nextState === "function"
               ? nextState(this._instance.state, this._instance.props)
@@ -74,6 +76,9 @@ class Wrapper {
             ...(patch || {})
           };
           this.output = this._instance.render();
+          if (typeof callback === "function") {
+            callback.call(this._instance);
+          }
         };
         if (this._instance.componentWillMount) {
           this._instance.componentWillMount();
@@ -125,9 +130,9 @@ class Wrapper {
     return this;
   }
 
-  setState(nextState) {
+  setState(nextState, callback) {
     if (this._instance && this._instance.setState) {
-      this._instance.setState(nextState);
+      this._instance.setState(nextState, callback);
     }
     return this;
   }
