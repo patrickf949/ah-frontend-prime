@@ -199,7 +199,7 @@ NavBarComponent.proptypes = {
   isAuthenticated: PropTypes.Boolean,
   isAuthenticatedSocial: PropTypes.Boolean
 };
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   isAuthenticated: state.auth_login.loginSuccess,
   isAuthenticatedSocial: state.socialAuthReducer.isAuthenticated,
   profile: state.profileReducer.loggedInProfile
