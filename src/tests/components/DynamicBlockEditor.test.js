@@ -23,6 +23,12 @@ describe("DynamicBlockEditor", () => {
     expect(screen.getByText(/invalid json/i)).toBeTruthy();
   });
 
+  it("handles null or non-array initialBlocks", () => {
+    const { rerender } = render(<DynamicBlockEditor initialBlocks={null} onChange={onChange} />);
+    rerender(<DynamicBlockEditor initialBlocks={JSON.stringify({ text: "hello" })} onChange={onChange} />);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
   it("renders empty state correctly", () => {
     render(<DynamicBlockEditor initialBlocks="[]" onChange={onChange} />);
     expect(screen.getByText(/Start by adding a text or image block below/i)).toBeTruthy();
@@ -73,6 +79,13 @@ describe("DynamicBlockEditor", () => {
     await waitFor(() => {
       expect(screen.getByText(/Only image files are allowed/i)).toBeTruthy();
     });
+  });
+
+  it("handles file change with empty files array", () => {
+    const { container } = render(<DynamicBlockEditor initialBlocks="[]" onChange={onChange} />);
+    const input = container.querySelector('input[type="file"]');
+    fireEvent.change(input, { target: { files: [] } });
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it("handles file change with large file", async () => {
@@ -144,5 +157,82 @@ describe("DynamicBlockEditor", () => {
     const removeButtons = screen.getAllByText("Remove");
     fireEvent.click(removeButtons[0]);
     expect(onChange).toHaveBeenCalled();
+  });
+
+  it("handles boundary checks when moving blocks", () => {
+    const blocks = [{ id: "1", type: "text", content: "Block 1" }];
+    render(<DynamicBlockEditor initialBlocks={JSON.stringify(blocks)} onChange={onChange} />);
+    const upButton = screen.getByRole("button", { name: "Up" });
+    const reactFiberKey = Object.keys(upButton).find(k => k.startsWith("__reactFiber"));
+    let fiber = upButton[reactFiberKey];
+    let userOnClick = null;
+    while (fiber) {
+      if (fiber.memoizedProps && typeof fiber.memoizedProps.onClick === "function" && fiber.memoizedProps.onClick.name !== "handleClick") {
+        userOnClick = fiber.memoizedProps.onClick;
+        break;
+      }
+      fiber = fiber.return;
+    }
+    if (userOnClick) {
+      userOnClick();
+    }
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("auto-selects cover image and allows manual selection", () => {
+    const onCoverSelect = jest.fn();
+    const blocks = [
+      { id: "1", type: "image", url: "http://cover.png" },
+      { id: "2", type: "image", url: "http://second.png" }
+    ];
+
+    const { rerender } = render(
+      <DynamicBlockEditor
+        initialBlocks={JSON.stringify([{ id: "1", type: "image", url: "http://cover.png" }])}
+        onChange={onChange}
+        onCoverImageSelect={onCoverSelect}
+        coverImageUrl=""
+      />
+    );
+    expect(onCoverSelect).toHaveBeenCalledWith("http://cover.png");
+
+    rerender(
+      <DynamicBlockEditor
+        initialBlocks={JSON.stringify(blocks)}
+        onChange={onChange}
+        onCoverImageSelect={onCoverSelect}
+        coverImageUrl="http://cover.png"
+      />
+    );
+
+    const selectButtons = screen.getAllByRole("button", { name: /Set as Cover Image/i });
+    fireEvent.click(selectButtons[0]);
+    expect(onCoverSelect).toHaveBeenCalledWith("http://second.png");
+  });
+
+  it("handles removing image blocks and triggers deletion request", () => {
+    const onCoverSelect = jest.fn();
+    axios.delete.mockRejectedValueOnce(new Error("Network err"));
+    sessionStorage.setItem("token", "dummy-token");
+
+    const blocks = [{ id: "img-1", type: "image", url: "http://cover.png" }];
+    render(
+      <DynamicBlockEditor
+        initialBlocks={JSON.stringify(blocks)}
+        onChange={onChange}
+        onCoverImageSelect={onCoverSelect}
+        coverImageUrl="http://cover.png"
+      />
+    );
+
+    const removeBtn = screen.getByText("Remove");
+    fireEvent.click(removeBtn);
+    expect(onCoverSelect).toHaveBeenCalledWith("");
+    expect(axios.delete).toHaveBeenCalledWith(
+      expect.stringContaining("/articles/upload-image-url/"),
+      expect.objectContaining({
+        data: { url: "http://cover.png" }
+      })
+    );
   });
 });
