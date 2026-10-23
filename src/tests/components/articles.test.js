@@ -482,10 +482,15 @@ describe("Article Components", () => {
     cardImg.simulate("error", { target: mockTarget });
     expect(mockTarget.src).toBeTruthy();
 
+    const loadingWrapper = shallow(<Home {...props} articles={[]} loading={true} />);
+    expect(loadingWrapper.find(".articles-loader").length).toBe(1);
+
     const state = {
-      getArticlesReducer: { articles: [], next: "", previous: "" },
+      getArticlesReducer: { articles: [], loading: true, next: "", previous: "" },
       homeArticlesReducer: { latest: [], trending: [], popular: [] }
     };
-    expect(homeMapStateToProps(state)).toBeDefined();
+    expect(homeMapStateToProps(state)).toEqual(
+      expect.objectContaining({ loading: true })
+    );
   });
 });
