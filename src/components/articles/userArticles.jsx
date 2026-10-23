@@ -7,6 +7,7 @@ import { withRouter } from "../../utils/router";
 import { getArticlesAction } from "../../actions/getArticles";
 import { deleteArticleAction } from "../../actions/deleteArticleAction";
 import { Link } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 import { FALLBACK_IMAGE } from "../../utils/constants";
 
 export class UserArticles extends Component {
@@ -24,9 +25,16 @@ export class UserArticles extends Component {
     this.props.deleteArticleAction(slug, this.props);
   }
   render() {
-    const articles = this.props.articles;
+    const { articles, loading } = this.props;
     const articleList =
-      articles && articles.length ? (
+      loading && (!articles || !articles.length) ? (
+        <div
+          className="user-articles-loader"
+          style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "35vh" }}
+        >
+          <ThreeDots color="#03a9f4" height={80} width={80} />
+        </div>
+      ) : articles && articles.length ? (
         articles.map(article => {
           return (
             <div className="article" key={article.slug}>
@@ -94,7 +102,8 @@ export class UserArticles extends Component {
 }
 
 export const mapStateToProps = state => ({
-  articles: state.getArticlesReducer.articles
+  articles: state.getArticlesReducer.articles,
+  loading: state.getArticlesReducer.loading
 });
 
 export default withRouter(
