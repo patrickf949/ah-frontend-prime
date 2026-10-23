@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { getArticlesAction } from "../actions/getArticles";
 import { getHomeArticlesAction } from "../actions/homeArticlesActions";
 import { API_BASE_URL } from "../config/api";
+import { ThreeDots } from "react-loader-spinner";
 
 import { FALLBACK_IMAGE } from "../utils/constants";
 const reactionSummary = article => {
@@ -159,8 +160,32 @@ export class Home extends Component {
       articles,
       latest = [],
       trending = [],
-      popular = []
+      popular = [],
+      loading = false
     } = this.props;
+
+    if (loading && (!articles || articles.length === 0)) {
+      return (
+        <div className="big-container">
+          <div
+            className="articles-loader"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "55vh",
+              gap: "12px"
+            }}
+          >
+            <ThreeDots color="#03a9f4" height={80} width={80} />
+            <p style={{ color: "#64748b", fontSize: "15px", margin: 0 }}>
+              Loading stories, please wait...
+            </p>
+          </div>
+        </div>
+      );
+    }
 
     const searchParams = new URLSearchParams(this.props.location?.search || "");
     const searchQuery = searchParams.get("search");
@@ -273,6 +298,7 @@ export class Home extends Component {
 
 export const mapStateToProps = state => ({
   articles: state.getArticlesReducer.articles,
+  loading: state.getArticlesReducer.loading,
   next: state.getArticlesReducer.next,
   previous: state.getArticlesReducer.previous,
   latest: state.homeArticlesReducer.latest,
