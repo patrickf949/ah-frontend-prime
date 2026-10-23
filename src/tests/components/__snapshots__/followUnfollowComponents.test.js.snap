@@ -1,17 +1,291 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`follow/unfollow button should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`follow/unfollow button should render without crashing 1`] = `
+<button
+  className="btn btn-outline-success"
+  onClick={[Function]}
+>
+  Follow
+</button>
+`;
 
-exports[`follower click should click on a follower 1`] = `ReactWrapper {}`;
+exports[`followers and following statistics should render without crashing 1`] = `
+<div
+  className="row"
+>
+  <div
+    aria-hidden="true"
+    aria-labelledby="exampleModalLabel"
+    className="modal fade"
+    id="exampleModal"
+    role="dialog"
+    tabIndex={-1}
+  >
+    <FollowingList
+      following={[]}
+    />
+  </div>
+  <div
+    aria-hidden="true"
+    aria-labelledby="exampleModalLabel"
+    className="modal fade"
+    id="exampleModal1"
+    role="dialog"
+    tabIndex={-1}
+  >
+    <FollowersList
+      followers={[]}
+    />
+  </div>
+  <a
+    className="col-md-4"
+    data-target="#exampleModal1"
+    data-toggle="modal"
+    href="#"
+  >
+    Followers
+     : 
+    <button
+      className="stats"
+    >
+      <strong>
+        0
+         
+      </strong>
+    </button>
+  </a>
+  <a
+    className="col-md-4"
+    data-target="#exampleModal"
+    data-toggle="modal"
+    href="#"
+  >
+    Following
+     : 
+    <button
+      className="stats"
+    >
+      <strong>
+        0
+         
+      </strong>
+    </button>
+  </a>
+</div>
+`;
 
-exports[`followers and following statistics should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`followers list popup should render without crashing 1`] = `
+<div
+  className="modal-dialog"
+  role="document"
+>
+  <div
+    className="modal-content"
+  >
+    <div
+      className="modal-header"
+    >
+      <h5
+        className="modal-title"
+      >
+        My Followers
+      </h5>
+      <button
+        aria-label="Close"
+        className="close"
+        data-dismiss="modal"
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+        >
+          ×
+        </span>
+      </button>
+    </div>
+    <div
+      className="modal-body"
+    >
+      No one is on the followers List
+    </div>
+    <div
+      class="modal-footer"
+    />
+  </div>
+</div>
+`;
 
-exports[`followers list popup should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`followers list popup should render without crashing 2`] = `
+<div
+  className="modal-dialog"
+  role="document"
+>
+  <div
+    className="modal-content"
+  >
+    <div
+      className="modal-header"
+    >
+      <h5
+        className="modal-title"
+      >
+        My Followers
+      </h5>
+      <button
+        aria-label="Close"
+        className="close"
+        data-dismiss="modal"
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+        >
+          ×
+        </span>
+      </button>
+    </div>
+    <div
+      className="modal-body"
+    >
+      <div
+        className="row"
+        id="follower"
+        onClick={[Function]}
+      >
+        <button
+          className="col col-lg-3 "
+          style={
+            {
+              "border": "none",
+            }
+          }
+        >
+          <img
+            alt="profile"
+            className="profile-page"
+            src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+          />
+        </button>
+        <div
+          className="col col-lg-9"
+        >
+          <h5 />
+          <p />
+        </div>
+        <br />
+      </div>
+    </div>
+    <div
+      class="modal-footer"
+    />
+  </div>
+</div>
+`;
 
-exports[`followers list popup should render without crashing 2`] = `ShallowWrapper {}`;
+exports[`following list popup should render without crashing 1`] = `
+<div
+  className="modal-dialog"
+  role="document"
+>
+  <div
+    className="modal-content"
+  >
+    <div
+      className="modal-header"
+    >
+      <h5
+        className="modal-title"
+      >
+        My Following
+      </h5>
+      <button
+        aria-label="Close"
+        className="close"
+        data-dismiss="modal"
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+        >
+          ×
+        </span>
+      </button>
+    </div>
+    <div
+      className="modal-body"
+    >
+      No one is on the following List
+    </div>
+    <div
+      class="modal-footer"
+    />
+  </div>
+</div>
+`;
 
-exports[`following click should click on a user  that is being followed 1`] = `ReactWrapper {}`;
-
-exports[`following list popup should render without crashing 1`] = `ShallowWrapper {}`;
-
-exports[`following list popup should render without crashing 2`] = `ShallowWrapper {}`;
+exports[`following list popup should render without crashing 2`] = `
+<div
+  className="modal-dialog"
+  role="document"
+>
+  <div
+    className="modal-content"
+  >
+    <div
+      className="modal-header"
+    >
+      <h5
+        className="modal-title"
+      >
+        My Following
+      </h5>
+      <button
+        aria-label="Close"
+        className="close"
+        data-dismiss="modal"
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+        >
+          ×
+        </span>
+      </button>
+    </div>
+    <div
+      className="modal-body"
+    >
+      <div
+        className="row"
+        id="following"
+        onClick={[Function]}
+      >
+        <button
+          className="col col-lg-3"
+          style={
+            {
+              "border": "none",
+            }
+          }
+        >
+          <img
+            alt="profile"
+            className="profile-page"
+            src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+          />
+        </button>
+        <div
+          className="col col-lg-9"
+        >
+          <h5 />
+          <p />
+        </div>
+        <br />
+      </div>
+    </div>
+    <div
+      class="modal-footer"
+    />
+  </div>
+</div>
+`;

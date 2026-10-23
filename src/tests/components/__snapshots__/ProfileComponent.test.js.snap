@@ -1,5 +1,56 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`edit profile container tests should render without crushing 1`] = `ShallowWrapper {}`;
+exports[`edit profile container tests should render without crushing 1`] = `
+<div>
+  <withRouter(Connect(EditProfile)) />
+</div>
+`;
 
-exports[`profileComponent tests should render without crushing 1`] = `ShallowWrapper {}`;
+exports[`profileComponent tests should render without crushing 1`] = `
+<div>
+  <div
+    className="container-personal-profile"
+  >
+    <div>
+      <div
+        className="user-details"
+      >
+        <div>
+          <h3>
+            undefined's profile
+          </h3>
+        </div>
+        <div>
+          <FollowsButton />
+        </div>
+        <br />
+        <div>
+          <p>
+            Fullname: undefined
+          </p>
+          <p>
+            bio: undefined
+          </p>
+        </div>
+        <div>
+          <FollowsStats />
+        </div>
+        <div
+          className="img-container"
+        >
+          <img
+            src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+            style={
+              {
+                "borderRadius": "50%",
+                "height": "200px",
+                "width": "200px",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

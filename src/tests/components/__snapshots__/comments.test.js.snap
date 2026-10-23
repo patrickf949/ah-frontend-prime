@@ -1,5 +1,224 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`test for comments should  1`] = `ShallowWrapper {}`;
+exports[`test for comments should render comments 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col col-lg-1"
+  />
+  <div
+    className="col col-lg-10"
+  >
+    <div
+      className="row"
+      style={
+        {
+          "marginBottom": "24px",
+        }
+      }
+    >
+      <div
+        className="col col-lg-1"
+      />
+      <div
+        className="col col-lg-11"
+      >
+        <div
+          style={
+            {
+              "backgroundColor": "#f8f9fa",
+              "border": "1px dashed #ced4da",
+              "borderRadius": "12px",
+              "margin": "10px 0 20px",
+              "padding": "20px",
+              "textAlign": "center",
+            }
+          }
+        >
+          <p
+            style={
+              {
+                "color": "#495057",
+                "fontSize": "14px",
+                "fontWeight": "500",
+                "margin": "0 0 12px 0",
+              }
+            }
+          >
+            Sign in to participate in the discussion.
+          </p>
+          <Link
+            className="btn btn-primary btn-sm"
+            style={
+              {
+                "borderRadius": "6px",
+                "color": "#fff",
+                "fontSize": "13px",
+                "fontWeight": "bold",
+                "padding": "6px 16px",
+                "textDecoration": "none",
+              }
+            }
+            to="/login"
+          >
+            Sign In
+          </Link>
+        </div>
+      </div>
+    </div>
+    <div>
+      <section
+        className="comments"
+      >
+        <article
+          className="comment"
+          style={
+            {
+              "borderLeft": "none",
+              "marginLeft": "0",
+              "marginTop": "0",
+              "paddingLeft": "0",
+            }
+          }
+        >
+          <a
+            className="comment-img"
+            href="/profile/user1"
+          >
+            <img
+              alt=""
+              height="50"
+              src="https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="
+              width="50"
+            />
+          </a>
+          <div
+            className="comment-body"
+          >
+            <div
+              className="text"
+            >
+              <p>
+                this is it
+              </p>
+            </div>
+            <div
+              style={
+                {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "justifyContent": "space-between",
+                }
+              }
+            >
+              <p
+                className="attribution"
+              >
+                by 
+                <a
+                  href="/profile/user1"
+                >
+                  user1
+                </a>
+                 at 
+                7:38:14 am on May 17th 2019.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </div>
+  <div
+    className="col col-lg-1"
+  />
+</div>
+`;
 
-exports[`test for comments should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`test for comments should render without crashing 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col col-lg-1"
+  />
+  <div
+    className="col col-lg-10"
+  >
+    <div
+      className="row"
+      style={
+        {
+          "marginBottom": "24px",
+        }
+      }
+    >
+      <div
+        className="col col-lg-1"
+      />
+      <div
+        className="col col-lg-11"
+      >
+        <div
+          style={
+            {
+              "backgroundColor": "#f8f9fa",
+              "border": "1px dashed #ced4da",
+              "borderRadius": "12px",
+              "margin": "10px 0 20px",
+              "padding": "20px",
+              "textAlign": "center",
+            }
+          }
+        >
+          <p
+            style={
+              {
+                "color": "#495057",
+                "fontSize": "14px",
+                "fontWeight": "500",
+                "margin": "0 0 12px 0",
+              }
+            }
+          >
+            Sign in to participate in the discussion.
+          </p>
+          <Link
+            className="btn btn-primary btn-sm"
+            style={
+              {
+                "borderRadius": "6px",
+                "color": "#fff",
+                "fontSize": "13px",
+                "fontWeight": "bold",
+                "padding": "6px 16px",
+                "textDecoration": "none",
+              }
+            }
+            to="/login"
+          >
+            Sign In
+          </Link>
+        </div>
+      </div>
+    </div>
+    <div
+      style={
+        {
+          "color": "#666",
+          "fontSize": "14px",
+          "fontStyle": "italic",
+          "padding": "30px 10px",
+          "textAlign": "center",
+        }
+      }
+    >
+      No comments yet. Be the first to share your thoughts!
+    </div>
+  </div>
+  <div
+    className="col col-lg-1"
+  />
+</div>
+`;

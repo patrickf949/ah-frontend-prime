@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`FavoritesPage component should render tabs sorted by count with dislike last 1`] = `
+<div
+  className="big-container"
+  style={
+    {
+      "padding": "40px 24px",
+    }
+  }
+>
+  <header
+    style={
+      {
+        "marginBottom": "32px",
+        "textAlign": "center",
+      }
+    }
+  >
+    <h2
+      style={
+        {
+          "color": "var(--text-primary)",
+          "fontSize": "36px",
+          "fontWeight": "800",
+        }
+      }
+    >
+      Your Favorites & Preferences
+    </h2>
+    <p
+      style={
+        {
+          "color": "var(--text-secondary)",
+          "fontSize": "16px",
+          "marginTop": "8px",
+        }
+      }
+    >
+      Explore the stories you have reacted to, grouped by your interaction preferences.
+    </p>
+  </header>
+  <div
+    style={
+      {
+        "borderBottom": "1px solid var(--border-color)",
+        "display": "flex",
+        "gap": "12px",
+        "marginBottom": "32px",
+        "overflowX": "auto",
+        "paddingBottom": "16px",
+      }
+    }
+  >
+    <button
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "var(--accent-color)",
+          "border": "none",
+          "borderRadius": "30px",
+          "color": "white",
+          "cursor": "pointer",
+          "display": "flex",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "gap": "8px",
+          "outline": "none",
+          "padding": "10px 20px",
+          "transition": "var(--transition-base)",
+          "whiteSpace": "nowrap",
+        }
+      }
+    >
+      <span>
+        🔥
+      </span>
+      <span>
+        Clap
+        s
+      </span>
+      <span
+        style={
+          {
+            "backgroundColor": "rgba(255,255,255,0.25)",
+            "borderRadius": "10px",
+            "fontSize": "12px",
+            "padding": "2px 8px",
+          }
+        }
+      >
+        1
+      </span>
+    </button>
+    <button
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#f1f5f9",
+          "border": "none",
+          "borderRadius": "30px",
+          "color": "var(--text-secondary)",
+          "cursor": "pointer",
+          "display": "flex",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "gap": "8px",
+          "outline": "none",
+          "padding": "10px 20px",
+          "transition": "var(--transition-base)",
+          "whiteSpace": "nowrap",
+        }
+      }
+    >
+      <span>
+        🔥
+      </span>
+      <span>
+        Like
+        s
+      </span>
+      <span
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.06)",
+            "borderRadius": "10px",
+            "fontSize": "12px",
+            "padding": "2px 8px",
+          }
+        }
+      >
+        1
+      </span>
+    </button>
+    <button
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#f1f5f9",
+          "border": "none",
+          "borderRadius": "30px",
+          "color": "var(--text-secondary)",
+          "cursor": "pointer",
+          "display": "flex",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "gap": "8px",
+          "outline": "none",
+          "padding": "10px 20px",
+          "transition": "var(--transition-base)",
+          "whiteSpace": "nowrap",
+        }
+      }
+    >
+      <span>
+        🔥
+      </span>
+      <span>
+        Dislike
+        s
+      </span>
+      <span
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.06)",
+            "borderRadius": "10px",
+            "fontSize": "12px",
+            "padding": "2px 8px",
+          }
+        }
+      >
+        1
+      </span>
+    </button>
+  </div>
+  <div
+    className="all-articles-section"
+  >
+    <div
+      className="heading"
+      style={
+        {
+          "marginBottom": "24px",
+        }
+      }
+    >
+      <h3>
+        Reacted with 
+        🔥
+         
+        Clap
+        s
+      </h3>
+    </div>
+    <div
+      className="all-stories-grid"
+      style={
+        {
+          "display": "grid",
+          "gap": "24px",
+          "gridTemplateColumns": "repeat(auto-fill, minmax(320px, 1fr))",
+        }
+      }
+    >
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/clap-slug",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              Clapped Article
+            </h3>
+            <p
+              className="desc"
+            >
+              Mock description
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                bob
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              >
+                1 min read
+              </span>
+              <React.Fragment>
+                <span
+                  className="divider"
+                />
+                <span
+                  className="card-reactions reactions"
+                >
+                  🔥 1
+                </span>
+              </React.Fragment>
+            </div>
+          </div>
+          <img
+            alt="authors haven"
+            className="img-tile"
+            onError={[Function]}
+            src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%220%200%20600%20400%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%0A%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23e0e0e0%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%23888888%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%3EImage%20Not%20Available%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+          />
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
+`;

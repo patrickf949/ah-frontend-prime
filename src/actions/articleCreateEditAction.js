@@ -31,7 +31,7 @@ export const articleCreateEditAction = (
       toast.success(
         `${sessionStorage.getItem("username")} your article has been ${action}`,
         {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
           onClose: props.history.push(
@@ -52,7 +52,7 @@ export const articleCreateEditAction = (
         const errors = error.response.data.errors;
         for (var key in errors) {
           toast.error(`${key}: ${errors[key]}`, {
-            position: toast.POSITION.TOP_RIGHT,
+            position: "top-right",
             autoClose: false,
             hideProgressBar: false
           });

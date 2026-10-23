@@ -41,11 +41,12 @@ describe("SocialAuthContainer", () => {
   it("should return response after google success", () => {
     wrapper.setProps({
       response: {
-        tokenId: "token"
+        credential: "token"
       }
     });
     wrapper.instance().handlegooglesuccess(wrapper.instance().props.response);
-    expect(wrapper.instance().props.response).toEqual({ tokenId: "token" });
+    expect(wrapper.instance().props.response).toEqual({ credential: "token" });
+    expect(wrapper.instance().props.googlelogin).toHaveBeenCalledWith("token");
   });
 
   it("should return response after facebook success", () => {

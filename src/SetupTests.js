@@ -1,4 +1,6 @@
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+// React 19 is not supported by Enzyme. Component tests should be migrated to
+// Testing Library instead of configuring an Enzyme adapter here.
+const { TextDecoder, TextEncoder } = require("util");
 
-configure({ adapter: new Adapter() });
+global.TextEncoder = global.TextEncoder || TextEncoder;
+global.TextDecoder = global.TextDecoder || TextDecoder;

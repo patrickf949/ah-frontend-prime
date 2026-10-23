@@ -1,5 +1,179 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[` navbar component should load other nav elements when a user is not authenticated 1`] = `ShallowWrapper {}`;
+exports[` navbar component should load other nav elements when a user is not authenticated 1`] = `
+<header
+  className="site-header"
+>
+  <nav
+    aria-label="Primary navigation"
+    className="navbar app-navbar"
+  >
+    <div
+      className="navbar-brand-group"
+    >
+      <button
+        aria-label="Open menu"
+        className="menu-toggle"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fas fa-bars"
+          id="nav-icon"
+        />
+      </button>
+      <Link
+        className="brand-link"
+        to="/"
+      >
+        Author's Haven
+      </Link>
+    </div>
+    <div
+      className="form-group has-search"
+    >
+      <form
+        className="form-inline"
+        onSubmit={[Function]}
+      >
+        <ForwardRef(TextField)
+          aria-label="Search"
+          className="form-control-search"
+          onChange={[Function]}
+          placeholder="Search stories..."
+          size="small"
+          slotProps={
+            {
+              "input": {
+                "startAdornment": <ForwardRef(InputAdornment)
+                  position="start"
+                >
+                  <i
+                    className="fa fa-search"
+                    id="search-icon"
+                  />
+                </ForwardRef(InputAdornment)>,
+              },
+            }
+          }
+          type="search"
+          value=""
+        />
+      </form>
+    </div>
+    <ul
+      className="nav navbar-nav nav-actions guest-actions"
+    >
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          to="/login"
+        >
+          Sign In
+        </Link>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link get-started "
+          to="/register"
+        >
+          Get Started
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;
 
-exports[` navbar component should render without crashing 1`] = `ShallowWrapper {}`;
+exports[` navbar component should render without crashing 1`] = `
+<header
+  className="site-header"
+>
+  <nav
+    aria-label="Primary navigation"
+    className="navbar app-navbar"
+  >
+    <div
+      className="navbar-brand-group"
+    >
+      <button
+        aria-label="Open menu"
+        className="menu-toggle"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fas fa-bars"
+          id="nav-icon"
+        />
+      </button>
+      <Link
+        className="brand-link"
+        to="/"
+      >
+        Author's Haven
+      </Link>
+    </div>
+    <div
+      className="form-group has-search"
+    >
+      <form
+        className="form-inline"
+        onSubmit={[Function]}
+      >
+        <ForwardRef(TextField)
+          aria-label="Search"
+          className="form-control-search"
+          onChange={[Function]}
+          placeholder="Search stories..."
+          size="small"
+          slotProps={
+            {
+              "input": {
+                "startAdornment": <ForwardRef(InputAdornment)
+                  position="start"
+                >
+                  <i
+                    className="fa fa-search"
+                    id="search-icon"
+                  />
+                </ForwardRef(InputAdornment)>,
+              },
+            }
+          }
+          type="search"
+          value=""
+        />
+      </form>
+    </div>
+    <ul
+      className="nav navbar-nav nav-actions guest-actions"
+    >
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          to="/login"
+        >
+          Sign In
+        </Link>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link get-started "
+          to="/register"
+        >
+          Get Started
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;

@@ -66,35 +66,43 @@ describe("editprofile component success tests", () => {
     expect(wrapper.instance().state.bio).toBe("I am the fudge");
   });
   it("should handle image upload", () => {
+    global.URL.createObjectURL = jest.fn(() => "blob:fake-url");
+    const file = new File(["dummy content"], "example.png", { type: "image/png" });
     const event = {
       target: {
-        name: "image",
-        files: "files.jpg"
+        files: [file]
       }
     };
     wrapper.instance().handleImageUpload(event);
-    expect(wrapper.instance().state.image).toBe("files.jpg");
+    expect(wrapper.instance().state.imageFile).toEqual(file);
+    expect(wrapper.instance().state.previewUrl).toBe("blob:fake-url");
   });
   it("should simulate image upload", () => {
+    global.URL.createObjectURL = jest.fn(() => "blob:fake-url");
     wrapper.find("#banyati").simulate("change", {
       target: {
-        name: "ian",
         files: [new File(["../../styles/images/profile.jpeg"], "sample.png")]
       }
     });
     expect(props.onChange).toBeCalledTimes(0);
   });
-  it("should handle the Submit event", () => {
+  it("should handle the Submit event", async () => {
     const instance = wrapper.instance();
     const event = {
-      target: {
-        name: "",
-        value: "emma ogwal"
-      }
+      preventDefault: jest.fn()
     };
-    event.preventDefault = jest.fn();
-    instance.handleSubmit(event);
+    instance.setState({ full_name: "emma ogwal" });
+    
+    // Create a mock for this specific test since we added axios calls in handleSubmit
+    const axios = require('axios');
+    const spyPost = jest.spyOn(axios, 'post').mockResolvedValue({ data: { uploadUrl: "test-url", url: "test-url" } });
+    const spyPut = jest.spyOn(axios, 'put').mockResolvedValue({});
+    
+    await instance.handleSubmit(event);
     expect(instance.state.full_name).toEqual("emma ogwal");
+    expect(props.editProfileAction).toBeCalled();
+    spyPost.mockRestore();
+    spyPut.mockRestore();
   });
   it("should not redirect on edit fail", () => {
     wrapper.setProps({ upDateSuccess: false });
@@ -104,12 +112,42 @@ describe("editprofile component success tests", () => {
     wrapper.setProps({ ...nextProps });
     expect(props.history.push).toBeCalledWith("/profile/null");
   });
+  it("should reject image files larger than 500KB", () => {
+    wrapper.instance().setState({ imageFile: null });
+    const file = new File(["dummy content"], "large.png", { type: "image/png" });
+    Object.defineProperty(file, "size", { value: 600 * 1024 });
+    const event = {
+      target: {
+        files: [file]
+      }
+    };
+    wrapper.instance().handleImageUpload(event);
+    expect(wrapper.instance().state.imageFile).toBeNull();
+  });
+  it("should handle image upload failure in handleSubmit", async () => {
+    const instance = wrapper.instance();
+    const event = { preventDefault: jest.fn() };
+    const axios = require("axios");
+    const spyPost = jest.spyOn(axios, "post").mockRejectedValueOnce({
+      response: { data: { error: "Upload error" } }
+    });
+
+    instance.setState({
+      full_name: "emma",
+      imageFile: new File(["dummy"], "sample.png", { type: "image/png" })
+    });
+    await instance.handleSubmit(event);
+    expect(instance.state.isProcessing).toBe(false);
+    spyPost.mockRestore();
+  });
   it("should map state to props", () => {
     const state = {
       profileReducer: {
-        profile: null
+        profile: null,
+        upDateSuccess: false
       }
     };
-    expect(mapStateToProps(state)).toEqual({ profile: null });
+    expect(mapStateToProps(state)).toEqual({ profile: null, upDateSuccess: false });
   });
 });
+

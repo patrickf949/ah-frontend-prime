@@ -8,6 +8,12 @@ const middleWare = [thunk];
 
 const mockStore = configureStore(middleWare);
 
+jest.mock("react-toastify", () => ({
+  toast: {
+    success: jest.fn()
+  }
+}));
+
 describe("Action for getting Article", () => {
   beforeEach(() => {
     moxios.install();
@@ -15,10 +21,12 @@ describe("Action for getting Article", () => {
 
   afterEach(() => {
     moxios.uninstall();
+    jest.clearAllMocks();
   });
 
-  it("Should delete an article", () => {
+  it("Should delete an article and trigger onClose", () => {
     const store = mockStore({});
+    const props = { history: { go: jest.fn() } };
     moxios.wait(() => {
       const requestM = moxios.requests.mostRecent();
       requestM.respondWith({
@@ -36,8 +44,17 @@ describe("Action for getting Article", () => {
         }
       }
     ];
-    return store.dispatch(deleteArticleAction()).then(() => {
+    return store.dispatch(deleteArticleAction("test-slug", props)).then(() => {
       expect(store.getActions()).toEqual(expectedAction);
+      
+      const { toast } = require("react-toastify");
+      expect(toast.success).toHaveBeenCalled();
+      
+      // Trigger the onClose callback
+      const successOptions = toast.success.mock.calls[0][1];
+      successOptions.onClose();
+      
+      expect(props.history.go).toHaveBeenCalledWith(0);
     });
   });
 });

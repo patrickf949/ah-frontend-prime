@@ -1,3 +1,27 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`6 should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`SocialAuth component should render without fail 1`] = `
+<div>
+  <div
+    className="face-book"
+  >
+    <FacebookLogin
+      appId={1782833315349267}
+      fields="name,email,picture"
+      render={[Function]}
+    />
+  </div>
+  <br />
+  <div
+    className="google"
+  >
+    <GoogleOAuthProvider
+      clientId="416893149725-uadrrgg3tbk2pd48u9ens7ea0s58cpkk.apps.googleusercontent.com"
+    >
+      <GoogleLogin
+        text="signin_with"
+      />
+    </GoogleOAuthProvider>
+  </div>
+</div>
+`;

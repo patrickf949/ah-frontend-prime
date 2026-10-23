@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import {
   REGISTRATION_ERROR_MESSAGE,
   RIGISTRATION_SUCCESS_MESSAGE,
@@ -13,7 +14,7 @@ export const registerUser = userData => async dispatch => {
   });
   await axios
     .post(
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/users/register/",
+      API_BASE_URL + "/users/register/",
       { user: userData }
     )
     .then(res => {
@@ -24,7 +25,7 @@ export const registerUser = userData => async dispatch => {
       toast.success(
         `your have Successfully registered, an email with activation link has been sent to your account!`,
         {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right",
           autoClose: 3000,
           hideProgressBar: false
         }
@@ -38,7 +39,7 @@ export const registerUser = userData => async dispatch => {
       const errorMessage = error.response.data.errors;
       Object.keys(errorMessage).forEach(key => {
         toast.error(`sorry ${errorMessage[key]}`, {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right",
           autoClose: false,
           hideProgressBar: false
         });

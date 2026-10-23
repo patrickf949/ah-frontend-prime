@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
@@ -18,7 +19,7 @@ export const getUsersFollowing = username => {
   return async dispatch => {
     return await axios
       .get(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/profiles/following/${username}`,
+        `${API_BASE_URL}/profiles/following/${username}`,
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.token
@@ -45,7 +46,7 @@ export const getUsersFollowers = username => {
   return async dispatch => {
     return await axios
       .get(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/profiles/followers/${username}`,
+        `${API_BASE_URL}/profiles/followers/${username}`,
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.token
@@ -70,12 +71,11 @@ export const getUsersFollowers = username => {
 
 export const getUsersProfileAction = username => {
   return async dispatch => {
-    const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`
-    };
+    const token = sessionStorage.getItem("token");
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
     return await axios
       .get(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/profiles/${username}`,
+        `${API_BASE_URL}/profiles/${username}`,
         { headers: headers }
       )
       .then(data => {
@@ -97,7 +97,7 @@ export const editProfileAction = data => {
   return async dispatch => {
     return axios
       .put(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/profiles/${
+        `${API_BASE_URL}/profiles/${
           sessionStorage.username
         }/edit`,
         data,
@@ -114,7 +114,7 @@ export const editProfileAction = data => {
         });
         toast.dismiss();
         toast.success("Profile updated successfully", {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right",
           autoClose: 2000,
           hideProgressBar: false
         });
@@ -131,7 +131,7 @@ export const followUser = user => {
     };
     return axios
       .post(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/profiles/${user}/follow`,
+        `${API_BASE_URL}/profiles/${user}/follow`,
         body,
         { headers: headers }
       )
@@ -139,7 +139,7 @@ export const followUser = user => {
         if (data.data.errors) {
           toast.dismiss();
           toast.info(`${data.data.errors[0]}`, {
-            position: toast.POSITION.TOP_RIGHT,
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false
           });
@@ -151,7 +151,7 @@ export const followUser = user => {
           if (data.data["profile"].message) {
             toast.dismiss();
             toast.success(`${data.data["profile"].message}`, {
-              position: toast.POSITION.TOP_RIGHT,
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false
             });
@@ -163,7 +163,7 @@ export const followUser = user => {
           } else {
             toast.dismiss();
             toast.info("Failed to follow User", {
-              position: toast.POSITION.TOP_RIGHT,
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false
             });
@@ -186,14 +186,14 @@ export const unfollowUser = user => {
 
     return axios
       .delete(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/profiles/${user}/follow`,
+        `${API_BASE_URL}/profiles/${user}/follow`,
         { headers: headers }
       )
       .then(data => {
         if (data.data.errors) {
           toast.dismiss();
           toast.info(`${data.data.errors[0]}`, {
-            position: toast.POSITION.TOP_RIGHT,
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false
           });
@@ -205,7 +205,7 @@ export const unfollowUser = user => {
           if (data.data["profile"].message) {
             toast.dismiss();
             toast.success(`${data.data["profile"].message}`, {
-              position: toast.POSITION.TOP_RIGHT,
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false
             });
@@ -217,7 +217,7 @@ export const unfollowUser = user => {
           } else {
             toast.dismiss();
             toast.info("Failed to unfollow User", {
-              position: toast.POSITION.TOP_RIGHT,
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false
             });

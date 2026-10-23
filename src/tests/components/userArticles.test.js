@@ -61,4 +61,19 @@ describe("user article tests", () => {
     };
     expect(mapStateToProps(appState)).toEqual(componentState);
   });
+  it("should fetch articles on mount", () => {
+    sessionStorage.setItem("email", "test@test.com");
+    const localProps = { ...props, getArticlesAction: jest.fn() };
+    const wrapper = shallow(<UserArticles {...localProps} />);
+    wrapper.instance().componentDidMount();
+    expect(localProps.getArticlesAction).toHaveBeenCalledWith(expect.stringContaining("?email=test@test.com"));
+  });
+
+  it("should handle article image onError fallback", () => {
+    const wrapper = shallow(<UserArticles {...props} />);
+    const img = wrapper.find(".img-tile").at(0);
+    const mockTarget = { src: "", onerror: jest.fn() };
+    img.simulate("error", { target: mockTarget });
+    expect(mockTarget.src).toBeTruthy();
+  });
 });

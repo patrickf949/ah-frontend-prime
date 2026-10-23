@@ -1,25 +1,47 @@
 import {
   FETCH_ARTICLE_SUCCESS,
+  FETCH_ARTICLE_REQUEST,
   LIKE_ARTICLE_FAILURE,
   LIKE_ARTICLE_SUCCESS,
   DISLIKE_ARTICLE_FAILURE,
-  DISLIKE_ARTICLE_SUCCESS
+  DISLIKE_ARTICLE_SUCCESS,
+  REACT_ARTICLE_SUCCESS
 } from "../actions/types";
 
 const initialState = {
   article: {},
   likes: 0,
-  dislikes: 0
+  dislikes: 0,
+  loading: false
 };
 
 const getArticleReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_ARTICLE_REQUEST:
+      return {
+        ...state,
+        article: {},
+        likes: 0,
+        dislikes: 0,
+        reactions: null,
+        loading: true
+      };
     case FETCH_ARTICLE_SUCCESS:
       return {
         ...state,
         article: action.payload,
         likes: action.payload.article.likes,
-        dislikes: action.payload.article.dislikes
+        dislikes: action.payload.article.dislikes,
+        reactions: action.payload.article.reactions,
+        loading: false
+      };
+
+    case REACT_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        likes: action.payload.likes,
+        dislikes: action.payload.dislikes,
+        reactions: action.payload.reactions
       };
     case LIKE_ARTICLE_SUCCESS:
       return {

@@ -36,6 +36,7 @@ describe("Profile action", () => {
     moxios.uninstall();
   });
   it("fetch profile successfully", () => {
+    sessionStorage.setItem("token", "dummy-token");
     const store = mockStore({});
     moxios.wait(() => {
       const requestM = moxios.requests.mostRecent();
@@ -380,6 +381,33 @@ describe("Profile action", () => {
     ];
     const username = "ianemma";
     return store.dispatch(unfollowUser(username)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it("fetch profile successfully without token", () => {
+    sessionStorage.removeItem("token");
+    const store = mockStore({});
+    moxios.wait(() => {
+      const requestM = moxios.requests.mostRecent();
+      requestM.respondWith({
+        status: 200,
+        response: {
+          profile: {
+            username: "ianemma"
+          }
+        }
+      });
+    });
+    const expectedActions = [
+      {
+        type: PROFILE_FETCHED,
+        payload: {
+          username: "ianemma"
+        }
+      }
+    ];
+    return store.dispatch(getUsersProfileAction("ianemma")).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

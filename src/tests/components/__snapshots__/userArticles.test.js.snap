@@ -1,3 +1,166 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`user article tests User articles should be tested 1`] = `ShallowWrapper {}`;
+exports[`user article tests User articles should be tested 1`] = `
+<div
+  className="big-container"
+>
+  <div
+    className="user-articles"
+  >
+    <div
+      className="heading"
+    >
+      <h3>
+        's articles
+      </h3>
+    </div>
+    <hr />
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          to="/article/dkaole-ld"
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              sunt aut facere repellat provi
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <p>
+              quia et suscipit
+suscipit recusandae consequuntur expedita e
+               ...
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              07:05:04 on May 17th 2019.
+            </span>
+          </div>
+          <div
+            className="img-div"
+          >
+            <img
+              className="img-tile"
+              onError={[Function]}
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+        <div
+          className="action-buttons"
+        >
+          <Link
+            to={
+              {
+                "pathname": "/edit-article/dkaole-ld",
+              }
+            }
+          >
+            Edit
+          </Link>
+          <button
+            className="delete"
+            onClick={[Function]}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="article"
+    >
+      <div
+        className="inner"
+      >
+        <Link
+          to="/article/kdaf-alpha"
+        >
+          <div
+            className="article-card"
+          >
+            <h3>
+              qui est esse
+               ...
+            </h3>
+            <p>
+              <b>
+                sunt aut facere repellat provident occaecati excepturi optio
+                 ...
+              </b>
+            </p>
+            <p>
+              quia et suscipit
+suscipit recusandae consequuntur expedita e
+               ...
+            </p>
+            <span>
+              <b>
+                Author: 
+                random
+              </b>
+            </span>
+            <br />
+            <span
+              className="card-date"
+            >
+              Created at
+               
+              07:05:04 on May 17th 2019.
+            </span>
+          </div>
+          <div
+            className="img-div"
+          >
+            <img
+              className="img-tile"
+              onError={[Function]}
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+            />
+          </div>
+        </Link>
+        <div
+          className="action-buttons"
+        >
+          <Link
+            to={
+              {
+                "pathname": "/edit-article/kdaf-alpha",
+              }
+            }
+          >
+            Edit
+          </Link>
+          <button
+            className="delete"
+            onClick={[Function]}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

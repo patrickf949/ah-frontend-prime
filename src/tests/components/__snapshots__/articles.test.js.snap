@@ -1,15 +1,543 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Article Components renders the create article page 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the create article page 1`] = `
+<div>
+  <ForwardRef(Dialog)
+    onClose={[Function]}
+    open={false}
+  >
+    <ForwardRef(DialogTitle)>
+      Unsaved Draft Found
+    </ForwardRef(DialogTitle)>
+    <ForwardRef(DialogContent)>
+      <ForwardRef(DialogContentText)>
+        An unsaved draft was found from your previous session. Would you like to restore it?
+      </ForwardRef(DialogContentText)>
+    </ForwardRef(DialogContent)>
+    <ForwardRef(DialogActions)>
+      <ForwardRef(Button)
+        color="secondary"
+        onClick={[Function]}
+      >
+        Discard
+      </ForwardRef(Button)>
+      <ForwardRef(Button)
+        autoFocus={true}
+        color="primary"
+        onClick={[Function]}
+        variant="contained"
+      >
+        Restore Draft
+      </ForwardRef(Button)>
+    </ForwardRef(DialogActions)>
+  </ForwardRef(Dialog)>
+  <CreateArticleComponent
+    body=""
+    description=""
+    draftData={null}
+    image=""
+    isUploaded={false}
+    onBodyChange={[Function]}
+    onChange={[Function]}
+    onSubmit={[Function]}
+    onUpload={[Function]}
+    showDraftModal={false}
+    tags=""
+    title=""
+  />
+</div>
+`;
 
-exports[`Article Components renders the edit article page 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the edit article page 1`] = `
+<div>
+  <CreateArticleComponent
+    article={null}
+    body="This is the body"
+    description=""
+    image=""
+    isUploaded={false}
+    onBodyChange={[Function]}
+    onChange={[Function]}
+    onSubmit={[Function]}
+    onUpload={[Function]}
+    tags=""
+    title=""
+  />
+</div>
+`;
 
-exports[`Article Components renders the single article page 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the single article page 1`] = `
+<div>
+  <div
+    className="not-found"
+  >
+    The article you have requested does not exist
+  </div>
+</div>
+`;
 
-exports[`Article Components renders the single article page without an article 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the single article page without an article 1`] = `
+<div>
+  <div
+    className="not-found"
+  >
+    The article you have requested does not exist
+  </div>
+</div>
+`;
 
-exports[`Article Components renders the single article page without an article image 1`] = `ShallowWrapper {}`;
+exports[`Article Components renders the single article page without an article image 1`] = `
+<div>
+  <div
+    className="not-found"
+  >
+    The article you have requested does not exist
+  </div>
+</div>
+`;
 
-exports[`Article Components should not regress 1`] = `ShallowWrapper {}`;
+exports[`Article Components should not regress 1`] = `
+<div
+  className="container-fluid mt-5"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col col-lg-3"
+    />
+    <div
+      className="col col-lg-6"
+    >
+      <h1>
+        Tell A story
+      </h1>
+      <form>
+        <ForwardRef(Grid)
+          spacing={2.25}
+        >
+          <ForwardRef(TextField)
+            id="title"
+            label="Title"
+            name="title"
+            onChange={[MockFunction]}
+            value=""
+          />
+          <ForwardRef(TextField)
+            id="description"
+            label="Description"
+            name="description"
+            onChange={[MockFunction]}
+            value=""
+          />
+          <DynamicBlockEditor
+            onChange={[Function]}
+            onCoverImageSelect={[MockFunction]}
+          />
+          <ForwardRef(TextField)
+            helperText="Separate your tags with a comma"
+            id="tags"
+            label="Tags"
+            name="tags"
+            onChange={[MockFunction]}
+            value=""
+          />
+          <ForwardRef(Button)
+            onClick={[MockFunction]}
+          >
+            Publish Story
+          </ForwardRef(Button)>
+        </ForwardRef(Grid)>
+      </form>
+    </div>
+    <div
+      className="col col-lg-3"
+    />
+  </div>
+</div>
+`;
 
-exports[`Article Components should render the home page 1`] = `ShallowWrapper {}`;
+exports[`Article Components should render the home page 1`] = `
+<div
+  className="big-container"
+>
+  <div
+    className="articles-top"
+  >
+    <div
+      className="top-articles"
+    >
+      <div
+        className="heading"
+        style={
+          {
+            "margin": "0 0 16px 0",
+          }
+        }
+      >
+        <h3>
+          Latest Stories
+        </h3>
+      </div>
+      <div
+        style={
+          {
+            "color": "#64748b",
+          }
+        }
+      >
+        No other recent articles.
+      </div>
+    </div>
+  </div>
+  <div
+    className="featured-sections"
+  >
+    <div
+      className="articles"
+    >
+      <div
+        className="heading"
+      >
+        <h3>
+          Trending Articles
+        </h3>
+      </div>
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/dkaole-ld",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              sunt aut facere repellat provident occaecati excepturi ...
+            </h3>
+            <p
+              className="desc"
+            >
+              sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                random
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              />
+            </div>
+          </div>
+          <img
+            alt="authors haven"
+            className="img-tile"
+            onError={[Function]}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+          />
+        </Link>
+      </div>
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/kdaf-alpha",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              qui est esse
+            </h3>
+            <p
+              className="desc"
+            >
+              sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                random
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              />
+            </div>
+          </div>
+          <img
+            alt="authors haven"
+            className="img-tile"
+            onError={[Function]}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+          />
+        </Link>
+      </div>
+    </div>
+    <div
+      className="articles1"
+    >
+      <div
+        className="heading"
+      >
+        <h3>
+          Popular Articles
+        </h3>
+      </div>
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/dkaole-ld",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              sunt aut facere repellat provident occaecati excepturi ...
+            </h3>
+            <p
+              className="desc"
+            >
+              sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                random
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              />
+            </div>
+          </div>
+          <img
+            alt="authors haven"
+            className="img-tile"
+            onError={[Function]}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+          />
+        </Link>
+      </div>
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/kdaf-alpha",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              qui est esse
+            </h3>
+            <p
+              className="desc"
+            >
+              sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                random
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              />
+            </div>
+          </div>
+          <img
+            alt="authors haven"
+            className="img-tile"
+            onError={[Function]}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+          />
+        </Link>
+      </div>
+    </div>
+  </div>
+  <div
+    className="all-articles-section"
+    ref={
+      {
+        "current": null,
+      }
+    }
+  >
+    <div
+      className="heading"
+    >
+      <h3>
+        Explore Stories
+      </h3>
+    </div>
+    <div
+      className="all-stories-grid"
+    >
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/dkaole-ld",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              sunt aut facere repellat provident occaecati excepturi ...
+            </h3>
+            <p
+              className="desc"
+            >
+              sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                random
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              />
+            </div>
+          </div>
+          <img
+            alt="authors haven"
+            className="img-tile"
+            onError={[Function]}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+          />
+        </Link>
+      </div>
+      <div
+        className="article-card-row"
+      >
+        <Link
+          className="links"
+          to={
+            {
+              "pathname": "/article/kdaf-alpha",
+            }
+          }
+        >
+          <div
+            className="article-card-info"
+          >
+            <h3>
+              qui est esse
+            </h3>
+            <p
+              className="desc"
+            >
+              sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+            </p>
+            <div
+              className="meta"
+            >
+              <span
+                className="author-name"
+              >
+                by 
+                random
+              </span>
+              <span
+                className="divider"
+              />
+              <span
+                className="read-time"
+              />
+            </div>
+          </div>
+          <img
+            alt="authors haven"
+            className="img-tile"
+            onError={[Function]}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWeAkfnCCPYnxmFYG60WKSsDJrduVtI6qgyZAJs-IAf6G1JywnZg"
+          />
+        </Link>
+      </div>
+    </div>
+    <div
+      aria-label="Article pagination"
+      className="articles-pagination"
+    >
+      <button
+        className="pagination-button eian"
+        disabled={true}
+        onClick={[Function]}
+        type="button"
+      >
+        Previous
+      </button>
+      <button
+        className="pagination-button aken"
+        disabled={true}
+        onClick={[Function]}
+        type="button"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -1,3 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`SocialAuthContainer should match with snapshot 1`] = `ShallowWrapper {}`;
+exports[`SocialAuthContainer should match with snapshot 1`] = `
+<div>
+  <SocialAuth
+    facebooksuccess={[Function]}
+    googlefailure={[Function]}
+    googlesuccess={[Function]}
+    id="socialAuth"
+  />
+</div>
+`;

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import axios from "axios";
 
 import { toast } from "react-toastify";
@@ -17,7 +18,7 @@ export const userLoginRequest = userData => async dispatch => {
   });
   try {
     const response = await axios.post(
-      "https://ah-backend-prime-staging.herokuapp.com/api/v1/users/login/",
+      API_BASE_URL + "/users/login/",
       userData
     );
 
@@ -28,7 +29,7 @@ export const userLoginRequest = userData => async dispatch => {
     dispatch(successLogin(response));
 
     toast.success(`Welcome ${response.data.user.username}. Login Successful`, {
-      position: toast.POSITION.TOP_RIGHT,
+      position: "top-right",
       autoClose: 2000,
       hideProgressBar: false
     });
@@ -40,7 +41,7 @@ export const userLoginRequest = userData => async dispatch => {
 
     errors.error.forEach(err => {
       toast.error(` ${err}`, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
         autoClose: false,
         hideProgressBar: false
       });

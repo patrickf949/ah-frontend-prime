@@ -1,5 +1,215 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`login modal fail tests should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`login modal fail tests should render without crashing 1`] = `
+<div
+  className="auth-page container-fluid px-3"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-lg-2 col-md-2"
+    />
+    <div
+      className="col-lg-8 col-md-8"
+    >
+      <section
+        className="Paper"
+      >
+        <h3>
+          Welcome back!
+        </h3>
+        <p>
+          SignIn to like, dislike, favorite and unfavorite various articles,
+          <br />
+          follow authors and comment on articles.
+        </p>
+        <div
+          className="row"
+        >
+          <div
+            className="col-lg-6 col-md-6"
+          >
+            <div
+              className="button-collective"
+            >
+              <withRouter(Connect(SocialAuthContainer)) />
+            </div>
+          </div>
+          <div
+            className="col-lg-6 col-md-6 grid-register"
+            id="login-form"
+          >
+            <form
+              method="post"
+            >
+              <ForwardRef(Grid)
+                spacing={2.25}
+              >
+                <ForwardRef(TextField)
+                  id="email"
+                  label="Email"
+                  name="email"
+                  required={true}
+                  type="email"
+                />
+                <ForwardRef(TextField)
+                  id="password"
+                  label="Password"
+                  maxLength={16}
+                  minLength={6}
+                  name="password"
+                  required={true}
+                  type="password"
+                />
+                <lt
+                  ariaLabel="login-loading"
+                  color="#003153"
+                  height="24"
+                  width="48"
+                />
+                <ForwardRef(Button)
+                  className="button-success"
+                  type="submit"
+                >
+                  Login
+                </ForwardRef(Button)>
+              </ForwardRef(Grid)>
+            </form>
+          </div>
+        </div>
+        <p>
+          Don't have an account yet?
+           
+          <Link
+            id="link"
+            to="/register"
+          >
+            create one now
+          </Link>
+        </p>
+        <p>
+          Forgot your password?
+           
+          <Link
+            id="link"
+            to="/passwordresetemail"
+          >
+            reset now
+          </Link>
+        </p>
+      </section>
+    </div>
+    <div
+      className="col-lg-2 col-md-2"
+    />
+  </div>
+</div>
+`;
 
-exports[`login modal success tests should render without crashing 1`] = `ShallowWrapper {}`;
+exports[`login modal success tests should render without crashing 1`] = `
+<div
+  className="auth-page container-fluid px-3"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-lg-2 col-md-2"
+    />
+    <div
+      className="col-lg-8 col-md-8"
+    >
+      <section
+        className="Paper"
+      >
+        <h3>
+          Welcome back!
+        </h3>
+        <p>
+          SignIn to like, dislike, favorite and unfavorite various articles,
+          <br />
+          follow authors and comment on articles.
+        </p>
+        <div
+          className="row"
+        >
+          <div
+            className="col-lg-6 col-md-6"
+          >
+            <div
+              className="button-collective"
+            >
+              <withRouter(Connect(SocialAuthContainer)) />
+            </div>
+          </div>
+          <div
+            className="col-lg-6 col-md-6 grid-register"
+            id="login-form"
+          >
+            <form
+              method="post"
+            >
+              <ForwardRef(Grid)
+                spacing={2.25}
+              >
+                <ForwardRef(TextField)
+                  id="email"
+                  label="Email"
+                  name="email"
+                  required={true}
+                  type="email"
+                />
+                <ForwardRef(TextField)
+                  id="password"
+                  label="Password"
+                  maxLength={16}
+                  minLength={6}
+                  name="password"
+                  required={true}
+                  type="password"
+                />
+                <lt
+                  ariaLabel="login-loading"
+                  color="#003153"
+                  height="24"
+                  width="48"
+                />
+                <ForwardRef(Button)
+                  className="button-success"
+                  type="submit"
+                >
+                  Login
+                </ForwardRef(Button)>
+              </ForwardRef(Grid)>
+            </form>
+          </div>
+        </div>
+        <p>
+          Don't have an account yet?
+           
+          <Link
+            id="link"
+            to="/register"
+          >
+            create one now
+          </Link>
+        </p>
+        <p>
+          Forgot your password?
+           
+          <Link
+            id="link"
+            to="/passwordresetemail"
+          >
+            reset now
+          </Link>
+        </p>
+      </section>
+    </div>
+    <div
+      className="col-lg-2 col-md-2"
+    />
+  </div>
+</div>
+`;

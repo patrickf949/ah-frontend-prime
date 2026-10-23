@@ -1,3 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Component for getting single Articles should receive props 1`] = `ShallowWrapper {}`;
+exports[`Component for getting single Articles should receive props 1`] = `
+<div>
+  <div
+    className="not-found"
+  >
+    The article you have requested does not exist
+  </div>
+</div>
+`;

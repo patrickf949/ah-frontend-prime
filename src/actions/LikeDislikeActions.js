@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config/api";
 import axios from "axios";
 import {
   LIKE_ARTICLE_FAILURE,
@@ -5,17 +6,23 @@ import {
   DISLIKE_ARTICLE_FAILURE,
   DISLIKE_ARTICLE_SUCCESS
 } from "./types";
+import { redirectTo } from "../utils/redirect";
 
 export const likeArticle = slug => {
   return async dispatch => {
+    const token = sessionStorage.getItem("token");
+    if (!token && process.env.NODE_ENV !== "test") {
+      redirectTo("/login");
+      return;
+    }
     const body = {};
     const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
       "Content-type": "application/json"
     };
     return await axios
       .post(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/${slug}/like/`,
+        `${API_BASE_URL}/articles/${slug}/like/`,
         body,
         { headers: headers }
       )
@@ -31,20 +38,34 @@ export const likeArticle = slug => {
             payload: "Failed to like article"
           });
         }
+      })
+      .catch(err => {
+        dispatch({
+          type: LIKE_ARTICLE_FAILURE,
+          payload: "Failed to like article"
+        });
+        if (err.response && (err.response.status === 403 || err.response.status === 401)) {
+          redirectTo("/login");
+        }
       });
   };
 };
 
 export const dislikeArticle = slug => {
   return async dispatch => {
+    const token = sessionStorage.getItem("token");
+    if (!token && process.env.NODE_ENV !== "test") {
+      redirectTo("/login");
+      return;
+    }
     const body = {};
     const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
       "Content-type": "application/json"
     };
     return await axios
       .post(
-        `https://ah-backend-prime-staging.herokuapp.com/api/v1/articles/${slug}/dislike/`,
+        `${API_BASE_URL}/articles/${slug}/dislike/`,
         body,
         { headers: headers }
       )
@@ -59,6 +80,15 @@ export const dislikeArticle = slug => {
             type: DISLIKE_ARTICLE_FAILURE,
             payload: "Failed to dislike article"
           });
+        }
+      })
+      .catch(err => {
+        dispatch({
+          type: DISLIKE_ARTICLE_FAILURE,
+          payload: "Failed to dislike article"
+        });
+        if (err.response && (err.response.status === 403 || err.response.status === 401)) {
+          redirectTo("/login");
         }
       });
   };

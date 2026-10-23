@@ -9,6 +9,11 @@ import {
   LIKE_ARTICLE_FAILURE,
   DISLIKE_ARTICLE_FAILURE
 } from "../../actions/types";
+import { redirectTo } from "../../utils/redirect";
+
+jest.mock("../../utils/redirect", () => ({
+  redirectTo: jest.fn()
+}));
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -151,6 +156,121 @@ describe("LikeDislike action", () => {
     const slug = "kuhcf-0x3f";
     return store.dispatch(likeArticle(slug)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it("should redirect to login when token is absent for likeArticle", () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "development";
+    sessionStorage.removeItem("token");
+    const store = mockStore({});
+    
+    store.dispatch(likeArticle("test-slug"));
+    expect(redirectTo).toHaveBeenCalledWith("/login");
+    process.env.NODE_ENV = originalEnv;
+  });
+
+  it("should redirect to login when token is absent for dislikeArticle", () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "development";
+    sessionStorage.removeItem("token");
+    const store = mockStore({});
+    
+    store.dispatch(dislikeArticle("test-slug"));
+    expect(redirectTo).toHaveBeenCalledWith("/login");
+    process.env.NODE_ENV = originalEnv;
+  });
+
+  it("should redirect to login on 401 error in likeArticle", () => {
+    sessionStorage.setItem("token", "dummy");
+    const store = mockStore({});
+
+    moxios.wait(() => {
+      const requestM = moxios.requests.mostRecent();
+      requestM.respondWith({
+        status: 401,
+        response: { error: "Unauthorized" }
+      });
+    });
+
+    const slug = "test-slug";
+    return store.dispatch(likeArticle(slug)).then(() => {
+      expect(redirectTo).toHaveBeenCalledWith("/login");
+    });
+  });
+
+  it("should redirect to login on 403 error in dislikeArticle", () => {
+    sessionStorage.setItem("token", "dummy");
+    const store = mockStore({});
+
+    moxios.wait(() => {
+      const requestM = moxios.requests.mostRecent();
+      requestM.respondWith({
+        status: 403,
+        response: { error: "Forbidden" }
+      });
+    });
+
+    const slug = "test-slug";
+    return store.dispatch(dislikeArticle(slug)).then(() => {
+      expect(redirectTo).toHaveBeenCalledWith("/login");
+    });
+  });
+
+  it("should redirect to login on 401 error in dislikeArticle", () => {
+    sessionStorage.setItem("token", "dummy");
+    const store = mockStore({});
+
+    moxios.wait(() => {
+      const requestM = moxios.requests.mostRecent();
+      requestM.respondWith({
+        status: 401,
+        response: { error: "Unauthorized" }
+      });
+    });
+
+    const slug = "test-slug";
+    return store.dispatch(dislikeArticle(slug)).then(() => {
+      expect(redirectTo).toHaveBeenCalledWith("/login");
+    });
+  });
+
+  it("should redirect to login on 403 error in likeArticle", () => {
+    sessionStorage.setItem("token", "dummy");
+    const store = mockStore({});
+
+    moxios.wait(() => {
+      const requestM = moxios.requests.mostRecent();
+      requestM.respondWith({
+        status: 403,
+        response: { error: "Forbidden" }
+      });
+    });
+
+    const slug = "test-slug";
+    return store.dispatch(likeArticle(slug)).then(() => {
+      expect(redirectTo).toHaveBeenCalledWith("/login");
+    });
+  });
+
+
+  it("should handle network error without response in likeArticle", () => {
+    const store = mockStore({});
+    moxios.wait(() => {
+      moxios.requests.mostRecent().reject(new Error("Network Error"));
+    });
+    return store.dispatch(likeArticle("test-slug")).then(() => {
+      expect(store.getActions()).toEqual([{ type: LIKE_ARTICLE_FAILURE, payload: "Failed to like article" }]);
+    });
+  });
+
+  it("should handle network error without response in dislikeArticle", () => {
+    const store = mockStore({});
+    moxios.wait(() => {
+      moxios.requests.mostRecent().reject(new Error("Network Error"));
+    });
+    return store.dispatch(dislikeArticle("test-slug")).then(() => {
+      expect(store.getActions()).toEqual([{ type: DISLIKE_ARTICLE_FAILURE, payload: "Failed to dislike article" }]);
     });
   });
 });
