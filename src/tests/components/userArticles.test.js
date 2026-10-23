@@ -46,7 +46,8 @@ describe("user article tests", () => {
   it("should map state to props", () => {
     const appState = {
       getArticlesReducer: {
-        articles: data.articles
+        articles: data.articles,
+        loading: false
       },
       auth: {
         isAutheticated: true,
@@ -57,9 +58,15 @@ describe("user article tests", () => {
     };
 
     const componentState = {
-      articles: data.articles
+      articles: data.articles,
+      loading: false
     };
     expect(mapStateToProps(appState)).toEqual(componentState);
+  });
+
+  it("should render loader when loading and no articles yet", () => {
+    const loadingWrapper = shallow(<UserArticles {...props} articles={[]} loading={true} />);
+    expect(loadingWrapper.find(".user-articles-loader").length).toBe(1);
   });
   it("should fetch articles on mount", () => {
     sessionStorage.setItem("email", "test@test.com");
