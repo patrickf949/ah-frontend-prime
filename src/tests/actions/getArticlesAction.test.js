@@ -1,7 +1,7 @@
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import moxios from "moxios";
-import { FETCH_ARTICLES_SUCCESS } from "../../actions/types";
+import { FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_REQUEST } from "../../actions/types";
 import { getArticlesAction } from "../../actions/getArticles";
 import data from "../mock_data/moxios_mock";
 
@@ -34,6 +34,9 @@ describe("Action for getting Articles", () => {
       });
     });
     const expectedAction = [
+      {
+        type: FETCH_ARTICLES_REQUEST
+      },
       {
         type: FETCH_ARTICLES_SUCCESS,
         payload: {
