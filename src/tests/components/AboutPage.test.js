@@ -18,15 +18,14 @@ describe("AboutPage component", () => {
     expect(wrapper.find("h2").at(0).text()).toBe("Our Origin");
   });
 
-  it("lists all contributors with PATRICK FITZ as lead", () => {
+  it("lists all contributors with PATRICK FITZ first as Software Engineer", () => {
     const wrapper = shallow(<AboutPage />);
     expect(contributors.length).toBeGreaterThanOrEqual(8);
     expect(contributors[0].name).toBe("PATRICK FITZ");
-    expect(contributors[0].isLead).toBe(true);
+    expect(contributors[0].role).toBe("Software Engineer");
 
     const cards = wrapper.find(".contributor-card");
     expect(cards.length).toBe(contributors.length);
-    expect(wrapper.find(".lead-tag").length).toBe(1);
   });
 
   it("handles image onerror fallback", () => {
