@@ -9,12 +9,13 @@ describe("AboutPage component", () => {
     expect(wrapper.find("h1").text()).toBe("A Social Haven for the Creative at Heart");
   });
 
-  it("mentions Andela with correct link", () => {
+  it("mentions Andela with correct link under contributors and dev team", () => {
     const wrapper = shallow(<AboutPage />);
     const link = wrapper.find(".andela-link");
     expect(link.length).toBe(1);
     expect(link.props().href).toBe("https://andela.com");
-    expect(wrapper.find(".about-story-card").text()).toContain("2019");
+    expect(wrapper.find(".team-heading").text()).toContain("2019");
+    expect(wrapper.find("h2").at(0).text()).toBe("Our Origin");
   });
 
   it("lists all contributors with PATRICK FITZ as lead", () => {
