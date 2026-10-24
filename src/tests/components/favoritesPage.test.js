@@ -171,4 +171,27 @@ describe("FavoritesPage component", () => {
     wrapper.find("button").at(1).simulate("click");
     expect(wrapper.state().activeTab).toBe("clap");
   });
+
+  it("renders card with custom image, long title, long description, and without breakdown", () => {
+    sessionStorage.setItem("token", "mock-token");
+    const longArticle = {
+      id: 99,
+      reaction: "love",
+      emoji: "❤️",
+      article: {
+        slug: "long-slug",
+        title: "This is a very long title that definitely exceeds fifty-five characters in length easily",
+        description: "This is a very long description that definitely exceeds ninety characters in length easily and continues for quite some more words to trigger ellipsis truncation properly.",
+        image: "https://example.com/cover.jpg",
+        reading_time: "5 min",
+        author: { username: "charlie" },
+        reactions: null
+      }
+    };
+    wrapper = shallow(<FavoritesPage {...props} />);
+    wrapper.setState({ loading: false, reactions: [longArticle], activeTab: "love" });
+    const img = wrapper.find(".img-tile");
+    expect(img.props().src).toBe("https://example.com/cover.jpg");
+    expect(wrapper.find(".article-card-info").text()).toContain("...");
+  });
 });
