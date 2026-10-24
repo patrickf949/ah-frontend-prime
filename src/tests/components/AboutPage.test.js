@@ -29,6 +29,23 @@ describe("AboutPage component", () => {
     expect(cards.length).toBe(contributors.length);
   });
 
+  it("applies SEO metadata on mount including Patrick Fitz and Andela", () => {
+    shallow(<AboutPage />);
+    expect(document.title).toContain("Patrick Fitz");
+    expect(document.title).toContain("Andela");
+
+    const description = document.head.querySelector('meta[name="description"]')?.getAttribute("content");
+    expect(description).toContain("Patrick Fitz");
+    expect(description).toContain("Andela");
+
+    const keywords = document.head.querySelector('meta[name="keywords"]')?.getAttribute("content");
+    expect(keywords).toContain("Patrick Fitz");
+    expect(keywords).toContain("Andela");
+
+    const author = document.head.querySelector('meta[name="author"]')?.getAttribute("content");
+    expect(author).toBe("Patrick Fitz");
+  });
+
   it("handles image onerror fallback", () => {
     const wrapper = shallow(<AboutPage />);
     const avatar = wrapper.find(".avatar").at(0);
