@@ -16,6 +16,7 @@ describe("AboutPage component", () => {
     expect(link.props().href).toBe("https://andela.com");
     expect(wrapper.find(".team-heading").text()).toContain("2019");
     expect(wrapper.find("h2").at(0).text()).toBe("Our Origin");
+    expect(wrapper.find(".andela-highlight").text()).toBe("Andela");
   });
 
   it("lists all contributors with PATRICK FITZ first as Software Engineer", () => {
