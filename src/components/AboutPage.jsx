@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import { applyPageSeo } from "../utils/seo";
 import "../styles/about.scss";
 
 export const contributors = [
@@ -68,85 +69,110 @@ export const contributors = [
   }
 ];
 
-export const AboutPage = () => {
-  return (
-    <div className="about-page">
-      <div className="about-hero">
-        <span className="about-badge">About Authors Haven</span>
-        <h1>A Social Haven for the Creative at Heart</h1>
-        <p className="about-lead">
-          Authors Haven is a modern publishing platform where writers, thinkers, and
-          creatives come together to share stories, exchange feedback, and cultivate
-          meaningful conversations.
-        </p>
-      </div>
+export class AboutPage extends Component {
+  componentWillMount() {
+    applyPageSeo({
+      title: "About Us & Engineering Team — Patrick Fitz | Andela",
+      description:
+        "Learn about Authors Haven, its 2019 Andela simulation project origins, and the software engineering team including Patrick Fitz. A social platform for writers to publish, share, and connect.",
+      author: "Patrick Fitz",
+      keywords: [
+        "Patrick Fitz",
+        "Andela",
+        "Authors Haven",
+        "Andela 2019",
+        "Authors Haven Team",
+        "Software Engineering",
+        "Publishing Platform",
+        "React",
+        "Django",
+        "Open Source Blog"
+      ],
+      canonicalUrl: (typeof window !== "undefined" && window.location ? window.location.origin : "") + "/about",
+      image: "https://avatars.githubusercontent.com/u/43245704?v=4"
+    });
+  }
 
-      <div className="about-story-card">
-        <h2>Our Origin</h2>
-        <p>
-          Authors Haven was originally conceived and built in <strong>2019</strong> as
-          part of a collaborative simulation project while at{" "}
-          <span className="andela-highlight">Andela</span>. The goal was to build a
-          production-grade, full-stack publishing ecosystem from scratch with high
-          test coverage, modern architecture, and an intuitive reading and writing
-          experience.
-        </p>
-        <p>
-          Today, the project has been updated and modernized with contemporary web standards,
-          serverless deployments, responsive design, and robust security.
-        </p>
-      </div>
-
-      <div className="about-team-section">
-        <div className="team-heading">
-          <h2>Contributors & Dev Team</h2>
-          <p>
-            The developers who contributed to bringing Authors Haven to life as part of a
-            collaborative simulation project while at{" "}
-            <a
-              href="https://andela.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="andela-link"
-            >
-              Andela
-            </a>{" "}
-            in 2019.
+  render() {
+    return (
+      <div className="about-page">
+        <div className="about-hero">
+          <span className="about-badge">About Authors Haven</span>
+          <h1>A Social Haven for the Creative at Heart</h1>
+          <p className="about-lead">
+            Authors Haven is a modern publishing platform where writers, thinkers, and
+            creatives come together to share stories, exchange feedback, and cultivate
+            meaningful conversations.
           </p>
         </div>
 
-        <div className="team-grid">
-          {contributors.map(member => (
-            <div
-              key={member.handle}
-              className="contributor-card"
-            >
-              <img
-                src={member.avatar}
-                alt={member.name}
-                className="avatar"
-                onError={e => {
-                  e.target.src = "https://img.icons8.com/color/96/000000/user.png";
-                }}
-              />
-              <h3>{member.name}</h3>
-              <span className="handle">@{member.handle}</span>
-              <span className="role">{member.role}</span>
-              <p className="bio">{member.bio}</p>
+        <div className="about-story-card">
+          <h2>Our Origin</h2>
+          <p>
+            Authors Haven was originally conceived and built in <strong>2019</strong> as
+            part of a collaborative simulation project while at{" "}
+            <span className="andela-highlight">Andela</span>. The goal was to build a
+            production-grade, full-stack publishing ecosystem from scratch with high
+            test coverage, modern architecture, and an intuitive reading and writing
+            experience.
+          </p>
+          <p>
+            Today, the project has been updated and modernized with contemporary web standards,
+            serverless deployments, responsive design, and robust security.
+          </p>
+        </div>
+
+        <div className="about-team-section">
+          <div className="team-heading">
+            <h2>Contributors & Dev Team</h2>
+            <p>
+              The developers who contributed to bringing Authors Haven to life as part of a
+              collaborative simulation project while at{" "}
               <a
-                href={member.github}
+                href="https://andela.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="github-link"
+                className="andela-link"
               >
-                GitHub Profile ↗
-              </a>
-            </div>
-          ))}
+                Andela
+              </a>{" "}
+              in 2019.
+            </p>
+          </div>
+
+          <div className="team-grid">
+            {contributors.map(member => (
+              <div
+                key={member.handle}
+                className="contributor-card"
+              >
+                <img
+                  src={member.avatar}
+                  alt={member.name}
+                  className="avatar"
+                  onError={e => {
+                    e.target.src = "https://img.icons8.com/color/96/000000/user.png";
+                  }}
+                />
+                <h3>{member.name}</h3>
+                <span className="handle">@{member.handle}</span>
+                <span className="role">{member.role}</span>
+                <p className="bio">{member.bio}</p>
+                <a
+                  href={member.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="github-link"
+                >
+                  GitHub Profile ↗
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default AboutPage;
