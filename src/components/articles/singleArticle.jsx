@@ -21,6 +21,10 @@ export class SingleArticleComponent extends Component {
   state = {};
   componentDidMount() {
     this.props.getArticleAction(this.props.match.params.slug);
+    const currentArticle = this.props.article?.article;
+    if (currentArticle?.seo) {
+      applyArticleSeo(currentArticle.seo);
+    }
   }
   componentDidUpdate(prevProps) {
     if (this.props.match.params.slug !== prevProps.match.params.slug) {
