@@ -90,32 +90,36 @@ export const AboutPage = () => {
       </div>
 
       <div className="about-story-card">
-        <h2>Our Origin & Andela Roots</h2>
+        <h2>Our Origin</h2>
         <p>
-          Authors Haven was originally conceived and built in <strong>2019</strong> as
-          part of a collaborative simulation project by a dedicated engineering team at{" "}
-          <a
-            href="https://andela.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="andela-link"
-          >
-            Andela
-          </a>
-          . The goal was to build a production-grade, full-stack Medium-like publishing
-          ecosystem from scratch with high test coverage, modern web architecture, and
-          an intuitive reading and writing experience.
+          Authors Haven was built to provide a vibrant, modern space where writers
+          can express themselves without friction. The platform brings together
+          long-form storytelling, reader reactions, bookmarks, and community engagement
+          within an elegant and fast reader experience.
         </p>
         <p>
-          Today, the project has been updated and modernized with contemporary web standards,
-          serverless deployments, responsive design, and robust security.
+          Designed from the ground up with high code quality, automated test coverage,
+          and robust architecture, Authors Haven has grown into a resilient publishing
+          hub for creators everywhere.
         </p>
       </div>
 
       <div className="about-team-section">
         <div className="team-heading">
           <h2>Contributors & Dev Team</h2>
-          <p>The developers who contributed to bringing Authors Haven to life.</p>
+          <p>
+            The developers who contributed to bringing Authors Haven to life as part of a
+            collaborative simulation project while at{" "}
+            <a
+              href="https://andela.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="andela-link"
+            >
+              Andela
+            </a>{" "}
+            in 2019.
+          </p>
         </div>
 
         <div className="team-grid">
