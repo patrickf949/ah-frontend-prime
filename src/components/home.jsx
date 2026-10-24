@@ -190,7 +190,26 @@ export class Home extends Component {
     const searchParams = new URLSearchParams(this.props.location?.search || "");
     const searchQuery = searchParams.get("search");
 
-    const articleList = articles.length ? (
+    const articleList = loading ? (
+      <div
+        className="articles-loader"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "260px",
+          gridColumn: "1/-1",
+          gap: "12px",
+          padding: "40px"
+        }}
+      >
+        <ThreeDots color="#03a9f4" height={60} width={60} />
+        <p style={{ color: "#64748b", fontSize: "15px", margin: 0 }}>
+          Loading stories, please wait...
+        </p>
+      </div>
+    ) : articles.length ? (
       articles.map(article => this.renderArticleCard(article))
     ) : (
       <div style={{ textAlign: "center", color: "#64748b", gridColumn: "1/-1", padding: "40px" }}>
@@ -276,7 +295,7 @@ export class Home extends Component {
             <button
               type="button"
               className="pagination-button eian"
-              disabled={!hasPrevious}
+              disabled={!hasPrevious || loading}
               onClick={() => this.fetchPrevious()}
             >
               Previous
@@ -284,7 +303,7 @@ export class Home extends Component {
             <button
               type="button"
               className="pagination-button aken"
-              disabled={!hasNext}
+              disabled={!hasNext || loading}
               onClick={() => this.fetchNext()}
             >
               Next
