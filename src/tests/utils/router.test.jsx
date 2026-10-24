@@ -72,6 +72,45 @@ describe("router utils", () => {
       expect(document.title).toBe("Login | Authors Haven");
       expect(r4.getByTestId("path").textContent).toBe("/login");
       r4.unmount();
+
+      const paths = [
+        ["/home", "Authors Haven"],
+        ["/register", "Register | Authors Haven"],
+        ["/create-article", "New Story | Authors Haven"],
+        ["/edit-article/sample", "Edit Story | Authors Haven"],
+        ["/user-articles", "My Stories | Authors Haven"],
+        ["/favorites", "Favorites | Authors Haven"],
+        ["/editprofile", "Edit Profile | Authors Haven"],
+        ["/profile/testuser", "Profile | Authors Haven"],
+        ["/passwordresetemail", "Reset Password | Authors Haven"],
+        ["/passwordreset/token123", "Reset Password | Authors Haven"],
+        ["/other-random-path", "Authors Haven"],
+        ["", "Authors Haven"]
+      ];
+
+      paths.forEach(([path, expectedTitle]) => {
+        const res = render(
+          <MemoryRouter initialEntries={[path]}>
+            <RouteElement component={TestComponent} />
+          </MemoryRouter>
+        );
+        expect(document.title).toBe(expectedTitle);
+        res.unmount();
+      });
+    });
+
+    it("handles components with custom displayName or fallback name", () => {
+      const CustomNamed = () => <div data-testid="custom">Named</div>;
+      CustomNamed.displayName = "SpecialComponent";
+      const WrappedCustom = withRouter(CustomNamed);
+      expect(WrappedCustom.displayName).toBe("withRouter(SpecialComponent)");
+
+      const Anonymous = function() {
+        return <div data-testid="anon">Anon</div>;
+      };
+      Object.defineProperty(Anonymous, "name", { value: "" });
+      const WrappedAnon = withRouter(Anonymous);
+      expect(WrappedAnon.displayName).toBe("withRouter(Component)");
     });
   });
 });
