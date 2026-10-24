@@ -84,15 +84,16 @@ export const AboutPage = () => {
       <div className="about-story-card">
         <h2>Our Origin</h2>
         <p>
-          Authors Haven was built to provide a vibrant, modern space where writers
-          can express themselves without friction. The platform brings together
-          long-form storytelling, reader reactions, bookmarks, and community engagement
-          within an elegant and fast reader experience.
+          Authors Haven was originally conceived and built in <strong>2019</strong> as
+          part of a collaborative simulation project while at{" "}
+          <span className="andela-highlight">Andela</span>. The goal was to build a
+          production-grade, full-stack publishing ecosystem from scratch with high
+          test coverage, modern architecture, and an intuitive reading and writing
+          experience.
         </p>
         <p>
-          Designed from the ground up with high code quality, automated test coverage,
-          and robust architecture, Authors Haven has grown into a resilient publishing
-          hub for creators everywhere.
+          Today, the project has been updated and modernized with contemporary web standards,
+          serverless deployments, responsive design, and robust security.
         </p>
       </div>
 
