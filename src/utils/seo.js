@@ -29,6 +29,7 @@ const setCanonical = url => {
  */
 export const applyPageSeo = ({
   title,
+  rawTitle,
   description,
   keywords = [],
   canonicalUrl,
@@ -36,7 +37,11 @@ export const applyPageSeo = ({
   ogType = "website",
   image
 }) => {
-  if (title) {
+  if (rawTitle) {
+    document.title = rawTitle;
+    setMetaTag("property", "og:title", rawTitle);
+    setMetaTag("name", "twitter:title", rawTitle);
+  } else if (title) {
     document.title = `${title} — Authors' Haven`;
     setMetaTag("property", "og:title", title);
     setMetaTag("name", "twitter:title", title);
