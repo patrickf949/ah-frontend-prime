@@ -17,14 +17,6 @@ export const Footer = () => {
         <div className="footer-links">
           <Link to="/" className="footer-link">Home</Link>
           <Link to="/about" className="footer-link">About</Link>
-          <a
-            href="https://andela.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-link"
-          >
-            Andela
-          </a>
         </div>
       </div>
       <div className="footer-bottom">
