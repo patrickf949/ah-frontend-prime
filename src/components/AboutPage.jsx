@@ -5,11 +5,10 @@ export const contributors = [
   {
     name: "PATRICK FITZ",
     handle: "patrickf949",
-    role: "Developer / Project Lead",
+    role: "Software Engineer",
     bio: "Software developer passionate about scalable web platforms and AI-driven systems.",
     avatar: "https://avatars.githubusercontent.com/u/43245704?v=4",
-    github: "https://github.com/patrickf949",
-    isLead: true
+    github: "https://github.com/patrickf949"
   },
   {
     name: "David Muhanguzi",
@@ -17,8 +16,7 @@ export const contributors = [
     role: "Full-Stack Software Engineer",
     bio: "Full-stack software engineer crafting robust user-facing applications.",
     avatar: "https://avatars.githubusercontent.com/u/38077368?v=4",
-    github: "https://github.com/MuhanguziDavid",
-    isLead: false
+    github: "https://github.com/MuhanguziDavid"
   },
   {
     name: "Kisekka David",
@@ -26,8 +24,7 @@ export const contributors = [
     role: "Software Engineer",
     bio: "Software Engineer | Pythonista | Django enthusiast.",
     avatar: "https://avatars.githubusercontent.com/u/26630001?v=4",
-    github: "https://github.com/Genza999",
-    isLead: false
+    github: "https://github.com/Genza999"
   },
   {
     name: "Brian Anyati",
@@ -35,8 +32,7 @@ export const contributors = [
     role: "Software Developer",
     bio: "Software developer from Uganda, thinking in cognito.",
     avatar: "https://avatars.githubusercontent.com/u/18057325?v=4",
-    github: "https://github.com/anyatibrian",
-    isLead: false
+    github: "https://github.com/anyatibrian"
   },
   {
     name: "Emmanuel Ian",
@@ -44,8 +40,7 @@ export const contributors = [
     role: "Software Engineer",
     bio: "Luck is a function of intent! Building impactful technology.",
     avatar: "https://avatars.githubusercontent.com/u/36891299?v=4",
-    github: "https://github.com/e-ian",
-    isLead: false
+    github: "https://github.com/e-ian"
   },
   {
     name: "Elton Maiyo",
@@ -53,8 +48,7 @@ export const contributors = [
     role: "Software Engineer",
     bio: "Passionate software engineer building resilient web and cloud backends.",
     avatar: "https://avatars.githubusercontent.com/u/4558078?v=4",
-    github: "https://github.com/eltronix",
-    isLead: false
+    github: "https://github.com/eltronix"
   },
   {
     name: "Ephraim Malinga",
@@ -62,8 +56,7 @@ export const contributors = [
     role: "Software Developer",
     bio: "Software developer passionate about solving problems with technology.",
     avatar: "https://avatars.githubusercontent.com/u/17592399?v=4",
-    github: "https://github.com/malep2007",
-    isLead: false
+    github: "https://github.com/malep2007"
   },
   {
     name: "Ogilo",
@@ -71,8 +64,7 @@ export const contributors = [
     role: "Software Engineer",
     bio: "Engineer contributing to authentication and system architecture.",
     avatar: "https://avatars.githubusercontent.com/u/80688520?v=4",
-    github: "https://github.com/Ogilo",
-    isLead: false
+    github: "https://github.com/Ogilo"
   }
 ];
 
@@ -126,9 +118,8 @@ export const AboutPage = () => {
           {contributors.map(member => (
             <div
               key={member.handle}
-              className={`contributor-card ${member.isLead ? "lead-card" : ""}`}
+              className="contributor-card"
             >
-              {member.isLead && <span className="lead-tag">Lead</span>}
               <img
                 src={member.avatar}
                 alt={member.name}
