@@ -25,6 +25,48 @@ const setCanonical = url => {
 };
 
 /**
+ * Apply general page SEO metadata to document head.
+ */
+export const applyPageSeo = ({
+  title,
+  description,
+  keywords = [],
+  canonicalUrl,
+  author,
+  ogType = "website",
+  image
+}) => {
+  if (title) {
+    document.title = `${title} — Authors' Haven`;
+    setMetaTag("property", "og:title", title);
+    setMetaTag("name", "twitter:title", title);
+  }
+  if (description) {
+    setMetaTag("name", "description", description);
+    setMetaTag("property", "og:description", description);
+    setMetaTag("name", "twitter:description", description);
+  }
+  if (author) {
+    setMetaTag("name", "author", author);
+  }
+  if (keywords && keywords.length) {
+    setMetaTag("name", "keywords", keywords.join(", "));
+  }
+  if (canonicalUrl) {
+    setCanonical(canonicalUrl);
+    setMetaTag("property", "og:url", canonicalUrl);
+  }
+  if (ogType) {
+    setMetaTag("property", "og:type", ogType);
+  }
+  if (image) {
+    setMetaTag("property", "og:image", image);
+    setMetaTag("name", "twitter:image", image);
+  }
+  setMetaTag("name", "twitter:card", image ? "summary_large_image" : "summary");
+};
+
+/**
  * Apply an article's SEO payload (from the API `seo` field) to the
  * document head: title, description, keywords, canonical URL and
  * Open Graph / Twitter card tags.
