@@ -38,14 +38,40 @@ describe("router utils", () => {
   });
 
   describe("RouteElement", () => {
-    it("renders component with legacy router props", () => {
-      const { getByTestId } = render(
-        <MemoryRouter initialEntries={["/route"]}>
+    it("renders component with legacy router props and updates document title", () => {
+      const { unmount } = render(
+        <MemoryRouter initialEntries={["/"]}>
           <RouteElement component={TestComponent} />
         </MemoryRouter>
       );
+      expect(document.title).toBe("Authors Haven");
+      unmount();
 
-      expect(getByTestId("path").textContent).toBe("/route");
+      const r2 = render(
+        <MemoryRouter initialEntries={["/about"]}>
+          <RouteElement component={TestComponent} />
+        </MemoryRouter>
+      );
+      expect(document.title).toBe("About | Authors Haven");
+      r2.unmount();
+
+      const r3 = render(
+        <MemoryRouter initialEntries={["/article/sample-slug"]}>
+          <RouteElement component={TestComponent} />
+        </MemoryRouter>
+      );
+      // Article routes do not overwrite dynamic article SEO titles
+      expect(document.title).toBe("About | Authors Haven");
+      r3.unmount();
+
+      const r4 = render(
+        <MemoryRouter initialEntries={["/login"]}>
+          <RouteElement component={TestComponent} />
+        </MemoryRouter>
+      );
+      expect(document.title).toBe("Login | Authors Haven");
+      expect(r4.getByTestId("path").textContent).toBe("/login");
+      r4.unmount();
     });
   });
 });
