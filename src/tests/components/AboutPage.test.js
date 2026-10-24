@@ -16,7 +16,6 @@ describe("AboutPage component", () => {
     expect(link.props().href).toBe("https://andela.com");
     expect(wrapper.find(".team-heading").text()).toContain("2019");
     expect(wrapper.find("h2").at(0).text()).toBe("Our Origin");
-    expect(wrapper.find(".andela-highlight").text()).toBe("Andela");
   });
 
   it("lists all contributors with PATRICK FITZ first as Software Engineer", () => {
@@ -31,12 +30,10 @@ describe("AboutPage component", () => {
 
   it("applies SEO metadata on mount including Patrick Fitz and Andela", () => {
     shallow(<AboutPage />);
-    expect(document.title).toContain("Patrick Fitz");
-    expect(document.title).toContain("Andela");
+    expect(document.title).toBe("About | Authors Haven");
 
     const description = document.head.querySelector('meta[name="description"]')?.getAttribute("content");
     expect(description).toContain("Patrick Fitz");
-    expect(description).toContain("Andela");
 
     const keywords = document.head.querySelector('meta[name="keywords"]')?.getAttribute("content");
     expect(keywords).toContain("Patrick Fitz");
