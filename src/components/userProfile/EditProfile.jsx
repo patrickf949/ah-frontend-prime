@@ -111,14 +111,14 @@ export class EditProfile extends Component {
                       id="full_name"
                       type="text"
                       label="Full name"
-                      defaultValue={this.state.full_name}
+                      value={this.state.full_name}
                       onChange={this.handleNameChange}
                     />
                     <TextField
                       id="bio"
                       type="text"
                       label="Short bio"
-                      defaultValue={this.state.bio}
+                      value={this.state.bio}
                       onChange={this.handleBioChange}
                       multiline
                       minRows={3}
@@ -147,7 +147,9 @@ export class EditProfile extends Component {
                     />
                   </div>
                 </div>
-                <progress value={this.state.progress} max="100" />
+                {this.state.isProcessing && (
+                  <progress value={this.state.progress} max="100" />
+                )}
               </div>
             </div>
           </div>
