@@ -485,6 +485,10 @@ describe("Article Components", () => {
     const loadingWrapper = shallow(<Home {...props} articles={[]} loading={true} />);
     expect(loadingWrapper.find(".articles-loader").length).toBe(1);
 
+    const paginationLoadingWrapper = shallow(<Home {...props} articles={data.articles} loading={true} />);
+    expect(paginationLoadingWrapper.find(".articles-loader").length).toBe(1);
+    expect(paginationLoadingWrapper.find(".aken").props().disabled).toBe(true);
+
     const state = {
       getArticlesReducer: { articles: [], loading: true, next: "", previous: "" },
       homeArticlesReducer: { latest: [], trending: [], popular: [] }
