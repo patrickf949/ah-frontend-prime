@@ -28,20 +28,20 @@ exports[`editprofile component success tests should render without crushing 1`] 
               }
             >
               <ForwardRef(TextField)
-                defaultValue=""
                 id="full_name"
                 label="Full name"
                 onChange={[Function]}
                 type="text"
+                value=""
               />
               <ForwardRef(TextField)
-                defaultValue=""
                 id="bio"
                 label="Short bio"
                 minRows={3}
                 multiline={true}
                 onChange={[Function]}
                 type="text"
+                value=""
               />
               <ForwardRef(Button)
                 disabled={false}
@@ -75,10 +75,6 @@ exports[`editprofile component success tests should render without crushing 1`] 
               />
             </div>
           </div>
-          <progress
-            max="100"
-            value={0}
-          />
         </div>
       </div>
     </div>
