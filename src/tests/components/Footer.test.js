@@ -7,14 +7,13 @@ describe("Footer component", () => {
     const wrapper = shallow(<Footer />);
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find(".footer-logo").text()).toBe("Authors Haven");
-    expect(wrapper.find(".footer-link").length).toBe(3);
+    expect(wrapper.find(".footer-link").length).toBe(2);
   });
 
-  it("links to Andela website", () => {
+  it("links to home and about pages", () => {
     const wrapper = shallow(<Footer />);
-    const link = wrapper.find("a[href='https://andela.com']");
-    expect(link.length).toBe(1);
-    expect(link.props().href).toBe("https://andela.com");
-    expect(link.props().target).toBe("_blank");
+    const links = wrapper.find(".footer-link");
+    expect(links.at(0).props().to).toBe("/");
+    expect(links.at(1).props().to).toBe("/about");
   });
 });
