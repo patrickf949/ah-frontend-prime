@@ -1,4 +1,4 @@
-import { applyArticleSeo } from "../../utils/seo";
+import { applyArticleSeo, applyPageSeo } from "../../utils/seo";
 
 const seoPayload = {
   meta_title: "My Great Article",
@@ -89,5 +89,39 @@ describe("applyArticleSeo", () => {
     expect(document.head.querySelector('meta[name="description"]')).toBeNull();
     expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
     expect(document.head.querySelector('meta[property="og:title"]')).toBeNull();
+  });
+});
+
+describe("applyPageSeo", () => {
+  beforeEach(() => {
+    document.head.innerHTML = "";
+    document.title = "";
+  });
+
+  it("applies page-level meta, author, canonical and social cards", () => {
+    applyPageSeo({
+      title: "About Us",
+      description: "About the platform",
+      keywords: ["about", "authors"],
+      canonicalUrl: "http://localhost:3000/about",
+      author: "Patrick Fitz",
+      image: "http://localhost:3000/cover.jpg",
+      ogType: "profile"
+    });
+
+    expect(document.title).toBe("About Us — Authors' Haven");
+    expect(document.head.querySelector('meta[name="description"]').getAttribute("content")).toBe("About the platform");
+    expect(document.head.querySelector('meta[name="author"]').getAttribute("content")).toBe("Patrick Fitz");
+    expect(document.head.querySelector('meta[name="keywords"]').getAttribute("content")).toBe("about, authors");
+    expect(document.head.querySelector('link[rel="canonical"]').getAttribute("href")).toBe("http://localhost:3000/about");
+    expect(document.head.querySelector('meta[property="og:type"]').getAttribute("content")).toBe("profile");
+    expect(document.head.querySelector('meta[property="og:image"]').getAttribute("content")).toBe("http://localhost:3000/cover.jpg");
+    expect(document.head.querySelector('meta[name="twitter:card"]').getAttribute("content")).toBe("summary_large_image");
+  });
+
+  it("handles empty or partial options gracefully", () => {
+    applyPageSeo({});
+    expect(document.title).toBe("");
+    expect(document.head.querySelector('meta[name="twitter:card"]').getAttribute("content")).toBe("summary");
   });
 });
