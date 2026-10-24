@@ -72,15 +72,15 @@ export const contributors = [
 export class AboutPage extends Component {
   componentWillMount() {
     applyPageSeo({
-      title: "About Us & Engineering Team — Patrick Fitz | Andela",
+      title: "About",
+      rawTitle: "About | Authors Haven",
       description:
-        "Learn about Authors Haven, its 2019 Andela simulation project origins, and the software engineering team including Patrick Fitz. A social platform for writers to publish, share, and connect.",
+        "Learn about Authors Haven, its origins, and the software engineering team including Patrick Fitz. A social platform for writers to publish, share, and connect.",
       author: "Patrick Fitz",
       keywords: [
         "Patrick Fitz",
         "Andela",
         "Authors Haven",
-        "Andela 2019",
         "Authors Haven Team",
         "Software Engineering",
         "Publishing Platform",
@@ -109,16 +109,15 @@ export class AboutPage extends Component {
         <div className="about-story-card">
           <h2>Our Origin</h2>
           <p>
-            Authors Haven was originally conceived and built in <strong>2019</strong> as
-            part of a collaborative simulation project while at{" "}
-            <span className="andela-highlight">Andela</span>. The goal was to build a
-            production-grade, full-stack publishing ecosystem from scratch with high
-            test coverage, modern architecture, and an intuitive reading and writing
-            experience.
+            Authors Haven was built to provide a vibrant, modern space where writers
+            can express themselves without friction. The platform brings together
+            long-form storytelling, reader reactions, bookmarks, and community engagement
+            within an elegant and fast reader experience.
           </p>
           <p>
-            Today, the project has been updated and modernized with contemporary web standards,
-            serverless deployments, responsive design, and robust security.
+            Designed from the ground up with high code quality, automated test coverage,
+            and robust architecture, Authors Haven has grown into a resilient publishing
+            hub for creators everywhere.
           </p>
         </div>
 
