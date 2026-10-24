@@ -140,6 +140,24 @@ describe("editprofile component success tests", () => {
     expect(instance.state.isProcessing).toBe(false);
     spyPost.mockRestore();
   });
+  it("should do nothing when file selection is cancelled or empty", () => {
+    wrapper.instance().handleImageUpload({ target: { files: [] } });
+  });
+  it("should submit without image file upload", async () => {
+    const instance = wrapper.instance();
+    instance.setState({ imageFile: null, bio: "new bio", full_name: "new name" });
+    await instance.handleSubmit({ preventDefault: jest.fn() });
+    expect(props.editProfileAction).toHaveBeenCalled();
+  });
+  it("should handle image upload error without response object", async () => {
+    const instance = wrapper.instance();
+    const axios = require("axios");
+    const spyPost = jest.spyOn(axios, "post").mockRejectedValueOnce(new Error("Network timeout"));
+    instance.setState({ imageFile: new File(["data"], "avatar.png", { type: "image/png" }) });
+    await instance.handleSubmit({ preventDefault: jest.fn() });
+    expect(instance.state.isProcessing).toBe(false);
+    spyPost.mockRestore();
+  });
   it("should map state to props", () => {
     const state = {
       profileReducer: {

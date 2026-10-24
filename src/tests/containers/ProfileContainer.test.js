@@ -74,6 +74,42 @@ describe("profile container", () => {
 
     wrapper.instance().componentWillReceiveProps(newProps);
     expect(wrapper).toMatchSnapshot();
+
+    wrapper.instance().componentWillReceiveProps({ profile: null });
+    wrapper.instance().componentWillReceiveProps({
+      profile: { username: "imatiti" },
+      isfollowing: "True"
+    });
+    expect(wrapper.instance().state.isfollowing).toBe(true);
+
+    wrapper.instance().componentWillReceiveProps({
+      profile: { username: "imatiti" },
+      isfollowing: "False"
+    });
+    expect(wrapper.instance().state.isfollowing).toBe(false);
+  });
+
+  it("should check isOwner", () => {
+    sessionStorage.setItem("username", "imatiti");
+    const props = {
+      match: { params: { username: "imatiti" } },
+      getUsersProfileAction: jest.fn(),
+      getUsersFollowers: jest.fn(),
+      getUsersFollowing: jest.fn()
+    };
+    const wrapper = shallow(<DumpProfileContainer {...props} />);
+    expect(wrapper.instance().isOwner()).toBe(true);
+
+    sessionStorage.setItem("username", "otheruser");
+    expect(wrapper.instance().isOwner()).toBe(false);
+  });
+
+  it("should have mapDispatchToProps actions", () => {
+    expect(mapDispatchToProps).toHaveProperty("getUsersProfileAction");
+    expect(mapDispatchToProps).toHaveProperty("followUser");
+    expect(mapDispatchToProps).toHaveProperty("unfollowUser");
+    expect(mapDispatchToProps).toHaveProperty("getUsersFollowers");
+    expect(mapDispatchToProps).toHaveProperty("getUsersFollowing");
   });
 
   it("should call followUser function", () => {

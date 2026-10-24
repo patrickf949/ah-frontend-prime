@@ -57,6 +57,19 @@ describe("profile Reducer Tests", () => {
     );
   });
 
+  it("should update loggedInProfile when fetched profile matches session username", () => {
+    sessionStorage.setItem("username", "currentuser");
+    const action = {
+      type: PROFILE_FETCHED,
+      payload: {
+        username: "currentuser",
+        following: false
+      }
+    };
+    const newState = profileReducer(initialState, action);
+    expect(newState.loggedInProfile).toEqual(action.payload);
+  });
+
   it("should fail to fetch a user profile", () => {
     const dispatchedAction = {
       type: PROFILE_FETCH_FAILED,
