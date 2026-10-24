@@ -36,7 +36,7 @@ export const applyPageSeo = ({
   author,
   ogType = "website",
   image
-}) => {
+} = {}) => {
   if (rawTitle) {
     document.title = rawTitle;
     setMetaTag("property", "og:title", rawTitle);

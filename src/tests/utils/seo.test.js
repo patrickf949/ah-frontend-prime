@@ -120,8 +120,11 @@ describe("applyPageSeo", () => {
   });
 
   it("handles empty or partial options gracefully", () => {
+    applyPageSeo();
     applyPageSeo({});
-    expect(document.title).toBe("");
-    expect(document.head.querySelector('meta[name="twitter:card"]').getAttribute("content")).toBe("summary");
+    applyPageSeo({ ogType: null });
+    applyPageSeo({ rawTitle: "Exact Raw Title" });
+    expect(document.title).toBe("Exact Raw Title");
+    expect(document.head.querySelector('meta[property="og:title"]').getAttribute("content")).toBe("Exact Raw Title");
   });
 });

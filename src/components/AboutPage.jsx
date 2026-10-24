@@ -88,7 +88,7 @@ export class AboutPage extends Component {
         "Django",
         "Open Source Blog"
       ],
-      canonicalUrl: (typeof window !== "undefined" && window.location ? window.location.origin : "") + "/about",
+      canonicalUrl: ((typeof window !== "undefined" && window.location?.origin) || "") + "/about",
       image: "https://avatars.githubusercontent.com/u/43245704?v=4"
     });
   }
