@@ -97,7 +97,7 @@ describe("follower click", () => {
   it("should click on a follower", () => {
     const onClickMock = jest.fn();
     const props = {
-      followers: [{ username: "david", full_name: "David" }],
+      followers: [{ username: "david", full_name: "David", image: "https://example.com/david.jpg" }],
       onClick: onClickMock
     };
     const wrapper = shallow(<FollowersList {...props} />);
@@ -120,7 +120,7 @@ describe("following click", () => {
   it("should click on a user  that is being followed", () => {
     const onClickMock = jest.fn();
     const props = {
-      following: [{ username: "david", full_name: "David" }],
+      following: [{ username: "david", full_name: "David", image: "https://example.com/david.jpg" }],
       onClick: onClickMock
     };
     const wrapper = shallow(<FollowingList {...props} />);

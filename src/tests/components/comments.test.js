@@ -211,4 +211,41 @@ describe("test for comments", () => {
     const hasLoader = wrapper.find("ThreeDots").length > 0 || wrapper.html ? wrapper.html().includes("comment-loading") : true;
     expect(hasLoader).toBe(true);
   });
+
+  it("does not add scroll listener on mount when not logged in", () => {
+    sessionStorage.removeItem("token");
+    const unauthWrapper = shallow(<Comments {...props} />);
+    unauthWrapper.instance().componentDidMount();
+  });
+
+  it("handles componentDidUpdate when slug unchanged or logged out", () => {
+    sessionStorage.removeItem("token");
+    instance.componentDidUpdate(props);
+
+    const newProps = { ...props, articleSlug: "another-slug" };
+    wrapper.setProps(newProps);
+    instance.componentDidUpdate(props);
+    expect(instance.state.visibleCount).toBe(5);
+  });
+
+  it("cancels reply when clicking reply button on active replying comment", () => {
+    sessionStorage.setItem("token", "dummy");
+    const newWrapper = shallow(<Comments {...props} commentsMessage={[
+      { id: 1, body: "Parent", author: { username: "user" }, parentId: 0 }
+    ]} />);
+    newWrapper.instance().setState({ replyingTo: 1 });
+    const replyButton = newWrapper.find(Button).at(1);
+    replyButton.props().onClick();
+    expect(newWrapper.state().replyingTo).toBeNull();
+  });
+
+  it("handleScroll does nothing when not near bottom", () => {
+    wrapper.setProps({ commentsMessage: Array(30).fill({ parentId: 0, author: { username: "test", image: "" } }) });
+    instance.setState({ visibleCount: 20 });
+    Object.defineProperty(document.documentElement, "scrollHeight", { value: 1000, configurable: true });
+    Object.defineProperty(window, "innerHeight", { value: 200, configurable: true });
+    Object.defineProperty(window, "scrollY", { value: 10, configurable: true });
+    instance.handleScroll();
+    expect(instance.state.visibleCount).toBe(20);
+  });
 });

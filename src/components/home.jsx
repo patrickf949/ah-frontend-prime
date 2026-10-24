@@ -36,6 +36,7 @@ export class Home extends Component {
   };
 
   componentDidMount() {
+    document.title = "Authors Haven";
     const { getArticlesAction, getHomeArticlesAction } = this.props;
     const searchParams = new URLSearchParams(this.props.location?.search || "");
     const searchQuery = searchParams.get("search");

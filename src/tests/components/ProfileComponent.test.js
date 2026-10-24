@@ -13,6 +13,28 @@ describe("profileComponent tests", () => {
     const wrapper = shallow(<ProfileComponent {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it("should render edit profile link when user is owner", () => {
+    const ownerProps = {
+      ...props,
+      isOwner: true,
+      image: "https://example.com/avatar.jpg"
+    };
+    const wrapper = shallow(<ProfileComponent {...ownerProps} />);
+    expect(wrapper.find(".btn-outline-success").length).toBe(1);
+    expect(wrapper.find("img").props().src).toBe("https://example.com/avatar.jpg");
+  });
+
+  it("should render follows button when user is not owner and fallback avatar", () => {
+    const nonOwnerProps = {
+      ...props,
+      isOwner: false,
+      image: ""
+    };
+    const wrapper = shallow(<ProfileComponent {...nonOwnerProps} />);
+    expect(wrapper.find("FollowsButton").length).toBe(1);
+    expect(wrapper.find("img").props().src).toContain("pixabay.com");
+  });
 });
 
 describe("edit profile container tests", () => {

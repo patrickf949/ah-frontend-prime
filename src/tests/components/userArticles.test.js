@@ -83,4 +83,15 @@ describe("user article tests", () => {
     img.simulate("error", { target: mockTarget });
     expect(mockTarget.src).toBeTruthy();
   });
+
+  it("should render empty state when no articles exist", () => {
+    const emptyWrapper = shallow(<UserArticles {...props} articles={[]} loading={false} />);
+    expect(emptyWrapper.text()).toContain("You have not yet created any articles sofar");
+  });
+
+  it("should render custom article image when available", () => {
+    const articleWithImage = [{ ...data.articles[0], image: "https://example.com/art.jpg" }];
+    const wrapper = shallow(<UserArticles {...props} articles={articleWithImage} />);
+    expect(wrapper.find(".img-tile").props().src).toBe("https://example.com/art.jpg");
+  });
 });

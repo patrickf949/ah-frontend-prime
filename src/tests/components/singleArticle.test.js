@@ -204,4 +204,21 @@ describe("Component for getting single Articles", () => {
     // since seo is defined.
     wrapper.setProps(newProps);
   });
+
+  it("should apply SEO on mount when article is already cached", () => {
+    const props = {
+      match: { params: { slug: "cached-slug" } },
+      getArticleAction: jest.fn(),
+      article: {
+        article: {
+          title: "Cached Story",
+          seo: { meta_title: "Cached Story" },
+          author: { username: "author", image: "" }
+        }
+      }
+    };
+    const wrapper = shallow(<DumpProfileContainer {...props} />);
+    wrapper.instance().componentDidMount();
+    expect(document.title).toBe("Cached Story — Authors' Haven");
+  });
 });

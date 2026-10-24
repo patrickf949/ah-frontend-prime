@@ -13,7 +13,7 @@ import followsUnfollowsReducer from "./followsUnfollowsReducer";
 import commentsReducer from "./commentsReducer";
 import getCommentsReducer from "./getCommentsReducer";
 
-export default combineReducers({
+const rootReducer = combineReducers({
   auth_login: loginReducer,
   getArticlesReducer,
   homeArticlesReducer,
@@ -25,7 +25,8 @@ export default combineReducers({
   passChange: passwordChangeReducer,
   profileReducer: profileReducer,
   followsUnfollowsReducer: followsUnfollowsReducer,
-  profileReducer,
   comments: commentsReducer,
   getComments: getCommentsReducer
 });
+
+export default rootReducer;

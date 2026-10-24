@@ -235,4 +235,40 @@ describe("DynamicBlockEditor", () => {
       })
     );
   });
+
+  it("renders with default props without initialBlocks", () => {
+    render(<DynamicBlockEditor onChange={onChange} />);
+  });
+
+  it("updates text block without mutating other blocks", () => {
+    const blocks = [
+      { id: "1", type: "text", content: "one" },
+      { id: "2", type: "text", content: "two" }
+    ];
+    render(<DynamicBlockEditor initialBlocks={JSON.stringify(blocks)} onChange={onChange} />);
+    const inputs = screen.getAllByTestId("quill");
+    fireEvent.change(inputs[0], { target: { value: "updated one" } });
+    expect(onChange).toHaveBeenCalledWith(expect.stringContaining("updated one"));
+  });
+
+  it("handles removing image blocks when url is not current coverImageUrl", () => {
+    axios.delete.mockReturnValue(Promise.resolve({}));
+    const onCoverSelect = jest.fn();
+    const blocks = [
+      { id: "img-1", type: "image", url: "http://cover.png" },
+      { id: "img-2", type: "image", url: "http://other.png" }
+    ];
+    render(
+      <DynamicBlockEditor
+        initialBlocks={JSON.stringify(blocks)}
+        onChange={onChange}
+        onCoverImageSelect={onCoverSelect}
+        coverImageUrl="http://cover.png"
+      />
+    );
+    onCoverSelect.mockClear();
+    const removeBtns = screen.getAllByText("Remove");
+    fireEvent.click(removeBtns[1]);
+    expect(onCoverSelect).not.toHaveBeenCalled();
+  });
 });
