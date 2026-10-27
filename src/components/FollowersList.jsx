@@ -1,4 +1,5 @@
 import React from "react";
+import { getDefaultAvatar } from "../utils/avatar";
 
 const FollowersList = props => {
   const { followers } = props;
@@ -37,7 +38,7 @@ const FollowersList = props => {
                       src={
                         item.image
                           ? `${item.image}`
-                          : "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+                          : getDefaultAvatar(item.full_name || item.username)
                       }
                       alt="profile"
                       className="profile-page"

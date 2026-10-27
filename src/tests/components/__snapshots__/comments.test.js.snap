@@ -89,7 +89,7 @@ exports[`test for comments should render comments 1`] = `
             <img
               alt=""
               height="50"
-              src="https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="
+              src="https://ui-avatars.com/api/?name=user1&background=03a9f4&color=fff&rounded=true"
               width="50"
             />
           </a>

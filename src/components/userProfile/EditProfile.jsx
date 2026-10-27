@@ -32,11 +32,23 @@ export class EditProfile extends Component {
       const { history } = nextProps;
       history.push(`/profile/${sessionStorage.getItem("username")}`);
     }
+    if (nextProps.profile && nextProps.profile !== this.props.profile) {
+      const { full_name, bio, image } = nextProps.profile;
+      this.setState(prevState => ({
+        full_name: prevState.full_name || full_name || "",
+        bio: prevState.bio || bio || "",
+        image: prevState.image || image || ""
+      }));
+    }
   }
 
   componentWillMount() {
-    const { full_name, bio, image } = this.props.profile;
-    this.setState({ full_name, bio, image });
+    const { full_name, bio, image } = this.props.profile || {};
+    this.setState({
+      full_name: full_name || "",
+      bio: bio || "",
+      image: image || ""
+    });
   }
   handleNameChange(event) {
     const { value } = event.target;

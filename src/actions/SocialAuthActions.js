@@ -30,6 +30,8 @@ export const facebooklogin = token => dispatch => {
       } else {
         if (data.data["auth_token"].username) {
           sessionStorage.setItem("username", data.data["auth_token"].username);
+          sessionStorage.setItem("email", data.data["auth_token"].email);
+          sessionStorage.setItem("token", data.data["auth_token"].token);
           toast.success(
             `Welcome ${data.data["auth_token"].username}. Login Successful`,
             {
@@ -38,8 +40,6 @@ export const facebooklogin = token => dispatch => {
               hideProgressBar: false
             }
           );
-          sessionStorage.setItem("username", data.data["auth_token"].username);
-          sessionStorage.setItem("email", data.data["auth_token"].email);
           dispatch({
             type: FACEBOOK_LOGIN,
             payload: data.data["auth_token"]
@@ -76,6 +76,8 @@ export const googlelogin = token => dispatch => {
       } else {
         if (data.data["auth_token"].username) {
           sessionStorage.setItem("username", data.data["auth_token"].username);
+          sessionStorage.setItem("email", data.data["auth_token"].email);
+          sessionStorage.setItem("token", data.data["auth_token"].token);
           toast.success(
             `Welcome ${data.data["auth_token"].username}. Login Successful`,
             {
@@ -84,8 +86,6 @@ export const googlelogin = token => dispatch => {
               hideProgressBar: false
             }
           );
-          sessionStorage.setItem("username", data.data["auth_token"].username);
-          sessionStorage.setItem("email", data.data["auth_token"].email);
           dispatch({
             type: GOOGLE_LOGIN,
             payload: data.data["auth_token"]

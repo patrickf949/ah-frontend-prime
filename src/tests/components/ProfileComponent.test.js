@@ -33,7 +33,7 @@ describe("profileComponent tests", () => {
     };
     const wrapper = shallow(<ProfileComponent {...nonOwnerProps} />);
     expect(wrapper.find("FollowsButton").length).toBe(1);
-    expect(wrapper.find("img").props().src).toContain("pixabay.com");
+    expect(wrapper.find("img").props().src).toContain("ui-avatars.com");
   });
 });
 

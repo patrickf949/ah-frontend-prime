@@ -167,5 +167,19 @@ describe("editprofile component success tests", () => {
     };
     expect(mapStateToProps(state)).toEqual({ profile: null, upDateSuccess: false });
   });
+
+  it("should update state when new profile props are received", () => {
+    const emptyWrapper = shallow(<EditProfile {...props} profile={{}} />);
+    emptyWrapper.setProps({
+      profile: {
+        full_name: "Received Name",
+        bio: "Received Bio",
+        image: "https://example.com/received.jpg"
+      }
+    });
+    expect(emptyWrapper.instance().state.full_name).toBe("Received Name");
+    expect(emptyWrapper.instance().state.bio).toBe("Received Bio");
+    expect(emptyWrapper.instance().state.image).toBe("https://example.com/received.jpg");
+  });
 });
 

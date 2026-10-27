@@ -16,6 +16,7 @@ import "../../styles/singleArticle.scss";
 import { getArticleAction } from "../../actions/getArticle";
 import Comments from "../comments";
 import { FALLBACK_IMAGE } from "../../utils/constants";
+import { getDefaultAvatar } from "../../utils/avatar";
 
 export class SingleArticleComponent extends Component {
   state = {};
@@ -134,7 +135,7 @@ export class SingleArticleComponent extends Component {
                 className="author-avatar"
                 src={
                   oneArticle.author.image ||
-                  "https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="
+                  getDefaultAvatar(oneArticle.author.username || "User")
                 }
                 alt={oneArticle.author.username}
               />

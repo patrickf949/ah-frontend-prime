@@ -232,15 +232,17 @@
 
 @media (max-width: 480px) {
   .app-navbar {
-    gap: 10px;
+    gap: 8px;
     padding: 0 12px;
   }
 
-  .brand-link {
-    max-width: 118px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .navbar-brand-group {
+    gap: 8px;
+    flex-shrink: 0;
   }
 
-
+  .brand-link {
+    font-size: 17px;
+    white-space: nowrap;
+  }
 }
