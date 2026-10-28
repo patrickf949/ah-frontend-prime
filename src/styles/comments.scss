@@ -9,14 +9,21 @@ a {
 
 section {
   background: rgba(255, 255, 255, 0.9);
-  padding-right: 85px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 85px 20px 20px;
   height: auto;
   width: 100%;
   margin: auto;
   margin-top: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  @media (max-width: 991.98px) {
+    padding: 16px 20px;
+  }
+
+  @media (max-width: 576px) {
+    padding: 12px;
+  }
 }
 
 .comment {
@@ -26,6 +33,53 @@ section {
   margin: 0 0 1em 40px;
   *zoom: 1;
   width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 991.98px) {
+    margin: 0 0 1em 0;
+  }
+
+  @media (max-width: 576px) {
+    margin: 0 0 0.85em 0;
+    padding-bottom: 0.85em;
+  }
+}
+
+.comment.comment-reply {
+  @media (max-width: 991.98px) {
+    margin-left: 24px !important;
+    padding-left: 12px !important;
+    border-left: 2px solid #03a9f4 !important;
+    margin-top: 12px !important;
+
+    .comment-img {
+      margin-right: 12px !important;
+      img {
+        width: 36px !important;
+        height: 36px !important;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    margin-left: 14px !important;
+    padding-left: 10px !important;
+    border-left: 2px solid #03a9f4 !important;
+    margin-top: 10px !important;
+
+    .comment-img {
+      margin-right: 8px !important;
+      img {
+        width: 28px !important;
+        height: 28px !important;
+      }
+    }
+
+    .comment-body .text {
+      padding: 6px 8px;
+      font-size: 13px;
+    }
+  }
 }
 
 .comment-img {
@@ -34,6 +88,23 @@ section {
   border-radius: 50%;
   border: 2px solid #e5e5e5;
   overflow: hidden;
+  flex-shrink: 0;
+
+  @media (max-width: 991.98px) {
+    margin-right: 14px;
+    img {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    margin-right: 10px;
+    img {
+      width: 36px;
+      height: 36px;
+    }
+  }
 }
 
 .comment-img img {
@@ -41,7 +112,8 @@ section {
 }
 
 .comment-body {
-  overflow: hidden
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .comment .text {
@@ -49,6 +121,12 @@ section {
   border: 1px solid #e5e5e5;
   border-radius: 5px;
   background: #fff;
+  word-break: break-word;
+
+  @media (max-width: 576px) {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
 }
 
 .comment .text p:last-child {
@@ -59,6 +137,11 @@ section {
   margin: 0.5em 0 0;
   font-size: 14px;
   color: #666;
+  word-break: break-word;
+
+  @media (max-width: 576px) {
+    font-size: 12px;
+  }
 }
 
 /* Decoration */
@@ -72,6 +155,10 @@ section {
   position: absolute;
   top: 0;
   left: 65px;
+
+  @media (max-width: 991.98px) {
+    display: none !important;
+  }
 }
 
 .comments:before {
@@ -79,6 +166,10 @@ section {
   left: 105px;
   bottom: 0px;
   background: rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 991.98px) {
+    display: none !important;
+  }
 }
 
 .comment:before {
@@ -89,6 +180,10 @@ section {
   margin: 16px 0 0 -6px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(0, 0, 0, 0.1);
   background: #ccc;
+
+  @media (max-width: 991.98px) {
+    display: none !important;
+  }
 }
 
 .comment:hover {
@@ -112,16 +207,27 @@ section {
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
+
+  @media (max-width: 991.98px) {
+    display: none !important;
+  }
 }
 
 .comment-forms {
-  textarea.form-control {
-    border: 1px solid #e5e5e5;
-    height: 100px;
+  width: 100%;
+
+  textarea.form-control,
+  .MuiTextField-root {
+    width: 100%;
   }
 
   .btn-comment {
     border: 1px solid #ccc;
     float: right;
+
+    @media (max-width: 576px) {
+      width: 100%;
+      float: none;
+    }
   }
 }
