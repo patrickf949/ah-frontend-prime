@@ -138,6 +138,29 @@ class Wrapper {
   }
 
   find(selector) {
+    if (typeof selector === "string" && selector.includes("[") && selector.endsWith("]")) {
+      const match = selector.match(/^([a-zA-Z0-9_-]+)?\[([a-zA-Z0-9_-]+)=['"]?([^'"]+)['"]?\]$/);
+      if (match) {
+        const [, tag, attr, val] = match;
+        const predicate = node => {
+          if (!node || !node.props) return false;
+          if (tag && node.type !== tag) return false;
+          return String(node.props[attr]) === String(val);
+        };
+        const results = [];
+        const search = n => {
+          if (Array.isArray(n)) {
+            n.forEach(search);
+            return;
+          }
+          if (!n || typeof n !== "object") return;
+          if (predicate(n)) results.push(n);
+          getChildren(n).forEach(search);
+        };
+        search(this.output);
+        return new Wrapper(null, results);
+      }
+    }
     return new Wrapper(null, walk(this.output, selector));
   }
 

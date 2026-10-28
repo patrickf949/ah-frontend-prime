@@ -39,7 +39,7 @@ exports[`profileComponent tests should render without crushing 1`] = `
           className="img-container"
         >
           <img
-            src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+            src="https://ui-avatars.com/api/?name=User&background=03a9f4&color=fff&rounded=true"
             style={
               {
                 "borderRadius": "50%",

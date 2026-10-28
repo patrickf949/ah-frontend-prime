@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import "../styles/comments.scss";
+import { getDefaultAvatar } from "../utils/avatar";
 
 export class Comments extends Component {
   constructor(props) {
@@ -116,7 +117,10 @@ export class Comments extends Component {
       <article className="comment" style={{ marginLeft: isReply ? "50px" : "0", borderLeft: isReply ? "2px solid #eee" : "none", paddingLeft: isReply ? "15px" : "0", marginTop: isReply ? "15px" : "0" }}>
         <a className="comment-img" href={`/profile/${message.author.username}`}>
           <img
-            src={message.author.image || "https://static.wixstatic.com/media/2cd43b_4ef9dc9638cc431b956e1c36862b519b~mv2.png?dn="}
+            src={
+              message.author.image ||
+              getDefaultAvatar(message.author.username || "User")
+            }
             alt=""
             width="50"
             height="50"

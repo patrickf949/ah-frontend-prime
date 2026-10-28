@@ -8,6 +8,7 @@ import "../styles/navbar.scss";
 import BellIcon from "../styles/images/icons8-bell-100.png";
 import SideDrawer from "./sideDrawer";
 import profileImage from "../styles/images/profile.png";
+import { getDefaultAvatar } from "../utils/avatar";
 import { getUsersProfileAction } from "../actions/profileActions";
 
 export class NavBarComponent extends React.Component {
@@ -89,7 +90,9 @@ export class NavBarComponent extends React.Component {
       sideDrawer = <SideDrawer />;
     }
     
-    const userImage = (this.props.profile && this.props.profile.image) || profileImage;
+    const userImage =
+      (this.props.profile && this.props.profile.image) ||
+      getDefaultAvatar(sessionUser || "User");
 
     return (
       <header className="site-header">

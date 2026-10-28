@@ -163,7 +163,7 @@ exports[`followers list popup should render without crashing 2`] = `
           <img
             alt="profile"
             className="profile-page"
-            src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+            src="https://ui-avatars.com/api/?name=User&background=03a9f4&color=fff&rounded=true"
           />
         </button>
         <div
@@ -271,7 +271,7 @@ exports[`following list popup should render without crashing 2`] = `
           <img
             alt="profile"
             className="profile-page"
-            src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+            src="https://ui-avatars.com/api/?name=User&background=03a9f4&color=fff&rounded=true"
           />
         </button>
         <div

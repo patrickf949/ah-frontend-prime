@@ -38,14 +38,79 @@ describe("router utils", () => {
   });
 
   describe("RouteElement", () => {
-    it("renders component with legacy router props", () => {
-      const { getByTestId } = render(
-        <MemoryRouter initialEntries={["/route"]}>
+    it("renders component with legacy router props and updates document title", () => {
+      const { unmount } = render(
+        <MemoryRouter initialEntries={["/"]}>
           <RouteElement component={TestComponent} />
         </MemoryRouter>
       );
+      expect(document.title).toBe("Authors Haven");
+      unmount();
 
-      expect(getByTestId("path").textContent).toBe("/route");
+      const r2 = render(
+        <MemoryRouter initialEntries={["/about"]}>
+          <RouteElement component={TestComponent} />
+        </MemoryRouter>
+      );
+      expect(document.title).toBe("About | Authors Haven");
+      r2.unmount();
+
+      const r3 = render(
+        <MemoryRouter initialEntries={["/article/sample-slug"]}>
+          <RouteElement component={TestComponent} />
+        </MemoryRouter>
+      );
+      // Article routes do not overwrite dynamic article SEO titles
+      expect(document.title).toBe("About | Authors Haven");
+      r3.unmount();
+
+      const r4 = render(
+        <MemoryRouter initialEntries={["/login"]}>
+          <RouteElement component={TestComponent} />
+        </MemoryRouter>
+      );
+      expect(document.title).toBe("Login | Authors Haven");
+      expect(r4.getByTestId("path").textContent).toBe("/login");
+      r4.unmount();
+
+      const paths = [
+        ["/home", "Authors Haven"],
+        ["/register", "Register | Authors Haven"],
+        ["/create-article", "New Story | Authors Haven"],
+        ["/edit-article/sample", "Edit Story | Authors Haven"],
+        ["/user-articles", "My Stories | Authors Haven"],
+        ["/favorites", "Favorites | Authors Haven"],
+        ["/editprofile", "Edit Profile | Authors Haven"],
+        ["/profile/testuser", "Profile | Authors Haven"],
+        ["/passwordresetemail", "Reset Password | Authors Haven"],
+        ["/passwordreset/token123", "Reset Password | Authors Haven"],
+        ["/other-random-path", "Authors Haven"],
+        ["", "Authors Haven"]
+      ];
+
+      paths.forEach(([path, expectedTitle]) => {
+        const res = render(
+          <MemoryRouter initialEntries={[path]}>
+            <RouteElement component={TestComponent} />
+          </MemoryRouter>
+        );
+        expect(document.title).toBe(expectedTitle);
+        res.unmount();
+      });
+    });
+
+    it("handles components with custom displayName or fallback name", () => {
+      const CustomNamed = () => <div data-testid="custom">Named</div>;
+      CustomNamed.displayName = "SpecialComponent";
+      const WrappedCustom = withRouter(CustomNamed);
+      expect(WrappedCustom.displayName).toBe("withRouter(SpecialComponent)");
+
+      const Anonymous = function() {
+        return <div data-testid="anon">Anon</div>;
+      };
+      Object.defineProperty(Anonymous, "name", { value: "" });
+      const WrappedAnon = withRouter(Anonymous);
+      expect(WrappedAnon.displayName).toBe("withRouter(Component)");
     });
   });
 });

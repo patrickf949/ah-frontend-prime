@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import NavBarComponent from "../navbar";
 import FollowsStats from "../FollowsStats";
 import FollowsButton from "../FollowsButton";
+import { getDefaultAvatar } from "../../utils/avatar";
 
 const ProfileComponent = props => {
   const {
@@ -59,7 +60,7 @@ const ProfileComponent = props => {
                 src={
                   image
                     ? image
-                    : "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png"
+                    : getDefaultAvatar(full_name || username || "User")
                 }
                 style={{ borderRadius: "50%", width: "200px", height: "200px" }}
               />

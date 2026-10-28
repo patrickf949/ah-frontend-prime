@@ -144,6 +144,51 @@ describe("Article Components", () => {
     expect(wrapper.find(".best-article").length).toEqual(0);
   });
 
+  it("should handle empty search results and display search query message", () => {
+    const emptySearchProps = {
+      ...props,
+      articles: [],
+      location: { search: "?search=unknown" }
+    };
+    const emptyWrapper = shallow(<Home {...emptySearchProps} />);
+    expect(emptyWrapper.text()).toContain('No articles match the query "unknown"');
+  });
+
+  it("should fallback to latest[0] as hero if trending is empty", () => {
+    const latestOnlyProps = {
+      ...props,
+      latest: [homeArticle("latest-only", "Latest Only Title", 0)],
+      trending: [],
+      popular: []
+    };
+    const latestWrapper = shallow(<Home {...latestOnlyProps} />);
+    expect(latestWrapper.find(".best-article").text()).toContain("Latest Only Title");
+  });
+
+  it("should disable pagination buttons when loading is true", () => {
+    const paginationProps = {
+      ...props,
+      previous: "http://api/prev",
+      next: "http://api/next",
+      loading: true
+    };
+    const pageWrapper = shallow(<Home {...paginationProps} />);
+    expect(pageWrapper.find(".eian").props().disabled).toBe(true);
+    expect(pageWrapper.find(".aken").props().disabled).toBe(true);
+  });
+
+  it("should handle null allArticlesRef and missing getHomeArticlesAction", () => {
+    jest.useFakeTimers();
+    const noActionProps = { ...props, getHomeArticlesAction: null, location: { search: "?search=test" } };
+    const w = shallow(<Home {...noActionProps} />);
+    w.instance().allArticlesRef = { current: null };
+    w.instance().componentDidMount();
+    w.instance().componentDidUpdate(noActionProps);
+    w.instance().scrollToResults();
+    jest.runAllTimers();
+    jest.useRealTimers();
+  });
+
   it("renders the single article page", () => {
     const wrapper = shallow(<SingleArticleComponent {...props1} />);
     expect(wrapper).toMatchSnapshot();
@@ -454,6 +499,17 @@ describe("Article Components", () => {
     const wrapper = shallow(<EditArticlePage {...props} />);
     wrapper.instance().onBodyChange({ target: { value: "new body" } });
     expect(wrapper.instance().state.body).toEqual("new body");
+
+    // Test componentDidUpdate when article is identical or null
+    wrapper.instance().componentDidUpdate({ article: { article: null } });
+    wrapper.setProps({ article: { article: { title: "Title", tagList: ["tag1"] } } });
+    wrapper.instance().componentDidUpdate({ article: { article: { title: "Title", tagList: ["tag1"] } } });
+
+    // Test onSubmit with tags
+    wrapper.setState({ tags: "tagA,tagB", title: "T", body: "B", description: "D", image: "img" });
+    wrapper.instance().onSubmit({ preventDefault: jest.fn() });
+    expect(props.articleCreateEditAction).toHaveBeenCalled();
+
     jest.runAllTimers();
     jest.useRealTimers();
   });
@@ -467,6 +523,16 @@ describe("Article Components", () => {
     // Call handleRestoreDraft(true) with draftData present to cover line 51
     wrapper.instance().handleRestoreDraft(true);
     expect(wrapper.state().title).toBe("DraftTitle");
+
+    // Call with empty draftData to cover fallback branches
+    wrapper.setState({ showDraftModal: true, draftData: {} });
+    wrapper.instance().handleRestoreDraft(true);
+    expect(wrapper.state().title).toBe("");
+
+    // Call componentDidMount with empty res.data
+    const axios = require("axios");
+    axios.get = jest.fn(() => Promise.resolve({ data: {} }));
+    wrapper.instance().componentDidMount();
 
     // Call JSX functions directly to cover lines 115, 123, 126
     const output = wrapper.instance().render();

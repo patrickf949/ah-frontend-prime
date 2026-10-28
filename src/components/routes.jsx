@@ -14,6 +14,8 @@ import CreateArticlePage from "./articles/createArticlePage";
 import UsersProfileContainer from "../containers/profile/UsersProfileContainer";
 import EditArticlePage from "./articles/editArticlePage";
 import FavoritesPage from "./articles/favoritesPage";
+import AboutPage from "./AboutPage";
+import Footer from "./Footer";
 import { RouteElement } from "../utils/router";
 
 class Routes extends Component {
@@ -74,7 +76,12 @@ class Routes extends Component {
               path="/favorites"
               element={<RouteElement component={FavoritesPage} />}
             />
+            <Route
+              path="/about"
+              element={<RouteElement component={AboutPage} />}
+            />
           </RouterRoutes>
+          <Footer />
         </BrowserRouter>
       </div>
     );

@@ -43,6 +43,7 @@ describe("googlelogin Action", () => {
 
     return store.dispatch(googlelogin(googleToken)).then(() => {
       expect(store.getActions()).toEqual(expectedGoogleAction);
+      expect(sessionStorage.getItem("token")).toBe("token");
     });
   });
 });
@@ -83,6 +84,7 @@ describe("facebooklogin Action", () => {
 
     return store.dispatch(facebooklogin(facebooktoken)).then(() => {
       expect(store.getActions()).toEqual(expectedFacebookAction);
+      expect(sessionStorage.getItem("token")).toBe("token");
     });
   });
 });
@@ -121,6 +123,7 @@ describe("facebookSocialfailure Action", () => {
 
     return store.dispatch(facebooklogin(facebooktoken)).then(() => {
       expect(store.getActions()).toEqual(expectedFacebookAction);
+      expect(sessionStorage.getItem("token")).toBe("token");
     });
   });
 });
@@ -221,6 +224,7 @@ describe("facebookSocialAlreadyRegisteredUser Action", () => {
 
     return store.dispatch(facebooklogin(facebooktoken)).then(() => {
       expect(store.getActions()).toEqual(expectedFacebookAction);
+      expect(sessionStorage.getItem("token")).toBe("token");
     });
   });
 });

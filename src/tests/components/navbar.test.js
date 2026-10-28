@@ -70,6 +70,42 @@ describe(" navbar component", () => {
     expect(mockGetProfile).toHaveBeenCalledWith("testuser");
   });
 
+  it("should not fetch user profile if no session username or profile already provided", () => {
+    sessionStorage.removeItem("username");
+    const mockGetProfile = jest.fn();
+    const w1 = shallow(<NavBarComponent {...props} getUsersProfileAction={mockGetProfile} profile={null} />);
+    w1.instance().componentDidMount();
+    expect(mockGetProfile).not.toHaveBeenCalled();
+
+    sessionStorage.setItem("username", "testuser");
+    const w2 = shallow(<NavBarComponent {...props} getUsersProfileAction={mockGetProfile} profile={{ username: "testuser" }} />);
+    w2.instance().componentDidMount();
+    expect(mockGetProfile).not.toHaveBeenCalled();
+  });
+
+  it("should clean up without closeTimer on unmount", () => {
+    instance.closeTimer = null;
+    instance.componentWillUnmount();
+  });
+
+  it("should handle mouse enter when closeTimer is null", () => {
+    instance.closeTimer = null;
+    instance.handleDropdownMouseEnter();
+    expect(instance.state.isDropdownOpen).toBe(true);
+  });
+
+  it("should render with profile image when available", () => {
+    sessionStorage.setItem("username", "testuser");
+    const profileWrapper = shallow(
+      <NavBarComponent
+        {...props}
+        isAuthenticated={true}
+        profile={{ image: "https://example.com/custom-profile.jpg" }}
+      />
+    );
+    expect(profileWrapper.find(".profile-img").props().src).toBe("https://example.com/custom-profile.jpg");
+  });
+
   it("should clean up event listener and timer on unmount", () => {
     jest.useFakeTimers();
     instance.handleDropdownMouseLeave();
