@@ -114,7 +114,15 @@ export class Comments extends Component {
     const isLoggedIn = Boolean(sessionStorage.token);
 
     return (
-      <article className="comment" style={{ marginLeft: isReply ? "50px" : "0", borderLeft: isReply ? "2px solid #eee" : "none", paddingLeft: isReply ? "15px" : "0", marginTop: isReply ? "15px" : "0" }}>
+      <article
+        className={`comment ${isReply ? "comment-reply" : "comment-root"}`}
+        style={{
+          marginLeft: isReply ? "50px" : "0",
+          borderLeft: isReply ? "2px solid #eee" : "none",
+          paddingLeft: isReply ? "15px" : "0",
+          marginTop: isReply ? "15px" : "0"
+        }}
+      >
         <a className="comment-img" href={`/profile/${message.author.username}`}>
           <img
             src={
@@ -130,8 +138,8 @@ export class Comments extends Component {
           <div className="text">
             <p>{message.body}</p>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <p className="attribution">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
+            <p className="attribution" style={{ margin: "4px 0" }}>
               by <a href={`/profile/${message.author.username}`}>{message.author.username}</a> at {moment(message.createdAt).format(
                 "h:mm:ss a [on] MMMM Do YYYY."
               )}
@@ -140,7 +148,14 @@ export class Comments extends Component {
               <Button 
                 size="small" 
                 onClick={() => this.setState({ replyingTo: replyingTo === message.id ? null : message.id })}
-                sx={{ textTransform: "none", color: "#fff", minWidth: "auto", padding: "2px 8px" }}
+                sx={{
+                  textTransform: "none",
+                  color: "#03a9f4",
+                  fontWeight: 600,
+                  minWidth: "auto",
+                  padding: "2px 8px",
+                  fontSize: { xs: "12px", sm: "13px" }
+                }}
               >
                 {replyingTo === message.id ? "Cancel" : "Reply"}
               </Button>
@@ -148,8 +163,8 @@ export class Comments extends Component {
           </div>
           
           {replyingTo === message.id && (
-             <form onSubmit={(e) => this.handleReplySubmit(e, message.id)} style={{ marginTop: "10px" }}>
-                <Stack spacing={1} direction="row" alignItems="flex-start">
+             <form onSubmit={(e) => this.handleReplySubmit(e, message.id)} style={{ marginTop: "12px", width: "100%" }}>
+                <Stack spacing={1} direction={{ xs: "column", sm: "row" }} alignItems={{ xs: "stretch", sm: "flex-start" }}>
                   <TextField
                     name="replyComment"
                     placeholder="Write a reply..."
@@ -161,7 +176,20 @@ export class Comments extends Component {
                     fullWidth
                     autoFocus
                   />
-                  <Button type="submit" variant="contained" size="small" sx={{ backgroundColor: "#03a9f4", color: "#fff", textTransform: "none", height: "32px", padding: "4px 16px", alignSelf: "flex-start" }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="small"
+                    sx={{
+                      backgroundColor: "#03a9f4",
+                      color: "#fff",
+                      textTransform: "none",
+                      height: { xs: "36px", sm: "40px" },
+                      padding: "4px 16px",
+                      fontWeight: "bold",
+                      alignSelf: { xs: "stretch", sm: "flex-start" }
+                    }}
+                  >
                     Post
                   </Button>
                 </Stack>
@@ -229,12 +257,12 @@ export class Comments extends Component {
     }
 
     return (
-      <div className="row">
-        <div className="col col-lg-1" />
-        <div className="col col-lg-10">
-          <div className="row" style={{ marginBottom: "24px" }}>
-            <div className="col col-lg-1" />
-            <div className="col col-lg-11">
+      <div className="row comments-row">
+        <div className="col-lg-1 d-none d-lg-block" />
+        <div className="col-12 col-lg-10">
+          <div className="row comment-input-row" style={{ marginBottom: "24px" }}>
+            <div className="col-lg-1 d-none d-lg-block" />
+            <div className="col-12 col-lg-11">
               {!isLoggedIn ? (
                 <div style={{ padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "12px", border: "1px dashed #ced4da", textAlign: "center", margin: "10px 0 20px" }}>
                   <p style={{ margin: "0 0 12px 0", fontSize: "14px", color: "#495057", fontWeight: "500" }}>Sign in to participate in the discussion.</p>
@@ -246,7 +274,7 @@ export class Comments extends Component {
                   onSubmit={this.handleOnSubmit}
                   className="comment-forms"
                 >
-                  <Stack spacing={1.5} sx={{ alignItems: "flex-start", width: "100%" }}>
+                  <Stack spacing={1.5} sx={{ alignItems: { xs: "stretch", sm: "flex-end" }, width: "100%" }}>
                     <TextField
                       name="comments"
                       label="Add a comment"
@@ -256,7 +284,19 @@ export class Comments extends Component {
                       minRows={4}
                       fullWidth
                     />
-                    <Button type="submit" className="btn btn-comment" variant="contained" sx={{ backgroundColor: "#03a9f4", color: "#fff", textTransform: "none", fontWeight: "bold", "&:hover": { backgroundColor: "#0288d1" } }}>
+                    <Button
+                      type="submit"
+                      className="btn btn-comment"
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "#03a9f4",
+                        color: "#fff",
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        width: { xs: "100%", sm: "auto" },
+                        "&:hover": { backgroundColor: "#0288d1" }
+                      }}
+                    >
                       Comment
                     </Button>
                   </Stack>
@@ -266,7 +306,7 @@ export class Comments extends Component {
           </div>
           {commentsContent}
         </div>
-        <div className="col col-lg-1" />
+        <div className="col-lg-1 d-none d-lg-block" />
       </div>
     );
   }

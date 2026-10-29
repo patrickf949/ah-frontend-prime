@@ -2,16 +2,16 @@
 
 exports[`test for comments should render comments 1`] = `
 <div
-  className="row"
+  className="row comments-row"
 >
   <div
-    className="col col-lg-1"
+    className="col-lg-1 d-none d-lg-block"
   />
   <div
-    className="col col-lg-10"
+    className="col-12 col-lg-10"
   >
     <div
-      className="row"
+      className="row comment-input-row"
       style={
         {
           "marginBottom": "24px",
@@ -19,10 +19,10 @@ exports[`test for comments should render comments 1`] = `
       }
     >
       <div
-        className="col col-lg-1"
+        className="col-lg-1 d-none d-lg-block"
       />
       <div
-        className="col col-lg-11"
+        className="col-12 col-lg-11"
       >
         <div
           style={
@@ -72,7 +72,7 @@ exports[`test for comments should render comments 1`] = `
         className="comments"
       >
         <article
-          className="comment"
+          className="comment comment-root"
           style={
             {
               "borderLeft": "none",
@@ -108,12 +108,19 @@ exports[`test for comments should render comments 1`] = `
                 {
                   "alignItems": "center",
                   "display": "flex",
+                  "flexWrap": "wrap",
+                  "gap": "8px",
                   "justifyContent": "space-between",
                 }
               }
             >
               <p
                 className="attribution"
+                style={
+                  {
+                    "margin": "4px 0",
+                  }
+                }
               >
                 by 
                 <a
@@ -131,23 +138,23 @@ exports[`test for comments should render comments 1`] = `
     </div>
   </div>
   <div
-    className="col col-lg-1"
+    className="col-lg-1 d-none d-lg-block"
   />
 </div>
 `;
 
 exports[`test for comments should render without crashing 1`] = `
 <div
-  className="row"
+  className="row comments-row"
 >
   <div
-    className="col col-lg-1"
+    className="col-lg-1 d-none d-lg-block"
   />
   <div
-    className="col col-lg-10"
+    className="col-12 col-lg-10"
   >
     <div
-      className="row"
+      className="row comment-input-row"
       style={
         {
           "marginBottom": "24px",
@@ -155,10 +162,10 @@ exports[`test for comments should render without crashing 1`] = `
       }
     >
       <div
-        className="col col-lg-1"
+        className="col-lg-1 d-none d-lg-block"
       />
       <div
-        className="col col-lg-11"
+        className="col-12 col-lg-11"
       >
         <div
           style={
@@ -218,7 +225,7 @@ exports[`test for comments should render without crashing 1`] = `
     </div>
   </div>
   <div
-    className="col col-lg-1"
+    className="col-lg-1 d-none d-lg-block"
   />
 </div>
 `;
